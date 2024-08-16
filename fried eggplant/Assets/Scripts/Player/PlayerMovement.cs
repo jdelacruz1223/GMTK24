@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [Range(1f,10f)] public float startSpeed = 5;
     private float speed;
     [SerializeField] private float maxSpeed = 10;
-    private float acceleration = 1.03f;
+    private float acceleration = 1.006f;
     public Rigidbody2D rb;
     private MoveState moveState;
     // Start is called before the first frame update
