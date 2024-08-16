@@ -11,6 +11,18 @@ public class PlayerMovement : MonoBehaviour
         idle
     }
 
+    private enum AnimationState
+    {
+        isMoving,
+        isRunning,
+        isSpeeding,
+        isGrounded,
+        isFalling,
+        isJumping,
+        isIdling,
+        isFlipped
+    }
+
     private float speed;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
