@@ -19,7 +19,7 @@ namespace Assets.Scripts.Database
                     Score = 0,
                 };
 
-                var response = await SupabaseClient.Instance.supabase.From<Leaderboard>().Insert(model);
+                var response = await SupabaseClient.GetInstance().Client.From<Leaderboard>().Insert(model);
                 Debug.Log(response.ResponseMessage);
             }
             catch (Exception ex)

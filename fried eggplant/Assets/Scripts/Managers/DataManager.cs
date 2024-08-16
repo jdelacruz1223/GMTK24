@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    private void Start()
+    private async void Start()
     {
-        var supabaseClient = SupabaseClient.Instance.supabase;
-        Debug.Log(supabaseClient.ToString());
+        await SupabaseClient.GetInstance().InitializeSupabase();
+
+        var result = await SupabaseClient.GetInstance().Client.From<Leaderboard>().Get();
+
+        foreach (var player in result.Models)
+        {
+            Debug.LogWarning("Name: " + player.Name + " " + " Books Collected: " + player.Score.ToString());
+        }
     }
 
     void Update()

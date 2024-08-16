@@ -595,7 +595,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &2047901509
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -723,6 +723,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSpeed: 5
   maxSpeed: 10
+  acceleration: 1.03
+  cooldown: 1
   jumpingPower: 16
   jumpBufferTime: 0.2
   coyoteTime: 0.2
