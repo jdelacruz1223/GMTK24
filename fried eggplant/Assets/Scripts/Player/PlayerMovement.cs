@@ -14,7 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private float speed;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
-    private float acceleration = 1.03f;
+    [SerializeField] private float acceleration = 1.03f;
+    [SerializeField] private float cooldown = 1f;
+    private bool isCooldown = false;
     private MoveState moveState;
 
     // Sprite
@@ -70,13 +72,19 @@ public class PlayerMovement : MonoBehaviour
         Flip();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("obstacle"))
+        if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
         {
             Debug.Log("Collided with wall");
-            speed -= 3;
+            speed = (speed > startSpeed) ? speed - 3 : startSpeed;
+            collisionCooldown();
         }
+    }
+    IEnumerator collisionCooldown() {
+        isCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        isCooldown = false;
     }
 
     #region Jumping Mechanics
