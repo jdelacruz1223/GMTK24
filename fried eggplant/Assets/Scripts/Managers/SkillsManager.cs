@@ -25,6 +25,7 @@ public class SkillsManager : MonoBehaviour
     void Start()
     {
        playerSkills = getAvailableSkills().ToArray();
+       playerCurrentSkill = playerSkills[skillIndex];
     }
     // Update is called once per frame
     void Update()
@@ -57,16 +58,21 @@ public class SkillsManager : MonoBehaviour
     }
     public void applySkill(Skill skill){
         //get data manager
-        DataManager dataManager = DataManager.instance;
+        if(DataManager.instance.playerBooks < skill.cost){
+            return;
+        }
+        else{
+            DataManager.instance.playerBooks -= skill.cost;
+        }
 
         if(skill.modifier.instantBoost != new Vector2(0,0)){
-            dataManager.addBoost(skill.modifier.instantBoost);
+            DataManager.instance.addBoost(skill.modifier.instantBoost);
         }
         if(skill.modifier.addBounce == true){
-            dataManager.addBounce();
+            DataManager.instance.addBounce();
         }
         if(skill.modifier.addJump == true){
-            dataManager.addJump();
+            DataManager.instance.addJump();
         }
         print("Applied " + skill.name + " to player.");
     }

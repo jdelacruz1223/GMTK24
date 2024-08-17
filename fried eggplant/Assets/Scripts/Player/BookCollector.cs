@@ -29,10 +29,12 @@ public class BookCollector : MonoBehaviour
         newBook.transform.localPosition += new Vector3(0, collectedBooks.Count * newBook.GetComponent<SpriteRenderer>().bounds.size.y, 0);
 
         collectedBooks.Add(newBook);
+        DataManager.instance.addBook();
     }
     public void RemoveBook(GameObject book) {
         if (collectedBooks.Contains(book)) {
             collectedBooks.Remove(book);
+            DataManager.instance.removeBook();
         }
     }
     public int getNumBooks(){
