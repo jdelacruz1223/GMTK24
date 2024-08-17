@@ -55,11 +55,10 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
-        moveState = (Input.GetAxis("Horizontal") != 0) ? MoveState.moving : MoveState.idle;
+        transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
+        moveState = (Input.GetAxisRaw("Horizontal") != 0) ? MoveState.moving : MoveState.idle;
         if (moveState == MoveState.moving)
         {
-            Debug.Log("Speed: " + (int) speed);
             speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
             isRunning = true;
             isIdling = false;
