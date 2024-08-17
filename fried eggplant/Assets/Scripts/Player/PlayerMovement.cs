@@ -57,19 +57,19 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
         moveState = (Input.GetAxis("Horizontal") != 0) ? MoveState.moving : MoveState.idle;
-        if (moveState == MoveState.moving)
-        {
-            speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-            isRunning = true;
-            isIdling = false;
-        }
-        else
-        {
-            speed = startSpeed;
-            isRunning = false;
+        // if (moveState == MoveState.moving)
+        // {
+        //     speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+        //     isRunning = true;
+        //     isIdling = false;
+        // }
+        // else
+        // {
+        //     speed = startSpeed;
+        //     isRunning = false;
 
-            if (!IsGrounded()) isIdling = false; else isIdling = true;
-        }
+        //     if (!IsGrounded()) isIdling = false; else isIdling = true;
+        // }
     }
 
     // Update is called once per frame
@@ -79,7 +79,8 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
 
         CoyoteMechanic();
-        PlayAnimation();
+        //PlayAnimation();
+        animationUpdate();
         Flip();
     }
 
@@ -93,23 +94,71 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool isFalling;
-    private bool isRunning;
-    private bool isIdling;
-    private bool hasLanded;
-    private bool hasBook;
-    void PlayAnimation()
+    // private bool isFalling;
+    // private bool isRunning;
+    // private bool isIdling;
+    // private bool hasLanded;
+    // private bool hasBook;
+    // void PlayAnimation()
+    // {
+    //     isJumping = Input.GetButtonDown("Jump") && IsGrounded();
+    //     isFalling = !IsGrounded() && rb.velocity.y > 0;
+
+    //     animator.SetBool("isRunning", false);
+    //     animator.SetBool("isIdling", false);
+    //     animator.SetBool("isJumping", false);
+    //     animator.SetBool("isFalling", false);
+    //     animator.SetBool("hasBook", false);
+ 
+    // }
+
+    void animationUpdate ()
     {
-        isJumping = Input.GetButtonDown("Jump") && IsGrounded();
-        isFalling = !IsGrounded() && rb.velocity.y < 0;
+        switch(moveState)
+        {
+            case MoveState.falling:
+            {
+                animator.SetBool("isFalling", true);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isIdling", false);
+                animator.SetBool("isJumping", false);
+                animator.SetBool("hasBook", false);
+            }
+            break;
+            case MoveState.running:
+            {
+                animator.SetBool("isRunning", true);
+                animator.SetBool("isIdling", false);
+                animator.SetBool("isJumping", false);
+                animator.SetBool("isFalling", false);
+                animator.SetBool("hasBook", false);
+            }
+            break;
 
-        animator.SetBool("isRunning", isRunning);
-        animator.SetBool("isIdling", isIdling);
-        animator.SetBool("isJumping", isJumping);
-        animator.SetBool("isFalling", isFalling);
-        animator.SetBool("hasBook", hasBook);
+            case MoveState.idle:
+            {
+                animator.SetBool("isIdling", true);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isJumping", false);
+                animator.SetBool("isFalling", false);
+                animator.SetBool("hasBook", false);
+            }
+            break;
+
+            case MoveState.jumping:
+            {
+                animator.SetBool("isJumping", true);
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isIdling", false);
+                animator.SetBool("isFalling", false);
+                animator.SetBool("hasBook", false);
+            }
+            break;
+            default:
+            break;
+        
+        }
     }
-
     #region Jumping Mechanics
     private void CoyoteMechanic()
     {
