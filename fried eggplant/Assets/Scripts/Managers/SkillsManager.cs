@@ -58,11 +58,11 @@ public class SkillsManager : MonoBehaviour
     }
     public void applySkill(Skill skill){
         //get data manager
-        if(DataManager.instance.playerBooks < skill.cost){
+        if(DataManager.instance.booksAmount < skill.cost){
             return;
         }
         else{
-            DataManager.instance.playerBooks -= skill.cost;
+            DataManager.instance.booksAmount -= skill.cost;
         }
 
         if(skill.modifier.instantBoost != new Vector2(0,0)){
