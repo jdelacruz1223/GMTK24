@@ -18,7 +18,9 @@ public class PlatformScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = (waypoints[0] != null) ? waypoints[0].position : transform.position;
+        if (waypoints != null) {
+            transform.position = (waypoints[0] != null) ? waypoints[0].position : transform.position;
+        }
     }
 
     // Update is called once per frame
