@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ExtraJumpMod
   m_EditorClassIdentifier: 
   instantBoost: {x: 0, y: 0}
-  makeBouncey: 0
-  additionalJumps: 0
+  addBounce: 0
+  addJump: 1

@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Bounce
   description: A force that propels you away from impacts
   cost: 2
-  modifiers: []
+  modifier: {fileID: 11400000, guid: 105a7572d11dc5f418824034031da5bc, type: 2}

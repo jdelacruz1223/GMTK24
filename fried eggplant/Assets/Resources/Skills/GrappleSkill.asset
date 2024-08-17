@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fbb1b9b15e8c540b5e2e975b6591f3, type: 3}
   m_Name: GrappleSkill
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Grapple
+  description: Tether yourself to a surface
   cost: 0
-  modifiers: []
+  modifier: {fileID: 0}

@@ -166,14 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02fbc0c82c86bbb4bb75d7a53b7cf85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allSkills:
-  - {fileID: 11400000, guid: 92214d61554a43e4f83ae47d86e48496, type: 2}
-  - {fileID: 11400000, guid: cb18c3c7898ba094ea35302f59404f1a, type: 2}
-  - {fileID: 11400000, guid: d779f7fdeeceda1448d0d9a7fac8aa51, type: 2}
-  - {fileID: 11400000, guid: c7c7e26681d663c4fb1779f2c59ced69, type: 2}
-  - {fileID: 11400000, guid: df5875624d499ab469fd3273109b45cc, type: 2}
-  availableSkills: 0001010001
-  lockStates: 1
+  skillStates: {fileID: 11400000, guid: c1b62e4bfa6ca024a90675bcb9c5e236, type: 2}
 --- !u!1 &20108685
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +199,8 @@ MonoBehaviour:
   playerAddtlJumpAmount: 0
   playerBounceAmount: 0
   playerInstantBoostAmount: {x: 0, y: 0}
+  playerSkills: []
+  playerCurrentSkill: {fileID: 0}
 --- !u!4 &20108687
 Transform:
   m_ObjectHideFlags: 0

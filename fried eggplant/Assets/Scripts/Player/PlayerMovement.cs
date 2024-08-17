@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Vector2 lastVelocity;
     private enum MoveState
     {
         moving,
@@ -15,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float speed;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
+    public Vector2 lastVelocity;
     private float acceleration = 1.03f;
     private MoveState moveState;
     // Sprite
@@ -73,24 +73,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(lastVelocity);
         if(DataManager.instance.attemptToBounce()){
             Vector2 bounce = new Vector2(0,0);
             if(collision.relativeVelocity.x > 0){
-                print("horizontal bounce");
                 //doesn't work cause player is moving...
                 bounce.x = lastVelocity.x * -1;
             }
             if(collision.relativeVelocity.y > 0){
-                print("vertical bounce");
                 bounce.y = lastVelocity.y * -1;
             }
-            if(bounce == new Vector2(0,0)){
-                print("bounce failed");
-            }
-            else{
-                rb.velocity = bounce;
-            }
+            rb.velocity += bounce;
         }
         if (collision.gameObject.CompareTag("obstacle"))
         {

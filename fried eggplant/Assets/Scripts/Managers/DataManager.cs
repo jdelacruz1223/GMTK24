@@ -8,8 +8,7 @@ public class DataManager : MonoBehaviour
     public int playerAddtlJumpAmount = 0;
     public int playerBounceAmount = 0;
     public Vector2 playerInstantBoostAmount = new Vector2(0,0);
-    public List<Skill> playerSkills; //all skills player can use
-    public Skill playerCurrentSkill; //which skill is selected
+
 
     private void Awake(){
         // If there is an instance, and it's not me, delete myself.
@@ -25,14 +24,12 @@ public class DataManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerSkills = SkillsManager.instance.getAvailableSkills();
+
     }
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K)){
-            SkillsManager.instance.applySkill(playerCurrentSkill);
-        }
+        
     }
     public Vector2 applyBoost(){ 
         Vector2 temp = playerInstantBoostAmount;

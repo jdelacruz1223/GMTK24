@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Extra Jump
   description: Give yourself another jump
   cost: 0
-  modifier: {fileID: 0}
+  modifier: {fileID: 11400000, guid: 451388a808ecefd48a82545f266713d6, type: 2}
