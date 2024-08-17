@@ -3,6 +3,9 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
+/// <summary>
+/// Simple AES Encrypt and Decrpyt
+/// </summary>
 public class AESEncrypt
 {
     private readonly byte[] _key;

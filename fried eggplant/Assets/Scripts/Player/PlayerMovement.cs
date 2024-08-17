@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // Jumping Mechanics
     private bool isJumping;
     [SerializeField] private float jumpingPower = 16f;
-    [SerializeField] private float jumpBufferTime = 0.2f;
+    [SerializeField] private float jumpBufferTime = 0.5f;
     private float jumpBufferCounter;
 
     [SerializeField] private float coyoteTime = 0.2f;
@@ -92,21 +92,6 @@ public class PlayerMovement : MonoBehaviour
             speed = (speed > startSpeed) ? speed - 3 : startSpeed;
             collisionCooldown();
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("platform") && transform.position.y > collision.transform.position.y) {
-            transform.parent = collision.transform;
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("platform")) {
-            transform.parent = null;
-        }
-    }
-    IEnumerator collisionCooldown() {
-        isCooldown = true;
-        yield return new WaitForSeconds(cooldown);
-        isCooldown = false;
     }
 
     #region Jumping Mechanics
@@ -177,6 +162,12 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         yield return new WaitForSeconds(0.4f);
         isJumping = false;
+    }
+    IEnumerator collisionCooldown()
+    {
+        isCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        isCooldown = false;
     }
     #endregion
 }

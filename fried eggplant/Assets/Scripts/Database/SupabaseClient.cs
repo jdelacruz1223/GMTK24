@@ -10,6 +10,10 @@ using Assets.Scripts;
 
 public class SupabaseClient : MonoBehaviour
 {
+    /// <summary>
+    /// Must exist in a certain point, much preferably in the beginning.
+    /// </summary>
+    /// <returns></returns>
     public static SupabaseClient GetInstance() { return me; }
     public static SupabaseClient me;
 
@@ -26,6 +30,11 @@ public class SupabaseClient : MonoBehaviour
 
     public Supabase.Client Client {  get; private set; }
 
+    /// <summary>
+    /// Initializes Supabase on Startup
+    /// Using AES for encrypting the url and key for security purposes.
+    /// </summary>
+    /// <returns>None</returns>
     public async Task InitializeSupabase()
     {
         string url = "tfIKRiFF8ps2QYAhD8tgPPmbhxMBkhSuJilZg5kFww8pO3jMjGiwJESEZ93WJndq";

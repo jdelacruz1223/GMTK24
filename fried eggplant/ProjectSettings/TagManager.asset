@@ -7,6 +7,10 @@ TagManager:
   - obstacle
   - platform
   - player
+  - Book
+  - SmlBookPoint
+  - MdBookPoint
+  - BigBookPoint
   layers:
   - Default
   - TransparentFX
