@@ -170,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
+            speed = startSpeed;
         }
     }
     #endregion
