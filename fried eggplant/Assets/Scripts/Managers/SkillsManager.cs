@@ -25,6 +25,7 @@ public class SkillsManager : MonoBehaviour
     void Start()
     {
        playerSkills = getAvailableSkills().ToArray();
+       playerCurrentSkill = playerSkills[skillIndex];
     }
     // Update is called once per frame
     void Update()
