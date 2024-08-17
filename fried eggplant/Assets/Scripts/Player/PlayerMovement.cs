@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //animation
-    public PlayerAnimation playerAnim;
+    private PlayerAnimation playerAnim;
     private PlayerAnimation.MoveState currentMoveState;
     private PlayerAnimation.MoveState animIdle = PlayerAnimation.MoveState.idle;
     private PlayerAnimation.MoveState animRunning = PlayerAnimation.MoveState.running;
@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float cooldown = 1f;
     private bool isCooldown = false;
     private bool hasBook;
+    private BookCollector bookCollector;
     
     // Sprite
     private bool isFacingRight = true;
@@ -52,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         //animator = GetComponent<Animator>();
         speed = startSpeed;
         playerAnim = GetComponent<PlayerAnimation>();
+        bookCollector = GetComponent<BookCollector>();
     }
     void FixedUpdate()
     {
@@ -65,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-        //     speed = startSpeed;
+            speed = startSpeed;
         //     isRunning = false;
 
         //     if (!IsGrounded()) isIdling = false; else isIdling = true;
@@ -77,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get Horizontal Axis Input to know which side we are facing
         horizontal = Input.GetAxisRaw("Horizontal");
-
+        hasBook = (bookCollector.getNumBooks() > 0) ? true : false;
         CoyoteMechanic();
         //PlayAnimation();
         //animationUpdate();

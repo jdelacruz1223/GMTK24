@@ -35,4 +35,7 @@ public class BookCollector : MonoBehaviour
             collectedBooks.Remove(book);
         }
     }
+    public int getNumBooks(){
+        return collectedBooks.Count;
+    }
 }
