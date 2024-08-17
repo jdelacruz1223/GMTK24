@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// Keys and Configs
+    /// </summary>
     public class Config
     {
         public static string yek { get; } = "o95Ex0tNssYSIwLlzpWZQT1Wrw2XI1XN";

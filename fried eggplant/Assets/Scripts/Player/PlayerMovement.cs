@@ -93,11 +93,7 @@ public class PlayerMovement : MonoBehaviour
             collisionCooldown();
         }
     }
-    IEnumerator collisionCooldown() {
-        isCooldown = true;
-        yield return new WaitForSeconds(cooldown);
-        isCooldown = false;
-    }
+   
 
     #region Jumping Mechanics
     private void CoyoteMechanic()
@@ -167,6 +163,12 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         yield return new WaitForSeconds(0.4f);
         isJumping = false;
+    }
+    IEnumerator collisionCooldown()
+    {
+        isCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        isCooldown = false;
     }
     #endregion
 }
