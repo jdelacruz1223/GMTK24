@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9fbb1b9b15e8c540b5e2e975b6591f3, type: 3}
-  m_Name: DoubleJumpSkill
+  m_Script: {fileID: 11500000, guid: f876583b42127ae43a1bc5e8bec4a47d, type: 3}
+  m_Name: ExtraJumpMod
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  cost: 0
-  modifiers: []
+  instantBoost: {x: 0, y: 0}
+  makeBouncey: 0
+  additionalJumps: 0
