@@ -5,7 +5,9 @@ using UnityEngine;
 public class BookSpawnManager : MonoBehaviour
 {
     public GameObject spawnPoints;
-    public GameObject bookPrefab;
+    public GameObject smallBookPrefab;
+    public GameObject mediumBookPrefab;
+    public GameObject bigBookPrefab;
 
     private void Start()
     {
@@ -19,7 +21,20 @@ public class BookSpawnManager : MonoBehaviour
     {
         foreach (Transform child in spawnPoints.transform)
         {
-            Instantiate(bookPrefab, child.position, Quaternion.Euler(0, 0, 90));
+            switch(child.tag)
+            {
+                case "SmlBookPoint":
+                    SpawnFromPoint(child, smallBookPrefab);
+                    break;
+                case "MdBookPoint":
+                    SpawnFromPoint(child, mediumBookPrefab);
+                    break;
+                case "BigBookPoint":
+                    SpawnFromPoint(child, bigBookPrefab);
+                    break;
+            }
         }
     }
+
+    void SpawnFromPoint(Transform child, GameObject prefab) => Instantiate(prefab, child.position, Quaternion.Euler(0, 0, 90));
 }

@@ -4,45 +4,58 @@ using UnityEngine;
 
 public class BookCollision : MonoBehaviour
 {
-    public float rayLength = 5f; 
-    public LayerMask obstacleLayer; 
-    private Rigidbody2D rb;
+    private bool hasRigidbody = false;
+    private SpriteRenderer SpriteRenderer;
+    private BoxCollider2D boxCollider;
 
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = true;
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
-    void Update()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        RaycastHit2D left = Physics2D.Raycast(transform.position, Vector2.left, rayLength, obstacleLayer);
-        RaycastHit2D right = Physics2D.Raycast(transform.position, Vector2.right, rayLength, obstacleLayer);
-
-        if (left.collider != null)
+        if (collision.transform.tag == "obstacle")
         {
-            Debug.Log("GOT HIT AT LEFT");
+            if (!hasRigidbody)
+            {
+                Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                hasRigidbody = true;
 
-            OnRaycastHit(left);
-        }
+                Vector2 forceDirection = collision.contacts[0].normal * -1;
+                float forceMagnitude = 10f;
 
-        if (right.collider != null)
-        {
-            Debug.Log("GOT HIT AT RIGHT");
+                rb.AddForce(forceDirection * forceMagnitude * 5, ForceMode2D.Impulse);
 
-            OnRaycastHit(right);
+                StartCoroutine(destroyBook(rb));
+            }
         }
     }
 
-    void OnRaycastHit(RaycastHit2D hit)
+    IEnumerator destroyBook(Rigidbody2D rb)
     {
-        Debug.Log(hit);
-        if (hit.collider.CompareTag("obstacle"))
-        {
-            rb.isKinematic = false;
+        transform.SetParent(null);
+        float alphaVal = SpriteRenderer.color.a;
+        Color tmp = SpriteRenderer.color;
 
-            Vector2 forceDirection = ((Vector2)transform.position - hit.point).normalized;
-            rb.AddForce(forceDirection * 10f, ForceMode2D.Impulse);
+        while (SpriteRenderer.color.a < 1)
+        {
+            alphaVal += 0.01f;
+            tmp.a = alphaVal;
+            SpriteRenderer.color = tmp;
+
+            yield return new WaitForSeconds(0.05f);
         }
+
+        //yield return new WaitForSeconds(1);
+
+        //rb.isKinematic = true;
+        //boxCollider.isTrigger = true;
+
+        yield return new WaitForSeconds(3);
+
+        Destroy(gameObject);
     }
 }
