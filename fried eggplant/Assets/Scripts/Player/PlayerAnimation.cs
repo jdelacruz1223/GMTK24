@@ -36,10 +36,14 @@ public class PlayerAnimation : MonoBehaviour
         switch (moveState)
         {
             case MoveState.idle:
-                anim.SetBool("isIdling", true);
+                anim.SetBool("isIdling",true);
+                anim.SetBool("isRunning",false);
+                anim.SetBool("isFalling",false);
+                anim.SetBool("hasLanded",false);
             break;
             case MoveState.running:
-                anim.SetBool("isRunning", true);
+                anim.SetBool("isRunning",true);
+                anim.SetBool("isIdling",false);
             break;
             case MoveState.landed:
                 anim.SetBool("hasLanded", true);
@@ -49,6 +53,10 @@ public class PlayerAnimation : MonoBehaviour
             break;
             case MoveState.jumping:
                 anim.SetBool("isJumping", true);
+            break;
+            case MoveState.hasTurned:
+                anim.SetBool("isRunning",true);
+                anim.SetTrigger("hasTurned");
             break;
             default:
             break;
