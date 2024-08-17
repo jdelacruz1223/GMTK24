@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     // Sprite
     private bool isFacingRight = true;
     private float horizontal;
+    private bool hasLanded;
 
     // Jumping Mechanics
     private bool isJumping;
@@ -81,10 +82,16 @@ public class PlayerMovement : MonoBehaviour
         CoyoteMechanic();
         //PlayAnimation();
         //animationUpdate()
-        if (rb.velocity.y > 0) {
+        if (rb.velocity.y > 0 ) {
             currentMoveState = animJumping;
         } else if (rb.velocity.y < 0) {
             currentMoveState = animFalling;
+        }   
+        if (IsGrounded() && !hasLanded) {
+            currentMoveState = animLanded;
+            hasLanded = true;
+        } else if (!IsGrounded()) {
+            hasLanded = false;
         }
         playerAnim.AnimationUpdate(currentMoveState, hasBook);
         Flip();
