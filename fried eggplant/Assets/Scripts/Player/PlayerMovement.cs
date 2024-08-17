@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // Jumping Mechanics
     private bool isJumping;
     [SerializeField] private float jumpingPower = 16f;
-    [SerializeField] private float jumpBufferTime = 0.2f;
+    [SerializeField] private float jumpBufferTime = 0.5f;
     private float jumpBufferCounter;
 
     [SerializeField] private float coyoteTime = 0.2f;
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveState == MoveState.moving)
         {
             speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-            Debug.Log("Speed: " + speed);
+            //Debug.Log("Speed: " + speed);
         }
         else
         {
@@ -93,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
             collisionCooldown();
         }
     }
-   
 
     #region Jumping Mechanics
     private void CoyoteMechanic()

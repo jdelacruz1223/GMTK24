@@ -12,6 +12,9 @@ public class BookSpawnManager : MonoBehaviour
         SpawnBook();
     }
 
+    /// <summary>
+    /// TODO: Must add a check if what type of Tag the Book is
+    /// </summary>
     void SpawnBook()
     {
         foreach (Transform child in spawnPoints.transform)
