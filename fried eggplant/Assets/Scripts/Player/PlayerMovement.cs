@@ -57,19 +57,19 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
         currentMoveState = (Input.GetAxis("Horizontal") != 0) ? animRunning : animIdle;
-        // if (moveState == MoveState.moving)
-        // {
-        //     speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
         //     isRunning = true;
         //     isIdling = false;
-        // }
-        // else
-        // {
+        }
+        else
+        {
         //     speed = startSpeed;
         //     isRunning = false;
 
         //     if (!IsGrounded()) isIdling = false; else isIdling = true;
-        // }
+        }
     }
 
     // Update is called once per frame
@@ -114,7 +114,16 @@ public class PlayerMovement : MonoBehaviour
  
     // }
 
-    
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("platform") && transform.position.y > collision.transform.position.y) {
+            transform.parent = collision.transform;
+        }
+    }
+    void OnCollisionExit2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("platform")) {
+            transform.parent = null;
+        }
+    }
     #region Jumping Mechanics
     private void CoyoteMechanic()
     {
