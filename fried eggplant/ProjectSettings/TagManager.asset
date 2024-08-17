@@ -5,7 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - obstacle
+<<<<<<< HEAD
   - Book
+=======
+  - platform
+  - player
+>>>>>>> Development
   layers:
   - Default
   - TransparentFX
