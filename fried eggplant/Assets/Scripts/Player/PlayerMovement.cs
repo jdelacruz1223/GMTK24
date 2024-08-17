@@ -8,14 +8,21 @@ public class PlayerMovement : MonoBehaviour
     private enum MoveState
     {
         moving,
-        idle
+        idle,
+        running,
+        speeding,
+        grounded,
+        falling,
+        jumping,
     }
 
     private float speed;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
     public Vector2 lastVelocity;
-    private float acceleration = 1.03f;
+    [SerializeField] private float acceleration = 1.03f;
+    [SerializeField] private float cooldown = 1f;
+    private bool isCooldown = false;
     private MoveState moveState;
     // Sprite
     private bool isFacingRight = true;
@@ -24,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     // Jumping Mechanics
     private bool isJumping;
     [SerializeField] private float jumpingPower = 16f;
-    [SerializeField] private float jumpBufferTime = 0.2f;
+    [SerializeField] private float jumpBufferTime = 0.5f;
     private float jumpBufferCounter;
 
     [SerializeField] private float coyoteTime = 0.2f;
@@ -36,26 +43,32 @@ public class PlayerMovement : MonoBehaviour
 
     // Components
     public Rigidbody2D rb;
+    private Animator animator;
 
 
     // Start is called before the first frame update
     void Start()
     {
         moveState = MoveState.idle;
+        animator = GetComponent<Animator>();
         speed = startSpeed;
     }
     void FixedUpdate()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
-        moveState = (Input.GetAxis("Horizontal") != 0) ? MoveState.moving : MoveState.idle;
+        transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
+        moveState = (Input.GetAxisRaw("Horizontal") != 0) ? MoveState.moving : MoveState.idle;
         if (moveState == MoveState.moving)
         {
             speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-            Debug.Log("Speed: " + speed);
+            isRunning = true;
+            isIdling = false;
         }
         else
         {
             speed = startSpeed;
+            isRunning = false;
+
+            if (!IsGrounded()) isIdling = false; else isIdling = true;
         }
 
         lastVelocity = rb.velocity;
@@ -68,10 +81,11 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
 
         CoyoteMechanic();
+        PlayAnimation();
         Flip();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if(DataManager.instance.attemptToBounce()){
             Vector2 bounce = new Vector2(0,0);
@@ -84,11 +98,38 @@ public class PlayerMovement : MonoBehaviour
             }
             rb.velocity += bounce;
         }
-        if (collision.gameObject.CompareTag("obstacle"))
+        if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
         {
             Debug.Log("Collided with wall");
-            speed -= 3;
+            speed = (speed > startSpeed) ? speed - 3 : startSpeed;
+            collisionCooldown();
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("platform") && transform.position.y > collision.transform.position.y) {
+            transform.parent = collision.transform;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("platform")) {
+            transform.parent = null;
+        }
+    }
+    private bool isFalling;
+    private bool isRunning;
+    private bool isIdling;
+    private bool hasLanded;
+    private bool hasBook;
+    void PlayAnimation()
+    {
+        isJumping = Input.GetButtonDown("Jump") && IsGrounded();
+        isFalling = !IsGrounded() && rb.velocity.y < 0;
+
+        animator.SetBool("isRunning", isRunning);
+        animator.SetBool("isIdling", isIdling);
+        animator.SetBool("isJumping", isJumping);
+        animator.SetBool("isFalling", isFalling);
+        animator.SetBool("hasBook", hasBook);
     }
 
     #region Jumping Mechanics
@@ -142,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
+            speed = startSpeed;
         }
     }
     #endregion
@@ -159,6 +201,12 @@ public class PlayerMovement : MonoBehaviour
         isJumping = true;
         yield return new WaitForSeconds(0.4f);
         isJumping = false;
+    }
+    IEnumerator collisionCooldown()
+    {
+        isCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        isCooldown = false;
     }
     #endregion
 }

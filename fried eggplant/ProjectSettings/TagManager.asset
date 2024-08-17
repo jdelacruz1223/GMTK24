@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - obstacle
+  - platform
+  - Book
+  - SmlBookPoint
+  - MdBookPoint
+  - BigBookPoint
   layers:
   - Default
   - TransparentFX

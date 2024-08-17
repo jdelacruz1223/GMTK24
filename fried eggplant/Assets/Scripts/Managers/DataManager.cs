@@ -1,3 +1,4 @@
+using Assets.Scripts.Database;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,12 +22,11 @@ public class DataManager : MonoBehaviour
             instance = this; 
         } 
     }
-    // Start is called before the first frame update
-    void Start()
+    private async void Start()
     {
-
+        await SupabaseClient.GetInstance().InitializeSupabase();
     }
-    // Update is called once per frame
+
     void Update()
     {
         
