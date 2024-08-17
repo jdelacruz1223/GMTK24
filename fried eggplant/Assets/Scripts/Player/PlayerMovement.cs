@@ -19,11 +19,11 @@ public class PlayerMovement : MonoBehaviour
     private float speed;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
+    public Vector2 lastVelocity;
     [SerializeField] private float acceleration = 1.03f;
     [SerializeField] private float cooldown = 1f;
     private bool isCooldown = false;
     private MoveState moveState;
-
     // Sprite
     private bool isFacingRight = true;
     private float horizontal;
@@ -70,6 +70,8 @@ public class PlayerMovement : MonoBehaviour
 
             if (!IsGrounded()) isIdling = false; else isIdling = true;
         }
+
+        lastVelocity = rb.velocity;
     }
 
     // Update is called once per frame
@@ -85,6 +87,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if(DataManager.instance.attemptToBounce()){
+            Vector2 bounce = new Vector2(0,0);
+            if(collision.relativeVelocity.x > 0){
+                //doesn't work cause player is moving...
+                bounce.x = lastVelocity.x * -1;
+            }
+            if(collision.relativeVelocity.y > 0){
+                bounce.y = lastVelocity.y * -1;
+            }
+            rb.velocity += bounce;
+        }
         if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
         {
             Debug.Log("Collided with wall");
@@ -170,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
             isFacingRight = !isFacingRight;
             localScale.x *= -1f;
             transform.localScale = localScale;
+            speed = startSpeed;
         }
     }
     #endregion
