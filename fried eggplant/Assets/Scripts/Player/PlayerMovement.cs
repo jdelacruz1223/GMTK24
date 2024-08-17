@@ -5,25 +5,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private enum MoveState
-    {
-        moving,
-        idle,
-        running,
-        speeding,
-        grounded,
-        falling,
-        jumping,
-    }
-
+    //animation
+    public PlayerAnimation playerAnim;
+    private PlayerAnimation.MoveState currentMoveState;
+    private PlayerAnimation.MoveState animIdle = PlayerAnimation.MoveState.idle;
+    private PlayerAnimation.MoveState animRunning = PlayerAnimation.MoveState.running;
+    private PlayerAnimation.MoveState animLanded = PlayerAnimation.MoveState.landed;
+    private PlayerAnimation.MoveState animFalling = PlayerAnimation.MoveState.falling;
+    private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
+    private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
+    private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
     private float speed;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
+    public Vector2 lastVelocity;
     [SerializeField] private float acceleration = 1.03f;
     [SerializeField] private float cooldown = 1f;
     private bool isCooldown = false;
-    private MoveState moveState;
-
+    private bool hasBook;
+    
     // Sprite
     private bool isFacingRight = true;
     private float horizontal;
@@ -43,33 +43,33 @@ public class PlayerMovement : MonoBehaviour
 
     // Components
     public Rigidbody2D rb;
-    private Animator animator;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        moveState = MoveState.idle;
-        animator = GetComponent<Animator>();
+        currentMoveState = animIdle;
+        //animator = GetComponent<Animator>();
         speed = startSpeed;
+        playerAnim = GetComponent<PlayerAnimation>();
     }
     void FixedUpdate()
     {
-        transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
-        moveState = (Input.GetAxisRaw("Horizontal") != 0) ? MoveState.moving : MoveState.idle;
-        if (moveState == MoveState.moving)
-        {
-            speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-            isRunning = true;
-            isIdling = false;
-        }
-        else
-        {
-            speed = startSpeed;
-            isRunning = false;
+        transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
+        currentMoveState = (Input.GetAxis("Horizontal") != 0) ? animRunning : animIdle;
+        // if (moveState == MoveState.moving)
+        // {
+        //     speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+        //     isRunning = true;
+        //     isIdling = false;
+        // }
+        // else
+        // {
+        //     speed = startSpeed;
+        //     isRunning = false;
 
-            if (!IsGrounded()) isIdling = false; else isIdling = true;
-        }
+        //     if (!IsGrounded()) isIdling = false; else isIdling = true;
+        // }
     }
 
     // Update is called once per frame
@@ -79,12 +79,26 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
 
         CoyoteMechanic();
-        PlayAnimation();
+        //PlayAnimation();
+        //animationUpdate();
+        //if(.hasBook.Count > 0) hasBook = true;
+        playerAnim.AnimationUpdate(currentMoveState, hasBook);
         Flip();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if(DataManager.instance.attemptToBounce()){
+            Vector2 bounce = new Vector2(0,0);
+            if(collision.relativeVelocity.x > 0){
+                //doesn't work cause player is moving...
+                bounce.x = lastVelocity.x * -1;
+            }
+            if(collision.relativeVelocity.y > 0){
+                bounce.y = lastVelocity.y * -1;
+            }
+            rb.velocity += bounce;
+        }
         if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
         {
             Debug.Log("Collided with wall");
@@ -92,33 +106,15 @@ public class PlayerMovement : MonoBehaviour
             collisionCooldown();
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("platform") && transform.position.y > collision.transform.position.y) {
-            transform.parent = collision.transform;
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("platform")) {
-            transform.parent = null;
-        }
-    }
-    private bool isFalling;
-    private bool isRunning;
-    private bool isIdling;
-    private bool hasLanded;
-    private bool hasBook;
-    void PlayAnimation()
-    {
-        isJumping = Input.GetButtonDown("Jump") && IsGrounded();
-        isFalling = !IsGrounded() && rb.velocity.y < 0;
 
-        animator.SetBool("isRunning", isRunning);
-        animator.SetBool("isIdling", isIdling);
-        animator.SetBool("isJumping", isJumping);
-        animator.SetBool("isFalling", isFalling);
-        animator.SetBool("hasBook", hasBook);
-    }
+    //     isJumping = Input.GetButtonDown("Jump") && IsGrounded();
+    //     isFalling = !IsGrounded() && rb.velocity.y > 0;
 
+
+ 
+    // }
+
+    
     #region Jumping Mechanics
     private void CoyoteMechanic()
     {
@@ -197,3 +193,4 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 }
+
