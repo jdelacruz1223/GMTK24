@@ -82,14 +82,19 @@ public class PlayerMovement : MonoBehaviour
         hasBook = (bookCollector.getNumBooks() > 0) ? true : false;
         CoyoteMechanic();
         //PlayAnimation();
-        //animationUpdate();
-        //if(.hasBook.Count > 0) hasBook = true;
+        //animationUpdate()
+        if (rb.velocity.y > 0) {
+            currentMoveState = animJumping;
+        } else if (rb.velocity.y < 0) {
+            currentMoveState = animFalling;
+        }
         playerAnim.AnimationUpdate(currentMoveState, hasBook);
         Flip();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        /*
         if(DataManager.instance.attemptToBounce()){
             Vector2 bounce = new Vector2(0,0);
             if(collision.relativeVelocity.x > 0){
@@ -98,9 +103,10 @@ public class PlayerMovement : MonoBehaviour
             }
             if(collision.relativeVelocity.y > 0){
                 bounce.y = lastVelocity.y * -1;
-            }
+            }S
             rb.velocity += bounce;
         }
+        */
         if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
         {
             Debug.Log("Collided with wall");
@@ -159,7 +165,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-
             coyoteTimeCounter = 0f;
         }
     }
@@ -173,13 +178,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
-            Vector3 localScale = transform.localScale;
+            //flipDelay();
             isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
             speed = startSpeed;
         }
     }
+    /*private IEnumerator flipDelay(){
+        currentMoveState = animHasTurned;
+        yield return new WaitForSeconds(5/12);
+        currentMoveState = animIdle;
+    }*/
     #endregion
 
     #region Checks
