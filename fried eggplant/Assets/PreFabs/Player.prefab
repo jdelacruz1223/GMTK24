@@ -205,11 +205,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSpeed: 3
-  maxSpeed: 12
+  maxSpeed: 13
   lastVelocity: {x: 0, y: 0}
   acceleration: 1.03
   cooldown: 1
-  jumpingPower: 9
+  jumpingPower: 10
   jumpBufferTime: 0.2
   coyoteTime: 0.2
   groundCheck: {fileID: 1531285469830039295}
