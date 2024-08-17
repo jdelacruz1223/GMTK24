@@ -6,6 +6,7 @@ TagManager:
   tags:
   - obstacle
   - platform
+  - player
   layers:
   - Default
   - TransparentFX

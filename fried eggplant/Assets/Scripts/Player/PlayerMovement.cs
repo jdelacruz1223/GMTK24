@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("platform")) {
+        if (collision.gameObject.CompareTag("platform") && transform.position.y > collision.transform.position.y) {
             transform.parent = collision.transform;
         }
     }
