@@ -9,8 +9,7 @@ public class DataManager : MonoBehaviour
     public int playerAddtlJumpAmount = 0;
     public int playerBounceAmount = 0;
     public Vector2 playerInstantBoostAmount = new Vector2(0,0);
-
-
+    public int playerBooks = 0;
     private void Awake(){
         // If there is an instance, and it's not me, delete myself.
         if (instance != null && instance != this) 
@@ -55,5 +54,11 @@ public class DataManager : MonoBehaviour
     }
     public void addBoost(Vector2 amt){
         playerInstantBoostAmount += amt;
+    }
+    public void addBook(){
+        playerBooks += 1;
+    }
+    public void removeBook(){
+        playerBooks -= 1;
     }
 }

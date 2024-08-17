@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f876583b42127ae43a1bc5e8bec4a47d, type: 3}
   m_Name: DashMod
   m_EditorClassIdentifier: 
-  instantBoost: {x: 5, y: 0}
-  makeBouncey: 0
-  additionalJumps: 0
+  instantBoost: {x: 20, y: 0}
+  addBounce: 0
+  addJump: 0
