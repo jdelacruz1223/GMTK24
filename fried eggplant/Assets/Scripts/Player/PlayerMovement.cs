@@ -55,8 +55,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
-        currentMoveState = (Input.GetAxis("Horizontal") != 0) ? animRunning : animIdle;
+        transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
+        currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
