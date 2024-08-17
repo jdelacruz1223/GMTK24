@@ -82,9 +82,9 @@ public class PlayerMovement : MonoBehaviour
         CoyoteMechanic();
         //PlayAnimation();
         //animationUpdate()
-        if (rb.velocity.y > 0 ) {
+        if (rb.velocity.y > 0.1f) {
             currentMoveState = animJumping;
-        } else if (rb.velocity.y < 0) {
+        } else if (rb.velocity.y < -0.1f) {
             currentMoveState = animFalling;
         }   
         if (IsGrounded() && !hasLanded) {
