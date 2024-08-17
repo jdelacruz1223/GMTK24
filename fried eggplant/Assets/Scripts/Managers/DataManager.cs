@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    private void Start()
+    private async void Start()
     {
-        var supabaseClient = SupabaseClient.Instance.supabase;
-        Debug.Log(supabaseClient.ToString());
+        await SupabaseClient.GetInstance().InitializeSupabase();
     }
 
     void Update()
