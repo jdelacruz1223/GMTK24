@@ -30,4 +30,9 @@ public class BookCollector : MonoBehaviour
 
         collectedBooks.Add(newBook);
     }
+    public void RemoveBook(GameObject book) {
+        if (collectedBooks.Contains(book)) {
+            collectedBooks.Remove(book);
+        }
+    }
 }

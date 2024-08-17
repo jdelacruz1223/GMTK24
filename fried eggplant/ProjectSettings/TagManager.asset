@@ -6,7 +6,6 @@ TagManager:
   tags:
   - obstacle
   - platform
-  - player
   - Book
   - SmlBookPoint
   - MdBookPoint

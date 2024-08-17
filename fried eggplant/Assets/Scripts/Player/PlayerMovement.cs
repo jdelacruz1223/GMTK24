@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         moveState = (Input.GetAxis("Horizontal") != 0) ? MoveState.moving : MoveState.idle;
         if (moveState == MoveState.moving)
         {
+            Debug.Log("Speed: " + (int) speed);
             speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
             isRunning = true;
             isIdling = false;
@@ -92,7 +93,16 @@ public class PlayerMovement : MonoBehaviour
             collisionCooldown();
         }
     }
-
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("platform") && transform.position.y > collision.transform.position.y) {
+            transform.parent = collision.transform;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("platform")) {
+            transform.parent = null;
+        }
+    }
     private bool isFalling;
     private bool isRunning;
     private bool isIdling;

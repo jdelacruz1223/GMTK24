@@ -7,11 +7,13 @@ public class BookCollision : MonoBehaviour
     private bool hasRigidbody = false;
     private SpriteRenderer SpriteRenderer;
     private BoxCollider2D boxCollider;
+   private BookCollector bookCollector;
 
     private void Start()
     {
         SpriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+        bookCollector = GameObject.FindGameObjectWithTag("Player").GetComponent<BookCollector>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -39,6 +41,7 @@ public class BookCollision : MonoBehaviour
         transform.SetParent(null);
         float alphaVal = SpriteRenderer.color.a;
         Color tmp = SpriteRenderer.color;
+        bookCollector.RemoveBook(gameObject);
 
         while (SpriteRenderer.color.a < 1)
         {
