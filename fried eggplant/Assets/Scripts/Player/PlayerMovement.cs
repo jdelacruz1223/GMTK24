@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveState == MoveState.moving)
         {
             speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-            Debug.Log("Speed: " + speed);
+            //Debug.Log("Speed: " + speed);
         }
         else
         {
@@ -79,6 +79,16 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Collided with wall");
             speed = (speed > startSpeed) ? speed - 3 : startSpeed;
             collisionCooldown();
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("platform")) {
+            transform.parent = collision.transform;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("platform")) {
+            transform.parent = null;
         }
     }
     IEnumerator collisionCooldown() {
