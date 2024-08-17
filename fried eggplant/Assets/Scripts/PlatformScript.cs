@@ -36,7 +36,7 @@ public class PlatformScript : MonoBehaviour
                 wpIndex = (wpIndex + 1 < waypoints.Length) ? wpIndex + 1 : 0;
             } else {
                 wpIndex += bounceControl;
-                if (wpIndex >= waypoints.Length) {
+                if (wpIndex + 1 >= waypoints.Length) {
                     bounceControl = -1;
                 } else if (wpIndex == 0) {
                     bounceControl = 1;
