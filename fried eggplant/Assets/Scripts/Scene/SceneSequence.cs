@@ -35,6 +35,6 @@ public class SceneSequence : MonoBehaviour
         SceneHandler.GotoScene(nextLevel, hasTransition: true);
     }
     public void RetryLevel() {
-        SceneHandler.GotoScene(SceneManager.GetActiveScene().name, hasTransition: true);
+        SceneHandler.GotoScene(SceneManager.GetActiveScene().name);
     }
 }
