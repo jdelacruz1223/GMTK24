@@ -33,6 +33,8 @@ public class PlayerAnimation : MonoBehaviour
     public void AnimationUpdate(MoveState moveState, bool book)
     {
         if (book) anim.SetBool("hasBook", true);
+        if (!book) anim.SetBool("hasBook", false);
+
         switch (moveState)
         {
             case MoveState.idle:
@@ -62,5 +64,7 @@ public class PlayerAnimation : MonoBehaviour
             default:
             break;
         }
+
+
     }
 }
