@@ -94,21 +94,22 @@ public class PlayerMovement : MonoBehaviour
             horizontal = Input.GetAxisRaw("Horizontal");
             hasBook = bookCollector.getNumBooks() > 0;
             CoyoteMechanic();
-            //PlayAnimation();
-            //animationUpdate()
-            if (rb.velocity.y > 0.1f) {
-                currentMoveState = animJumping;
-            } else if (rb.velocity.y < -0.1f) {
-                currentMoveState = animFalling;
-            }   
-            if (IsGrounded() && !hasLanded) {
-                currentMoveState = animLanded;
-                hasLanded = true;
-            } else if (!IsGrounded()) {
-                hasLanded = false;
-            }
-            Flip();
         }
+        //PlayAnimation();
+        //animationUpdate()
+        if (rb.velocity.y > 0.1f) {
+            currentMoveState = animJumping;
+        } else if (rb.velocity.y < -0.1f) {
+            currentMoveState = animFalling;
+        }   
+        if (IsGrounded() && !hasLanded) {
+            currentMoveState = animLanded;
+            hasLanded = true;
+        } else if (!IsGrounded()) {
+            hasLanded = false;
+        }
+
+        Flip();
         playerAnim.AnimationUpdate(currentMoveState, hasBook);
     }
 
