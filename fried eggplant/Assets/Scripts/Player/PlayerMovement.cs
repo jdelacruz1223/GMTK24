@@ -18,11 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
     private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
     private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
-    [SerializeField] public float speed;
+    private float speed;
     private bool canMove;
-    [Range(1f, 10f)] public float startSpeed = 5;
-    [SerializeField] private float maxSpeed = 10;
-    [SerializeField] private float acceleration = 1.03f;
     private float timeIdle;
     [SerializeField] private float cooldown = 1f;
     [SerializeField] private float boostTime = 1f;
@@ -34,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isBouncing = false;
     private bool isCooldown = false;
     private bool hasBook;
-    private bool hasStarted = false;
+    private bool hasStarted;
     private BookCollector bookCollector;
     private GameObject introSplash;
     
@@ -59,6 +56,13 @@ public class PlayerMovement : MonoBehaviour
     // Components
     public Rigidbody2D rb;
 
+    //Movement Variables
+    [SerializeField] public float C;
+    [SerializeField] public float c;
+    [SerializeField] public float a;
+    [SerializeField] public float h;
+    [SerializeField] public float d;
+    private const float pi = Mathf.PI;
     private float x;
     //float p = Mathf.PI;
 
@@ -68,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
     {
         currentMoveState = animIdle;
         //animator = GetComponent<Animator>();
-        speed = startSpeed;
         playerAnim = GetComponent<PlayerAnimation>();
         bookCollector = GetComponent<BookCollector>();
         introSplash = GameObject.FindGameObjectWithTag("Intro Splash");
@@ -77,12 +80,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    [SerializeField] public float C;
-    [SerializeField] public float c;
-    [SerializeField] public float a;
-    [SerializeField] public float h;
-    [SerializeField] public float d;
-    private const float pi = Mathf.PI;
+    
 
     void FixedUpdate()
     {
@@ -90,22 +88,6 @@ public class PlayerMovement : MonoBehaviour
             transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
             currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
             Move();
-            // if (Input.GetAxisRaw("Horizontal") != 0)
-            // {
-            //     if (IsGrounded()) 
-            //     {
-            //         //speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-            //         speed = (C * Math.Atan((C * startSpeed) - a)) + (pi/d) + h;
-            //     }
-            // }
-            // else
-            // {
-            //     speed = startSpeed;
-            // }
-            // if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) 
-            // {
-            //     speed = startSpeed;
-            // }
         }
         if(introSplash != null){
             if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End") && !hasStarted) {
@@ -140,7 +122,6 @@ public class PlayerMovement : MonoBehaviour
             timeIdle += Time.deltaTime;
             if (timeIdle >= 0.5f) {
                 x = 0;
-                speed = startSpeed;
             } 
         }
     }
@@ -175,10 +156,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        
         if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
         {
             Debug.Log("Collided with wall");
-            speed = (speed > startSpeed) ? speed - 3 : startSpeed;
+            x = 0;
             collisionCooldown();
         }
     }
@@ -191,7 +173,6 @@ public class PlayerMovement : MonoBehaviour
     // }
 
     void OnCollisionEnter2D(Collision2D collision) {
-
         if(DataManager.instance.canBounce){
             rb.AddForce(collision.contacts[0].normal * bounceForce);
             if(collision.relativeVelocity.y < 0){
