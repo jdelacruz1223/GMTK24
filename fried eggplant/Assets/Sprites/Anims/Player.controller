@@ -1210,7 +1210,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1109 &5419751663786040995
 AnimatorTransition:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1518,7 +1518,7 @@ AnimatorStateMachine:
     m_Position: {x: -520, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8678509793963639012}
-    m_Position: {x: -310, y: -100, z: 0}
+    m_Position: {x: -390, y: -100, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 2211160278284144853}
