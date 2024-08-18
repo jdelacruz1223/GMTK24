@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
     private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
     private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
-    [SerializeField] public double speed;
+    [SerializeField] public float speed;
     private bool canMove;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
