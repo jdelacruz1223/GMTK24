@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager GetInstance() { return instance; }
+    public static GameManager instance;
+
+    public string nextScene { get; private set; }
+
+    private void Awake()
     {
-        
+        if (instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    async void Start()
     {
-        
+        // Initialize Supabase
+        await SupabaseClient.GetInstance().InitializeSupabase();
+
+        nextScene = "";
     }
+
+    public void setNextScene(string name) => nextScene = name;
 }

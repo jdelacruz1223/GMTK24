@@ -794,6 +794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 593583655}
+  - component: {fileID: 593583656}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -816,6 +817,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &593583656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593583654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfda64dda78f824f939e5cb2b95afbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extraJumpAmount: 0
+  bounceAmount: 0
+  instantBoostAmount: {x: 0, y: 0}
+  booksAmount: 0
 --- !u!1 &609078033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,31 +1652,31 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 569610588}
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 2
+      insertIndex: -1
       addedObject: {fileID: 2048763326}
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 3
+      insertIndex: -1
       addedObject: {fileID: 486601294}
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 4
+      insertIndex: -1
       addedObject: {fileID: 902001441}
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 5
+      insertIndex: -1
       addedObject: {fileID: 394991210}
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 6
+      insertIndex: -1
       addedObject: {fileID: 471415937}
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 7
+      insertIndex: -1
       addedObject: {fileID: 299779199}
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 8
+      insertIndex: -1
       addedObject: {fileID: 2097468972}
     - targetCorrespondingSourceObject: {fileID: 6192745502503626507, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
-      insertIndex: 9
+      insertIndex: -1
       addedObject: {fileID: 642718886}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
