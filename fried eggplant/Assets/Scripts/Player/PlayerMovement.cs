@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
     private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
     private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
-    private float speed;
+    [SerializeField] private float speed;
     private bool canMove;
     private float timeIdle;
     [SerializeField] private float cooldown = 1f;

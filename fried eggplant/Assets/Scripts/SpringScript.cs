@@ -13,11 +13,6 @@ public class SpringScript : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void OnTriggerEnter2D(Collider2D collider) {
         if (collider.gameObject.CompareTag("Player")) {
             PlayerMovement player = collider.gameObject.GetComponent<PlayerMovement>();
