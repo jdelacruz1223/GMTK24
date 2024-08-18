@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
     [SerializeField] private float acceleration = 1.03f;
+    private float timeIdle;
     [SerializeField] private float cooldown = 1f;
     [SerializeField] private float boostTime = 1f;
     [SerializeField] private float bounceCooldown = 1f;
@@ -119,7 +120,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            if (IsGrounded()) speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            timeIdle = 0;
+        }
+        else 
+        {
+            timeIdle += Time.deltaTime;
+            if (timeIdle >= 0.5f) speed = startSpeed;
+        }
     }
 
     // Update is called once per frame
