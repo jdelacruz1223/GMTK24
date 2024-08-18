@@ -60,7 +60,10 @@ public class PlayerMovement : MonoBehaviour
         currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            if (IsGrounded()) {
+                speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            }
+            
         //     isRunning = true;
         //     isIdling = false;
         }
@@ -70,6 +73,9 @@ public class PlayerMovement : MonoBehaviour
         //     isRunning = false;
 
         //     if (!IsGrounded()) isIdling = false; else isIdling = true;
+        }
+        if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) {
+            speed = startSpeed;
         }
     }
 
