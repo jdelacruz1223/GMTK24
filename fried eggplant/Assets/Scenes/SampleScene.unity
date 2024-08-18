@@ -763,7 +763,7 @@ MonoBehaviour:
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
   m_XDamping: 1
-  m_YDamping: 1
+  m_YDamping: 3
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -832,7 +832,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 33.84
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2640,7 +2640,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2047901510}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 33.84
+    OrthographicSize: 10
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -2985,7 +2985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   extraJumpAmount: 0
-  bounceAmount: 0
+  canBounce: 0
   instantBoostAmount: {x: 0, y: 0}
   booksAmount: 0
 --- !u!4 &2047901510 stripped
@@ -3069,7 +3069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: boostTime
@@ -3080,8 +3080,20 @@ PrefabInstance:
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: startSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: bounceForce
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: acceleration
+      value: 1.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: jumpingPower
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8415856245176918753, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: m_Material
