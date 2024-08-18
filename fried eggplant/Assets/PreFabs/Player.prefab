@@ -243,7 +243,7 @@ MonoBehaviour:
   acceleration: 1.03
   cooldown: 1
   jumpingPower: 10
-  jumpBufferTime: 0.2
+  jumpBufferTime: 0.1
   coyoteTime: 0.2
   groundCheck: {fileID: 1531285469830039295}
   groundLayer:
