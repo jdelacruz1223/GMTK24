@@ -255,11 +255,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rb: {fileID: 2572298416405821561}
-  C: 0
-  c: 0
-  a: 0
-  h: 0
-  d: 0
+  C: 6
+  c: 0.3
+  a: 0.3
+  h: 1.4
+  d: 0.24
 --- !u!114 &680708230741935781
 MonoBehaviour:
   m_ObjectHideFlags: 0
