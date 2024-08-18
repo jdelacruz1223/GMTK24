@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get Horizontal Axis Input to know which side we are facing
         horizontal = Input.GetAxisRaw("Horizontal");
-        hasBook = (bookCollector.getNumBooks() > 0) ? true : false;
+        hasBook = bookCollector.getNumBooks() > 0;
         CoyoteMechanic();
         //PlayAnimation();
         //animationUpdate()
