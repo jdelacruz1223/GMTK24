@@ -239,15 +239,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  startSpeed: 3
-  maxSpeed: 13
-  acceleration: 1.03
+  startSpeed: 10
+  maxSpeed: 25
+  acceleration: 1.003
   cooldown: 1
   boostTime: 1
   bounceCooldown: 1
   bounceForce: 100
   boostForce: 100
-  jumpingPower: 10
+  jumpingPower: 11
   jumpBufferTime: 0.1
   coyoteTime: 0.2
   groundCheck: {fileID: 1531285469830039295}
