@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
     private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
     private float speed;
+    private bool canMove;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
     [SerializeField] private float acceleration = 1.03f;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isCooldown = false;
     private bool hasBook;
     private BookCollector bookCollector;
+    private GameObject introSplash;
     
     // Sprite
     private bool isFacingRight = true;
@@ -53,48 +55,61 @@ public class PlayerMovement : MonoBehaviour
         speed = startSpeed;
         playerAnim = GetComponent<PlayerAnimation>();
         bookCollector = GetComponent<BookCollector>();
+        introSplash = GameObject.FindGameObjectWithTag("Intro Splash");
+        canMove = introSplash == null;
     }
     void FixedUpdate()
     {
-        transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
-        currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-        //     isRunning = true;
-        //     isIdling = false;
-        }
-        else
-        {
-            speed = startSpeed;
-        //     isRunning = false;
+        if (canMove){
+            transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
+            currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
+            if (Input.GetAxisRaw("Horizontal") != 0)
+            {
+                if (IsGrounded()) {
+                    speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+                }
+                
+            //     isRunning = true;
+            //     isIdling = false;
+            }
+            else
+            {
+                speed = startSpeed;
+            //     isRunning = false;
 
-        //     if (!IsGrounded()) isIdling = false; else isIdling = true;
+            //     if (!IsGrounded()) isIdling = false; else isIdling = true;
+            }
+            if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) {
+                speed = startSpeed;
+            }
         }
+        if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Get Horizontal Axis Input to know which side we are facing
-        horizontal = Input.GetAxisRaw("Horizontal");
-        hasBook = (bookCollector.getNumBooks() > 0) ? true : false;
-        CoyoteMechanic();
-        //PlayAnimation();
-        //animationUpdate()
-        if (rb.velocity.y > 0 ) {
-            currentMoveState = animJumping;
-        } else if (rb.velocity.y < 0) {
-            currentMoveState = animFalling;
-        }   
-        if (IsGrounded() && !hasLanded) {
-            currentMoveState = animLanded;
-            hasLanded = true;
-        } else if (!IsGrounded()) {
-            hasLanded = false;
+        if (canMove) {
+            // Get Horizontal Axis Input to know which side we are facing
+            horizontal = Input.GetAxisRaw("Horizontal");
+            hasBook = bookCollector.getNumBooks() > 0;
+            CoyoteMechanic();
+            //PlayAnimation();
+            //animationUpdate()
+            if (rb.velocity.y > 0.1f) {
+                currentMoveState = animJumping;
+            } else if (rb.velocity.y < -0.1f) {
+                currentMoveState = animFalling;
+            }   
+            if (IsGrounded() && !hasLanded) {
+                currentMoveState = animLanded;
+                hasLanded = true;
+            } else if (!IsGrounded()) {
+                hasLanded = false;
+            }
+            Flip();
         }
         playerAnim.AnimationUpdate(currentMoveState, hasBook);
-        Flip();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -136,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canMove)
         {
             jumpBufferCounter = jumpBufferTime;
         }
@@ -154,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(JumpCooldown());
         }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f && canMove)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             coyoteTimeCounter = 0f;

@@ -39,7 +39,7 @@ public class PlayerAnimation : MonoBehaviour
                 anim.SetBool("isIdling",true);
                 anim.SetBool("isRunning",false);
                 anim.SetBool("isFalling",false);
-                anim.SetBool("hasLanded",false);
+                anim.SetBool("hasLanded", false);
             break;
             case MoveState.running:
                 anim.SetBool("isRunning",true);
