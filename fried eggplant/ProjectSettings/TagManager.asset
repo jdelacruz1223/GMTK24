@@ -10,6 +10,7 @@ TagManager:
   - SmlBookPoint
   - MdBookPoint
   - BigBookPoint
+  - Intro Splash
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - Transition
   - 
   - 
   - 
