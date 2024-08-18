@@ -12,6 +12,16 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneHandler.GotoScene("SampleScene", hasTransition: true);
+        SceneHandler.GotoScene("Tutorial Scene", hasTransition: true);
+    }
+
+    public void BackToMenu()
+    {
+
+    }
+    
+    public void Retry()
+    {
+        
     }
 }
