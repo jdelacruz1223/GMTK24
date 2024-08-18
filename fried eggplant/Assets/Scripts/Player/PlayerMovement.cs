@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     // Sprite
     private bool isFacingRight = true;
     private float horizontal;
+    private bool hasLanded;
 
     // Jumping Mechanics
     private bool isJumping;
@@ -59,7 +60,10 @@ public class PlayerMovement : MonoBehaviour
         currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            if (IsGrounded()) {
+                speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            }
+            
         //     isRunning = true;
         //     isIdling = false;
         }
@@ -70,6 +74,9 @@ public class PlayerMovement : MonoBehaviour
 
         //     if (!IsGrounded()) isIdling = false; else isIdling = true;
         }
+        if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) {
+            speed = startSpeed;
+        }
     }
 
     // Update is called once per frame
@@ -77,11 +84,21 @@ public class PlayerMovement : MonoBehaviour
     {
         // Get Horizontal Axis Input to know which side we are facing
         horizontal = Input.GetAxisRaw("Horizontal");
-        hasBook = (bookCollector.getNumBooks() > 0) ? true : false;
+        hasBook = bookCollector.getNumBooks() > 0;
         CoyoteMechanic();
         //PlayAnimation();
-        //animationUpdate();
-        //if(.hasBook.Count > 0) hasBook = true;
+        //animationUpdate()
+        if (rb.velocity.y > 0.1f) {
+            currentMoveState = animJumping;
+        } else if (rb.velocity.y < -0.1f) {
+            currentMoveState = animFalling;
+        }   
+        if (IsGrounded() && !hasLanded) {
+            currentMoveState = animLanded;
+            hasLanded = true;
+        } else if (!IsGrounded()) {
+            hasLanded = false;
+        }
         playerAnim.AnimationUpdate(currentMoveState, hasBook);
         Flip();
     }
@@ -146,7 +163,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-
             coyoteTimeCounter = 0f;
         }
     }
@@ -160,13 +176,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
-            Vector3 localScale = transform.localScale;
+            //flipDelay();
             isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
             speed = startSpeed;
         }
     }
+    /*private IEnumerator flipDelay(){
+        currentMoveState = animHasTurned;
+        yield return new WaitForSeconds(5/12);
+        currentMoveState = animIdle;
+    }*/
     #endregion
 
     #region Checks

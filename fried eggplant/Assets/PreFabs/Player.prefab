@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 544602320563870603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2807697339710320113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7035654582375486965}
+  m_Layer: 0
+  m_Name: StackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7035654582375486965
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807697339710320113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 544602320563870603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3713750086931246365
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +75,8 @@ GameObject:
   - component: {fileID: 2572298416405821561}
   - component: {fileID: 8415856245176918753}
   - component: {fileID: 4620653007918910439}
+  - component: {fileID: 680708230741935781}
+  - component: {fileID: -2800846484274752664}
   - component: {fileID: 4772523498930182298}
   m_Layer: 0
   m_Name: Player
@@ -66,6 +99,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1531285469830039295}
+  - {fileID: 7035654582375486965}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2973911715215442114
@@ -156,7 +190,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3713750086931246365}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 310fd7632ee13314cb6b64c18896048d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -204,8 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b50e35b4d1ab24cbd5dd5a0c4a399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 4
-  maxSpeed: 12
+  startSpeed: 3
+  maxSpeed: 13
   acceleration: 1.03
   cooldown: 1
   jumpingPower: 12
@@ -216,6 +250,33 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rb: {fileID: 2572298416405821561}
+--- !u!114 &680708230741935781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3713750086931246365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a217b2854c889249bf926319ecc5b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bookPrefab: {fileID: 6151016558333739303, guid: babdde49b22c337418ef654995d3c656, type: 3}
+  bookStackPosition: {fileID: 7035654582375486965}
+--- !u!114 &-2800846484274752664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3713750086931246365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3416cdc5f0de3148ac5a83b5da61c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 4772523498930182298}
 --- !u!95 &4772523498930182298
 Animator:
   serializedVersion: 5

@@ -43,5 +43,7 @@ public class SupabaseClient : MonoBehaviour
 
         Client = new Client(aes.Decrypt(url), aes.Decrypt(Config.key));
         await Client.InitializeAsync();
+
+        Debug.LogWarning("[Supabase] Connected to the Database as Client");
     }
 }
