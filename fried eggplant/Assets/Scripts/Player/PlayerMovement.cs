@@ -33,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
     private bool hasBook;
     private bool hasStarted;
     private bool isDead;
+
+    //particle systems
+    public ParticleSystem dust;
+
     //private bool isFlipping = false;
     private BookCollector bookCollector;
     private GameObject introSplash;
@@ -107,8 +111,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
+            CreateDust();
             if (IsGrounded()) {
                 speed = C * Mathf.Atan(c * x - a) + (pi / d) + h;
                 x += Time.deltaTime;
@@ -310,5 +316,11 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(bounceCooldown);
         isBouncing = false;
     }
+
+    void CreateDust(){
+        dust.Play();
+    }
+
+
 }
 
