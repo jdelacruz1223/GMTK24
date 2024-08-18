@@ -5,11 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-    
     public void QuitGame()
     {
         Application.Quit();
@@ -17,6 +12,6 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneHandler.GotoScene("SampleScene", hasTransition: true);
     }
 }
