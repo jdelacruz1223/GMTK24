@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -20,6 +21,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float maxSpeed = 10;
     [SerializeField] private float acceleration = 1.03f;
     [SerializeField] private float cooldown = 1f;
+    [SerializeField] private float boostTime = 1f;
+    [SerializeField] private float bounceCooldown = 1f;
+    private Vector2 boost;
+    [SerializeField] private float bounceForce = 100f;
+    [SerializeField] private float boostForce = 100f;
+    private bool isDashing = false;
+    private bool isBouncing = false;
     private bool isCooldown = false;
     private bool hasBook;
     private BookCollector bookCollector;
@@ -60,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (canMove){
+        if (canMove && !isDashing && !isBouncing){
             transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
             currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
             if (Input.GetAxisRaw("Horizontal") != 0)
@@ -83,13 +91,24 @@ public class PlayerMovement : MonoBehaviour
                 speed = startSpeed;
             }
         }
-        if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+        if(introSplash != null){
+            if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+        }
+        if(DataManager.instance.instantBoostAmount != new Vector2(0,0)){
+            boost = DataManager.instance.applyBoost() * boostForce;
+            if(boost.x != 0){
+                StartCoroutine(dash());
+            }
+            if(boost.y != 0){
+                StartCoroutine(lift());
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canMove) {
+        if (canMove && !isDashing && !isBouncing) {
             // Get Horizontal Axis Input to know which side we are facing
             horizontal = Input.GetAxisRaw("Horizontal");
             hasBook = bookCollector.getNumBooks() > 0;
@@ -107,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
             hasLanded = true;
         } else if (!IsGrounded()) {
             hasLanded = false;
+            isBouncing = false;
         }
 
         Flip();
@@ -131,6 +151,16 @@ public class PlayerMovement : MonoBehaviour
     // }
 
     void OnCollisionEnter2D(Collision2D collision) {
+
+        if(DataManager.instance.canBounce){
+            rb.AddForce(collision.contacts[0].normal * bounceForce);
+            if(collision.relativeVelocity.y < 0){
+                rb.AddForce(Vector2.up * bounceForce);
+            }
+            if(IsGrounded()){
+                DataManager.instance.canBounce = false;
+            }
+        }
         if (collision.gameObject.CompareTag("platform") && transform.position.y > collision.transform.position.y) {
             transform.parent = collision.transform;
         }
@@ -222,5 +252,32 @@ public class PlayerMovement : MonoBehaviour
         isCooldown = false;
     }
     #endregion
+
+    IEnumerator dash(){
+        var temp = rb.gravityScale;
+        rb.gravityScale = 0;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(new Vector2(boost.x*(isFacingRight?1:-1),0));
+        isDashing = true;
+        yield return new WaitForSeconds(boostTime);
+        rb.velocity = new Vector2(0,0);
+        rb.gravityScale = temp;
+        isDashing = false;
+    }
+
+    IEnumerator lift(){
+        var temp = rb.gravityScale;
+        rb.gravityScale = 0;
+        rb.AddForce(new Vector2(0,boost.y/2));
+        yield return new WaitForSeconds(boostTime);
+        rb.velocity = new Vector2(0,0);
+        rb.gravityScale = temp;
+    }
+
+    IEnumerator waitForBounceCooldown(){
+        isBouncing = true;
+        yield return new WaitForSeconds(bounceCooldown);
+        isBouncing = false;
+    }
 }
 

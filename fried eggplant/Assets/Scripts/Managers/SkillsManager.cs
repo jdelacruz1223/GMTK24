@@ -62,14 +62,14 @@ public class SkillsManager : MonoBehaviour
             return;
         }
         else{
-            DataManager.instance.booksAmount -= skill.cost;
+            DataManager.instance.removeBooks(skill.cost);
         }
 
         if(skill.modifier.instantBoost != new Vector2(0,0)){
             DataManager.instance.addBoost(skill.modifier.instantBoost);
         }
         if(skill.modifier.addBounce == true){
-            DataManager.instance.addBounce();
+            DataManager.instance.makeBouncey();
         }
         if(skill.modifier.addJump == true){
             DataManager.instance.addJump();

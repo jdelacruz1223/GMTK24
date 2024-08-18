@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Grapple
   description: Tether yourself to a surface
-  cost: 0
+  cost: 5
   modifier: {fileID: 0}
