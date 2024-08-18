@@ -205,6 +205,15 @@ public class PlayerMovement : MonoBehaviour
             transform.parent = null;
         }
     }
+
+    //Toggles player control on or off
+    public void toggleControl() {
+        canMove = !canMove;
+    }
+    //Sets player control to set boolean value
+    public void toggleControl(bool t) {
+        canMove = t;
+    }
     #region Jumping Mechanics
     private void CoyoteMechanic()
     {
