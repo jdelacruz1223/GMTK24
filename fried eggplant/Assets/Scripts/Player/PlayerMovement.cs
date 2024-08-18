@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
     private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
     private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
-    private float speed;
+    [SerializeField] public double speed;
     private bool canMove;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
@@ -46,6 +49,9 @@ public class PlayerMovement : MonoBehaviour
     // Components
     public Rigidbody2D rb;
 
+    double x;
+    double p = Math.PI;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,32 +64,45 @@ public class PlayerMovement : MonoBehaviour
         introSplash = GameObject.FindGameObjectWithTag("Intro Splash");
         canMove = introSplash == null;
     }
+
+    
+    [SerializeField] public double C;
+    [SerializeField] public double c;
+    [SerializeField] public double a;
+    [SerializeField] public double h;
+    [SerializeField] public double d;
+    private double pi = Math.PI;
+
     void FixedUpdate()
     {
-        if (canMove){
-            transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
+        if (canMove)
+        {
+            transform.Translate(Input.GetAxisRaw("Horizontal") * (float)speed * Time.deltaTime, 0, 0);
             currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
-            if (Input.GetAxisRaw("Horizontal") != 0)
-            {
-                if (IsGrounded()) {
-                    speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-                }
-                
-            //     isRunning = true;
-            //     isIdling = false;
-            }
-            else
-            {
-                speed = startSpeed;
-            //     isRunning = false;
-
-            //     if (!IsGrounded()) isIdling = false; else isIdling = true;
-            }
-            if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) {
-                speed = startSpeed;
-            }
+            Move();
+            // if (Input.GetAxisRaw("Horizontal") != 0)
+            // {
+            //     if (IsGrounded()) 
+            //     {
+            //         //speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            //         speed = (C * Math.Atan((C * startSpeed) - a)) + (pi/d) + h;
+            //     }
+            // }
+            // else
+            // {
+            //     speed = startSpeed;
+            // }
+            // if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) 
+            // {
+            //     speed = startSpeed;
+            // }
         }
         if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+    }
+
+    void Move()
+    {
+        speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
     }
 
     // Update is called once per frame
