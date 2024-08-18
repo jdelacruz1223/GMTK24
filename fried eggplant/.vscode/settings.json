@@ -56,5 +56,10 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "fried eggplant.sln"
+    "dotnet.defaultSolution": "fried eggplant.sln",
+    "cSpell.words": [
+      "Cooldown",
+      "Cooldowns",
+      "Rigidbody"
+    ]
 }

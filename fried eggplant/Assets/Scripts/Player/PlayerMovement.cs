@@ -1,20 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Actor
 {
     //animation
-    private PlayerAnimation playerAnim;
+    [SerializeField] private PlayerAnimation playerAnimation;
     private PlayerAnimation.MoveState currentMoveState;
-    private PlayerAnimation.MoveState animIdle = PlayerAnimation.MoveState.idle;
-    private PlayerAnimation.MoveState animRunning = PlayerAnimation.MoveState.running;
-    private PlayerAnimation.MoveState animLanded = PlayerAnimation.MoveState.landed;
-    private PlayerAnimation.MoveState animFalling = PlayerAnimation.MoveState.falling;
-    private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
-    private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
-    private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
-    private float speed;
+    private readonly PlayerAnimation.MoveState animIdle = PlayerAnimation.MoveState.idle;
+    private readonly PlayerAnimation.MoveState animRunning = PlayerAnimation.MoveState.running;
+    private readonly PlayerAnimation.MoveState animLanded = PlayerAnimation.MoveState.landed;
+    private readonly PlayerAnimation.MoveState animFalling = PlayerAnimation.MoveState.falling;
+    private readonly PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
+    private readonly PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
+    private readonly PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
     private bool canMove;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
@@ -22,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float cooldown = 1f;
     private bool isCooldown = false;
     private bool hasBook;
-    private BookCollector bookCollector;
+    [SerializeField] private BookCollector bookCollector;
     private GameObject introSplash;
     
     // Sprite
@@ -38,90 +37,105 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
+    private bool killJump;
 
     // Ground Checks
-    [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Vector2 groundCheckOffset;
+    [SerializeField] private Vector2 groundCheckSize;
 
     // Components
-    public Rigidbody2D rb;
+    // public Rigidbody2D rb;
+
+    [SerializeField] private new CinemachineVirtualCamera camera;
+    [SerializeField] private AnimationCurve cameraZoomCurve;
 
 
     // Start is called before the first frame update
     void Start()
     {
         currentMoveState = animIdle;
-        //animator = GetComponent<Animator>();
-        speed = startSpeed;
-        playerAnim = GetComponent<PlayerAnimation>();
-        bookCollector = GetComponent<BookCollector>();
         introSplash = GameObject.FindGameObjectWithTag("Intro Splash");
         canMove = introSplash == null;
     }
-    void FixedUpdate()
+    
+    override
+    protected void ActorFixedUpdate()
     {
-        if (canMove){
-            transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
-            currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
-            if (Input.GetAxisRaw("Horizontal") != 0)
-            {
-                if (IsGrounded()) {
-                    speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
-                }
-                
-            //     isRunning = true;
-            //     isIdling = false;
-            }
-            else
-            {
-                speed = startSpeed;
-            //     isRunning = false;
+        FixedUpdateMovement();
+        if (playerAnimation.anim.GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+        camera.m_Lens.OrthographicSize = 4 + cameraZoomCurve.Evaluate(Mathf.Abs(velocity.x) / maxSpeed);
+    }
 
-            //     if (!IsGrounded()) isIdling = false; else isIdling = true;
-            }
-            if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) {
-                speed = startSpeed;
-            }
+    void FixedUpdateMovement() {
+        if (!canMove) return;
+
+        // fixed update Jump handling, cannot get button presses in here!
+        if (coyoteTimeCounter > 0 && jumpBufferCounter > 0) {
+            velocity.y = jumpingPower;
+            jumpBufferCounter = 0;
         }
-        if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+
+        if (killJump) {
+            velocity.y *= 0.5f;
+            killJump = false;
+            coyoteTimeCounter = 0;
+        }
+
+        
+        var speed = velocity.x;
+        var horizontal = Input.GetAxisRaw("Horizontal");
+
+        var accel = 0.3f;
+        var targetSpeed = 0f;
+
+        if (Mathf.Abs(horizontal) > float.Epsilon) {
+            if (Mathf.Abs(speed) > startSpeed) accel = 0.05f;
+            targetSpeed = maxSpeed * Mathf.Sign(horizontal);
+        }
+        speed = Mathf.MoveTowards(speed, targetSpeed, accel);
+
+        velocity.x = speed;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (canMove) {
+            // 
+            CoyoteMechanic();
             // Get Horizontal Axis Input to know which side we are facing
             horizontal = Input.GetAxisRaw("Horizontal");
             hasBook = bookCollector.getNumBooks() > 0;
-            CoyoteMechanic();
+            currentMoveState = horizontal != 0 ? animRunning : animIdle;
         }
         //PlayAnimation();
         //animationUpdate()
-        if (rb.velocity.y > 0.1f) {
+        if (velocity.y > 0.1f) {
             currentMoveState = animJumping;
-        } else if (rb.velocity.y < -0.1f) {
+        } else if (velocity.y < -0.1f) {
             currentMoveState = animFalling;
         }   
-        if (IsGrounded() && !hasLanded) {
+        if (IsGrounded && !hasLanded) {
             currentMoveState = animLanded;
             hasLanded = true;
-        } else if (!IsGrounded()) {
+        } else if (!IsGrounded) {
             hasLanded = false;
         }
 
         Flip();
-        playerAnim.AnimationUpdate(currentMoveState, hasBook);
+        playerAnimation.AnimationUpdate(currentMoveState, hasBook);
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
-        {
-            Debug.Log("Collided with wall");
-            speed = (speed > startSpeed) ? speed - 3 : startSpeed;
-            collisionCooldown();
-        }
-    }
+    // private void OnCollisionStay2D(Collision2D collision)
+    // {
+    //     if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
+    //     {
+    //         Debug.Log("Collided with wall");
+    //         speed = (speed > startSpeed) ? speed - 3 : startSpeed;
+    //         collisionCooldown();
+    //     }
+    // }
 
     //     isJumping = Input.GetButtonDown("Jump") && IsGrounded();
     //     isFalling = !IsGrounded() && rb.velocity.y > 0;
@@ -140,10 +154,11 @@ public class PlayerMovement : MonoBehaviour
             transform.parent = null;
         }
     }
+
     #region Jumping Mechanics
     private void CoyoteMechanic()
     {
-        if (IsGrounded())
+        if (IsGrounded)
         {
             coyoteTimeCounter = coyoteTime;
         }
@@ -152,8 +167,9 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump") && canMove)
+        if (Input.GetButtonDown("Jump"))
         {
+            Debug.Log("Jump was pressed");
             jumpBufferCounter = jumpBufferTime;
         }
         else
@@ -161,19 +177,9 @@ public class PlayerMovement : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
-        if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && !isJumping)
+        if (Input.GetButtonUp("Jump") && velocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-
-            jumpBufferCounter = 0f;
-
-            StartCoroutine(JumpCooldown());
-        }
-
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f && canMove)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            coyoteTimeCounter = 0f;
+            killJump = true;
         }
     }
     #endregion
@@ -191,7 +197,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-            speed = startSpeed;
         }
     }
     /*private IEnumerator flipDelay(){
@@ -199,13 +204,6 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(5/12);
         currentMoveState = animIdle;
     }*/
-    #endregion
-
-    #region Checks
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-    }
     #endregion
 
     #region Cooldowns

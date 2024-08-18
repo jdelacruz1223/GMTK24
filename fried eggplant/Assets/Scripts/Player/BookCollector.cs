@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +30,7 @@ public class BookCollector : MonoBehaviour
         collectedBooks.Add(newBook);
         DataManager.instance.addBook();
     }
+    
     public void RemoveBook(GameObject book) {
         if (collectedBooks.Contains(book)) {
             collectedBooks.Remove(book);

@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class TimeManager : MonoBehaviour
 {
@@ -27,7 +23,7 @@ public class TimeManager : MonoBehaviour
         totalTime = (!isPaused) ? totalTime + Time.deltaTime : totalTime;
         currentTime = totalTime - startTime;
 
-        GameManager.GetInstance().setCurrentTime(currentTime);
+        GameManager.GetInstance()?.setCurrentTime(currentTime);
     }
     public void Timer() {
         var timeVar = currentTime;
