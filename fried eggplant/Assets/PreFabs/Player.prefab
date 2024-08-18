@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 2807697339710320113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0.7957863, y: -0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -238,10 +238,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b50e35b4d1ab24cbd5dd5a0c4a399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
   startSpeed: 3
   maxSpeed: 13
   acceleration: 1.03
   cooldown: 1
+  boostTime: 1
+  bounceCooldown: 1
+  bounceForce: 100
+  boostForce: 100
   jumpingPower: 10
   jumpBufferTime: 0.1
   coyoteTime: 0.2
@@ -250,6 +255,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   rb: {fileID: 2572298416405821561}
+  C: 0
+  c: 0
+  a: 0
+  h: 0
+  d: 0
 --- !u!114 &680708230741935781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bookPrefab: {fileID: 6151016558333739303, guid: babdde49b22c337418ef654995d3c656, type: 3}
   bookStackPosition: {fileID: 7035654582375486965}
+  collectedBooks: []
 --- !u!114 &-2800846484274752664
 MonoBehaviour:
   m_ObjectHideFlags: 0
