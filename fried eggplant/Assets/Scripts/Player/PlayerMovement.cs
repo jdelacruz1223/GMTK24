@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
@@ -57,8 +58,8 @@ public class PlayerMovement : MonoBehaviour
     // Components
     public Rigidbody2D rb;
 
-    double x;
-    double p = Math.PI;
+    private float x;
+    //float p = Mathf.PI;
 
 
     // Start is called before the first frame update
@@ -74,12 +75,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    [SerializeField] public double C;
-    [SerializeField] public double c;
-    [SerializeField] public double a;
-    [SerializeField] public double h;
-    [SerializeField] public double d;
-    private double pi = Math.PI;
+    [SerializeField] public float C;
+    [SerializeField] public float c;
+    [SerializeField] public float a;
+    [SerializeField] public float h;
+    [SerializeField] public float d;
+    private const float pi = Mathf.PI;
 
     void FixedUpdate()
     {
@@ -122,13 +123,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            if (IsGrounded()) speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            //if (IsGrounded()) speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            if (IsGrounded()) {
+                speed = C * Mathf.Atan(c * x - a) + (pi / d) + h;
+                x += Time.deltaTime;
+            } 
             timeIdle = 0;
         }
         else 
         {
             timeIdle += Time.deltaTime;
-            if (timeIdle >= 0.5f) speed = startSpeed;
+            if (timeIdle >= 0.5f) {
+                x = 0;
+                speed = startSpeed;
+            } 
         }
     }
 
@@ -248,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-            speed = startSpeed;
+            x = 0;
         }
     }
     /*private IEnumerator flipDelay(){
