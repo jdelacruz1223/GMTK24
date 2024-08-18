@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b50e35b4d1ab24cbd5dd5a0c4a399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startSpeed: 3
+  startSpeed: 4
   maxSpeed: 13
   acceleration: 1.03
   cooldown: 1
