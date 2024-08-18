@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isBouncing = false;
     private bool isCooldown = false;
     private bool hasBook;
+    private bool hasStarted = false;
     private BookCollector bookCollector;
     private GameObject introSplash;
     
@@ -72,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         bookCollector = GetComponent<BookCollector>();
         introSplash = GameObject.FindGameObjectWithTag("Intro Splash");
         canMove = introSplash == null;
+        hasStarted = canMove;
     }
 
     
@@ -106,7 +108,10 @@ public class PlayerMovement : MonoBehaviour
             // }
         }
         if(introSplash != null){
-            if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+            if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End") && !hasStarted) {
+                canMove = true;
+                hasStarted = true;
+            } 
         }
         if(DataManager.instance.instantBoostAmount != new Vector2(0,0)){
             boost = DataManager.instance.applyBoost() * boostForce;
