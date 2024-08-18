@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneSequence : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class SceneSequence : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
-            //SceneHandler.GotoScene(nextLevel, hasTransition: true);
             collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
             endScreen.SetActive(true);
         }
@@ -31,5 +31,8 @@ public class SceneSequence : MonoBehaviour
     [ContextMenu("Go To Next Level")]
     public void GoToNextLevel() {
         SceneHandler.GotoScene(nextLevel, hasTransition: true);
+    }
+    public void RetryLevel() {
+        
     }
 }
