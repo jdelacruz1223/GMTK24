@@ -28,6 +28,7 @@ public class SceneSequence : MonoBehaviour
     public void GoToMainMenu() {
         SceneHandler.GotoScene("MainMenuScene", hasTransition: true);
     }
+    [ContextMenu("Go To Next Level")]
     public void GoToNextLevel() {
         SceneHandler.GotoScene(nextLevel, hasTransition: true);
     }
