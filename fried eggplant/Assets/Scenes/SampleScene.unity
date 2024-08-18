@@ -4618,19 +4618,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: boostTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: boostForce
-      value: 300
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: startSpeed
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: bounceForce
-      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: acceleration
