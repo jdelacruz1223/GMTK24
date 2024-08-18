@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,14 +17,23 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
     private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
     private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
-    private float speed;
+    [SerializeField] public float speed;
+    private bool canMove;
     [Range(1f, 10f)] public float startSpeed = 5;
     [SerializeField] private float maxSpeed = 10;
     [SerializeField] private float acceleration = 1.03f;
     [SerializeField] private float cooldown = 1f;
+    [SerializeField] private float boostTime = 1f;
+    [SerializeField] private float bounceCooldown = 1f;
+    private Vector2 boost;
+    [SerializeField] private float bounceForce = 100f;
+    [SerializeField] private float boostForce = 100f;
+    private bool isDashing = false;
+    private bool isBouncing = false;
     private bool isCooldown = false;
     private bool hasBook;
     private BookCollector bookCollector;
+    private GameObject introSplash;
     
     // Sprite
     private bool isFacingRight = true;
@@ -44,6 +56,9 @@ public class PlayerMovement : MonoBehaviour
     // Components
     public Rigidbody2D rb;
 
+    double x;
+    double p = Math.PI;
+
 
     // Start is called before the first frame update
     void Start()
@@ -53,39 +68,69 @@ public class PlayerMovement : MonoBehaviour
         speed = startSpeed;
         playerAnim = GetComponent<PlayerAnimation>();
         bookCollector = GetComponent<BookCollector>();
+        introSplash = GameObject.FindGameObjectWithTag("Intro Splash");
+        canMove = introSplash == null;
     }
+
+    
+    [SerializeField] public double C;
+    [SerializeField] public double c;
+    [SerializeField] public double a;
+    [SerializeField] public double h;
+    [SerializeField] public double d;
+    private double pi = Math.PI;
+
     void FixedUpdate()
     {
-        transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
-        currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            if (IsGrounded()) {
-                speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+        if (canMove && !isDashing && !isBouncing){
+            transform.Translate(Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime, 0, 0);
+            currentMoveState = (Input.GetAxisRaw("Horizontal") != 0) ? animRunning : animIdle;
+            Move();
+            // if (Input.GetAxisRaw("Horizontal") != 0)
+            // {
+            //     if (IsGrounded()) 
+            //     {
+            //         //speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
+            //         speed = (C * Math.Atan((C * startSpeed) - a)) + (pi/d) + h;
+            //     }
+            // }
+            // else
+            // {
+            //     speed = startSpeed;
+            // }
+            // if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) 
+            // {
+            //     speed = startSpeed;
+            // }
+        }
+        if(introSplash != null){
+            if (introSplash.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+        }
+        if(DataManager.instance.instantBoostAmount != new Vector2(0,0)){
+            boost = DataManager.instance.applyBoost() * boostForce;
+            if(boost.x != 0){
+                StartCoroutine(dash());
             }
-            
-        //     isRunning = true;
-        //     isIdling = false;
+            if(boost.y != 0){
+                StartCoroutine(lift());
+            }
         }
-        else
-        {
-            speed = startSpeed;
-        //     isRunning = false;
+    }
 
-        //     if (!IsGrounded()) isIdling = false; else isIdling = true;
-        }
-        if (rb.velocity.x > 0.1f || rb.velocity.x < -0.1f) {
-            speed = startSpeed;
-        }
+    void Move()
+    {
+        speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Get Horizontal Axis Input to know which side we are facing
-        horizontal = Input.GetAxisRaw("Horizontal");
-        hasBook = bookCollector.getNumBooks() > 0;
-        CoyoteMechanic();
+        if (canMove && !isDashing && !isBouncing) {
+            // Get Horizontal Axis Input to know which side we are facing
+            horizontal = Input.GetAxisRaw("Horizontal");
+            hasBook = bookCollector.getNumBooks() > 0;
+            CoyoteMechanic();
+        }
         //PlayAnimation();
         //animationUpdate()
         if (rb.velocity.y > 0.1f) {
@@ -98,9 +143,11 @@ public class PlayerMovement : MonoBehaviour
             hasLanded = true;
         } else if (!IsGrounded()) {
             hasLanded = false;
+            isBouncing = false;
         }
-        playerAnim.AnimationUpdate(currentMoveState, hasBook);
+
         Flip();
+        playerAnim.AnimationUpdate(currentMoveState, hasBook);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -121,6 +168,16 @@ public class PlayerMovement : MonoBehaviour
     // }
 
     void OnCollisionEnter2D(Collision2D collision) {
+
+        if(DataManager.instance.canBounce){
+            rb.AddForce(collision.contacts[0].normal * bounceForce);
+            if(collision.relativeVelocity.y < 0){
+                rb.AddForce(Vector2.up * bounceForce);
+            }
+            if(IsGrounded()){
+                DataManager.instance.canBounce = false;
+            }
+        }
         if (collision.gameObject.CompareTag("platform") && transform.position.y > collision.transform.position.y) {
             transform.parent = collision.transform;
         }
@@ -142,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canMove)
         {
             jumpBufferCounter = jumpBufferTime;
         }
@@ -160,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(JumpCooldown());
         }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f && canMove)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             coyoteTimeCounter = 0f;
@@ -212,5 +269,32 @@ public class PlayerMovement : MonoBehaviour
         isCooldown = false;
     }
     #endregion
+
+    IEnumerator dash(){
+        var temp = rb.gravityScale;
+        rb.gravityScale = 0;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(new Vector2(boost.x*(isFacingRight?1:-1),0));
+        isDashing = true;
+        yield return new WaitForSeconds(boostTime);
+        rb.velocity = new Vector2(0,0);
+        rb.gravityScale = temp;
+        isDashing = false;
+    }
+
+    IEnumerator lift(){
+        var temp = rb.gravityScale;
+        rb.gravityScale = 0;
+        rb.AddForce(new Vector2(0,boost.y/2));
+        yield return new WaitForSeconds(boostTime);
+        rb.velocity = new Vector2(0,0);
+        rb.gravityScale = temp;
+    }
+
+    IEnumerator waitForBounceCooldown(){
+        isBouncing = true;
+        yield return new WaitForSeconds(bounceCooldown);
+        isBouncing = false;
+    }
 }
 
