@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
     private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
     private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
-    private float speed;
+    [SerializeField] private float speed;
     private bool canMove;
     private float timeIdle;
     [SerializeField] private float cooldown = 1f;
@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isCooldown = false;
     private bool hasBook;
     private bool hasStarted;
+    private bool isDead;
+    //private bool isFlipping = false;
     private BookCollector bookCollector;
     private GameObject introSplash;
     
@@ -64,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float d;
     private const float pi = Mathf.PI;
     private float x;
-    //float p = Mathf.PI;
 
 
     // Start is called before the first frame update
@@ -77,10 +78,8 @@ public class PlayerMovement : MonoBehaviour
         introSplash = GameObject.FindGameObjectWithTag("Intro Splash");
         canMove = introSplash == null;
         hasStarted = canMove;
+        isDead = false;
     }
-
-    
-    
 
     void FixedUpdate()
     {
@@ -110,7 +109,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            //if (IsGrounded()) speed = (speed < maxSpeed) ? speed * acceleration : maxSpeed;
             if (IsGrounded()) {
                 speed = C * Mathf.Atan(c * x - a) + (pi / d) + h;
                 x += Time.deltaTime;
@@ -149,7 +147,6 @@ public class PlayerMovement : MonoBehaviour
             hasLanded = false;
             isBouncing = false;
         }
-
         Flip();
         playerAnim.AnimationUpdate(currentMoveState, hasBook);
     }
@@ -164,13 +161,6 @@ public class PlayerMovement : MonoBehaviour
             collisionCooldown();
         }
     }
-
-    //     isJumping = Input.GetButtonDown("Jump") && IsGrounded();
-    //     isFalling = !IsGrounded() && rb.velocity.y > 0;
-
-
- 
-    // }
 
     void OnCollisionEnter2D(Collision2D collision) {
         if(DataManager.instance.canBounce){
@@ -246,7 +236,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
-            //flipDelay();
+            //currentMoveState = animHasTurned;
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
@@ -254,17 +244,28 @@ public class PlayerMovement : MonoBehaviour
             x = 0;
         }
     }
-    /*private IEnumerator flipDelay(){
+    /*
+    private IEnumerator flipDelay(){
+        isFlipping = true;
         currentMoveState = animHasTurned;
         yield return new WaitForSeconds(5/12);
+        isFacingRight = !isFacingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
         currentMoveState = animIdle;
-    }*/
+        isFlipping = false;
+    }
+    */
     #endregion
 
     #region Checks
     private bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+    }
+    public bool isPlayerDead() {
+        return isDead;
     }
     #endregion
 

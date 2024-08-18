@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneSequence : MonoBehaviour
 {
     [SerializeField] private string nextLevel;
     public GameObject endScreen;
+    public TimeManager timeManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +22,9 @@ public class SceneSequence : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
-            //SceneHandler.GotoScene(nextLevel, hasTransition: true);
             collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
             endScreen.SetActive(true);
+            timeManager.pauseTimer();
         }
     }
     public void GoToMainMenu() {
@@ -31,5 +33,8 @@ public class SceneSequence : MonoBehaviour
     [ContextMenu("Go To Next Level")]
     public void GoToNextLevel() {
         SceneHandler.GotoScene(nextLevel, hasTransition: true);
+    }
+    public void RetryLevel() {
+        SceneHandler.GotoScene(SceneManager.GetActiveScene().name);
     }
 }
