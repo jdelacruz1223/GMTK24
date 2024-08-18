@@ -9668,7 +9668,7 @@ Tilemap:
       - {fileID: -594098816, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 2078012744, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 945551734, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
-      m_AnimationSpeed: 12.000001
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 79, y: -6, z: 0}
@@ -9692,7 +9692,7 @@ Tilemap:
       - {fileID: -594098816, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 2078012744, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 945551734, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
-      m_AnimationSpeed: 12.000001
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -4, y: -5, z: 0}
@@ -9704,7 +9704,7 @@ Tilemap:
       - {fileID: -594098816, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 2078012744, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 945551734, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
-      m_AnimationSpeed: 12
+      m_AnimationSpeed: 12.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -1, y: -5, z: 0}
@@ -9848,7 +9848,7 @@ Tilemap:
       - {fileID: -594098816, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 2078012744, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 945551734, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
-      m_AnimationSpeed: 12.000001
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 67, y: -2, z: 0}
@@ -10088,7 +10088,7 @@ Tilemap:
       - {fileID: -594098816, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 2078012744, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 945551734, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
-      m_AnimationSpeed: 12
+      m_AnimationSpeed: 12.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 75, y: 3, z: 0}
@@ -10256,7 +10256,7 @@ Tilemap:
       - {fileID: -594098816, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 2078012744, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
       - {fileID: 945551734, guid: 5453064c3488e7948b7d9f36aafa9f35, type: 3}
-      m_AnimationSpeed: 12.000001
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 75, y: 12, z: 0}
