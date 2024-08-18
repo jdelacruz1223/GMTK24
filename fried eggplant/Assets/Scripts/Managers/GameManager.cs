@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public string nextScene { get; private set; }
+    public float currentTime { get; private set; }
 
     private void Awake()
     {
@@ -30,4 +31,5 @@ public class GameManager : MonoBehaviour
     }
 
     public void setNextScene(string name) => nextScene = name;
+    public void setCurrentTime(float time) => currentTime = time;
 }
