@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Lift
   description: Give yourself an upward boost
-  cost: 0
+  cost: 3
   modifier: {fileID: 11400000, guid: a2adb7bf176d1f842ae8f7a27198070c, type: 2}

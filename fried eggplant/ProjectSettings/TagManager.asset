@@ -11,6 +11,7 @@ TagManager:
   - MdBookPoint
   - BigBookPoint
   - Intro Splash
+  - Death Pit
   layers:
   - Default
   - TransparentFX

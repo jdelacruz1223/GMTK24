@@ -36,5 +36,5 @@ public class BookSpawnManager : MonoBehaviour
         }
     }
 
-    void SpawnFromPoint(Transform child, GameObject prefab) => Instantiate(prefab, child.position, Quaternion.Euler(0, 0, 90));
+    void SpawnFromPoint(Transform child, GameObject prefab) => Instantiate(prefab, child.position, Quaternion.identity);
 }

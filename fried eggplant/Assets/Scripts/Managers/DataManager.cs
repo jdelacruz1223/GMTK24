@@ -6,8 +6,9 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
+    public GameObject player;
     public int extraJumpAmount = 0;
-    public int bounceAmount = 0;
+    public bool canBounce;
     public Vector2 instantBoostAmount = new Vector2(0, 0);
     public int booksAmount = 0;
     private void Awake()
@@ -24,7 +25,7 @@ public class DataManager : MonoBehaviour
     }
     private void Start()
     {
-
+        player = GameObject.FindFirstObjectByType<PlayerMovement>().gameObject;
     }
 
     void Update()
@@ -44,19 +45,13 @@ public class DataManager : MonoBehaviour
         extraJumpAmount -= (extraJumpAmount > 0) ? 1 : 0;
         return attempt;
     }
-    public bool attemptToBounce()
-    {
-        bool attempt = bounceAmount > 0;
-        bounceAmount -= (bounceAmount > 0) ? 1 : 0;
-        return attempt;
-    }
     public void addJump()
     {
         extraJumpAmount += 1;
     }
-    public void addBounce()
+    public void makeBouncey()
     {
-        bounceAmount += 1;
+        canBounce = true;
     }
     public void addBoost(Vector2 amt)
     {
@@ -69,5 +64,10 @@ public class DataManager : MonoBehaviour
     public void removeBook()
     {
         booksAmount -= 1;
+    }
+    public void removeBooks(int amt){
+        for (int i = 0; i < amt; i++){
+            StartCoroutine(player.GetComponent<BookCollector>().RemoveTopBook());
+        }
     }
 }
