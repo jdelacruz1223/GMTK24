@@ -190,7 +190,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3713750086931246365}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 310fd7632ee13314cb6b64c18896048d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -240,7 +240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSpeed: 3
   maxSpeed: 13
-  lastVelocity: {x: 0, y: 0}
   acceleration: 1.03
   cooldown: 1
   jumpingPower: 10

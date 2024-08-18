@@ -26,6 +26,8 @@ public class TimeManager : MonoBehaviour
     {
         totalTime = (!isPaused) ? totalTime + Time.deltaTime : totalTime;
         currentTime = totalTime - startTime;
+
+        GameManager.GetInstance().setCurrentTime(currentTime);
     }
     public void Timer() {
         var timeVar = currentTime;

@@ -7,7 +7,7 @@ public class BookCollision : MonoBehaviour
     private bool hasRigidbody = false;
     private SpriteRenderer SpriteRenderer;
     private BoxCollider2D boxCollider;
-   private BookCollector bookCollector;
+    private BookCollector bookCollector;
 
     private void Start()
     {
@@ -51,11 +51,6 @@ public class BookCollision : MonoBehaviour
 
             yield return new WaitForSeconds(0.05f);
         }
-
-        //yield return new WaitForSeconds(1);
-
-        //rb.isKinematic = true;
-        //boxCollider.isTrigger = true;
 
         yield return new WaitForSeconds(3);
 
