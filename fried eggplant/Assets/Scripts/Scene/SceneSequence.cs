@@ -11,6 +11,7 @@ public class SceneSequence : MonoBehaviour
     public GameObject endScreen;
     public AudioSource jingle;
     private GameObject cam;
+    [SerializeField] private GameObject dimOverlay;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class SceneSequence : MonoBehaviour
             if (collision.gameObject.GetComponent<PlayerMovement>().isControllable()) {
                 collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
                 Instantiate(endScreen, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), Quaternion.identity, cam.transform);
+                Instantiate(dimOverlay, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), Quaternion.identity, cam.transform);
                 TimeManager.instance.endLevel();
                 jingle.Play();
             }
