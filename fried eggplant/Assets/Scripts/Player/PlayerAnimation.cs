@@ -20,8 +20,9 @@ public class PlayerAnimation : MonoBehaviour
         hasBook,
         hasTurned
     }
-    [HideInInspector] public Animator anim;
-    [SerializeField] private ParticleSystem dust;
+    public Animator anim;
+    public ParticleSystem dust;
+    
     
     void Start()
     {
@@ -44,11 +45,11 @@ public class PlayerAnimation : MonoBehaviour
             case MoveState.running:
                 anim.SetBool("isRunning",true);
                 anim.SetBool("isIdling",false);
-                if (dust != null && GetComponent<PlayerMovement>().IsGrounded) dust.Play();
+                if (GetComponent<PlayerMovement>().IsGrounded) dust?.Play();
             break;
             case MoveState.landed:
                 anim.SetTrigger("hasLanded");
-                if (dust != null) dust.Play();
+                dust?.Play();
             break;
             case MoveState.falling:
                 anim.SetBool("isFalling", true);
