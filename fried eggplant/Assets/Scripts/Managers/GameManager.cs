@@ -23,7 +23,9 @@ public class GameManager : MonoBehaviour
     async void Start()
     {
         // Initialize Supabase
-        await SupabaseClient.GetInstance().InitializeSupabase();
+        if (SupabaseClient.GetInstance() != null) {
+          await SupabaseClient.GetInstance().InitializeSupabase();
+        }
 
         nextScene = "";
     }
