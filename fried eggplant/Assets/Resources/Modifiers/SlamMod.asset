@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9fbb1b9b15e8c540b5e2e975b6591f3, type: 3}
-  m_Name: BounceSkill
+  m_Script: {fileID: 11500000, guid: f876583b42127ae43a1bc5e8bec4a47d, type: 3}
+  m_Name: SlamMod
   m_EditorClassIdentifier: 
-  name: Bounce
-  description: A force that propels you away from impacts
-  cost: 2
-  modifier: {fileID: 11400000, guid: 105a7572d11dc5f418824034031da5bc, type: 2}
+  instantBoost: {x: 0, y: -2}
+  addBounce: 0
+  addJump: 0
