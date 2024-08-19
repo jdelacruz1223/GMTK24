@@ -8,7 +8,7 @@ namespace Assets.Scripts.Scene
 {
     /// <summary>
     /// Seamless Transition when going to another Level
-    /// Will utilize SceneHandler but the handling of transitions is managed here.
+    /// Will utilize SceneHandler but the handling of levels is managed here.
     /// </summary>
     public class LevelManager
     {

@@ -23,7 +23,6 @@ using UnityEngine;
 /// </summary>
 public class SceneHandler
 {
-
     /// <summary>
     /// Handles all of the scenes whether additive or not.
     /// Can add scenes, and unload scenes.
