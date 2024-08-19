@@ -7,13 +7,25 @@ using UnityEngine.WSA;
 
 public class TimeManager : MonoBehaviour
 {
+    public static TimeManager instance;
     public TMP_Text text;
     private float startTime;
     private float currentTime;
     private float totalTime;
     private bool isPaused = false;
+    [SerializeField] private float secondsPerBook = 1f;
 
     // Start is called before the first frame update
+    void Awake() {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     void Start()
     {
         startTime = Time.time;
@@ -26,7 +38,6 @@ public class TimeManager : MonoBehaviour
     {
         totalTime = (!isPaused) ? totalTime + Time.deltaTime : totalTime;
         currentTime = totalTime - startTime;
-
         GameManager.GetInstance().setCurrentTime(currentTime);
     }
     public void Timer() {
@@ -40,6 +51,10 @@ public class TimeManager : MonoBehaviour
     public void pauseTimer() {
         CancelInvoke("Timer");
         isPaused = true;
+    }
+    public void endLevel() {
+        currentTime -= secondsPerBook * DataManager.instance.booksAmount;
+        pauseTimer();
     }
     [ContextMenu("Unpause Timer")]
     public void unPauseTimer(){
