@@ -34,7 +34,7 @@ public class BookCollision : MonoBehaviour
                 StartCoroutine(destroyBook());
             }
         }
-        if (collision.transform.tag == "platform") {
+        if (collision.transform.tag == "platform" || collision.transform.tag == "Player" || collision.transform.tag == "Book") {
             Physics2D.IgnoreCollision(collision.collider, gameObject.GetComponent<Collider2D>());
         }
     }

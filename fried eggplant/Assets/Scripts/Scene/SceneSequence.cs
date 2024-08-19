@@ -8,7 +8,6 @@ public class SceneSequence : MonoBehaviour
 {
     [SerializeField] private string nextLevel;
     public GameObject endScreen;
-    public TimeManager timeManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +23,7 @@ public class SceneSequence : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) {
             collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
             endScreen.SetActive(true);
-            timeManager.pauseTimer();
+            TimeManager.instance.endLevel();
         }
     }
     public void GoToMainMenu() {

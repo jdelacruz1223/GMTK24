@@ -12,7 +12,6 @@ public class PlatformScript : MonoBehaviour
     [SerializeField] private bool bounce = false; // Goes back and forth if true
     [SerializeField] private float speed = 5f;
     private Vector2 direction;
-    private SpriteRenderer sprite;
     private Collider2D player;
     private Collider2D collision;
     private int wpIndex = 0;
@@ -25,7 +24,6 @@ public class PlatformScript : MonoBehaviour
         if (waypoints != null) {
             transform.position = (waypoints[0] != null) ? waypoints[0].position : transform.position;
         }
-        sprite = GetComponent<SpriteRenderer>();
         collision = GetComponent<BoxCollider2D>();
         GetComponent<PlatformEffector2D>().enabled = isOneWay;
         collision.usedByEffector = isOneWay;
@@ -58,12 +56,12 @@ public class PlatformScript : MonoBehaviour
         }
     }
     void OnCollisionEnter2D(Collision2D c) {
-        if (c.transform.tag == "Player" && c.transform.tag != "Book") {
+        if (c.transform.tag == "Player") {
             player = c.collider;
         }
     }
     void OnCollisionExit2D (Collision2D c ) {
-        if (c.transform.tag == "Player" && c.transform.tag != "Book") {
+        if (c.transform.tag == "Player") {
             player = null;
         }
     }

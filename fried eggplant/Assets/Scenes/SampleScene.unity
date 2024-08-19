@@ -330,7 +330,6 @@ GameObject:
   - component: {fileID: 268565591}
   - component: {fileID: 268565590}
   - component: {fileID: 268565589}
-  - component: {fileID: 268565588}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -338,19 +337,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &268565588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268565587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6c579c1459c44e44a6f0967e841f701, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 1101659438}
 --- !u!114 &268565589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +412,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1101659440}
   - {fileID: 960456231}
   - {fileID: 1691187645}
   m_Father: {fileID: 0}
@@ -2072,6 +2057,7 @@ RectTransform:
   m_Children:
   - {fileID: 1873543369}
   - {fileID: 799516024}
+  - {fileID: 1101659440}
   m_Father: {fileID: 268565592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2209,6 +2195,7 @@ Transform:
   - {fileID: 1949434894}
   - {fileID: 1796587481}
   - {fileID: 160822137}
+  - {fileID: 1630992510}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1011861580
@@ -2453,16 +2440,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101659437}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 268565592}
+  m_Father: {fileID: 960456231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -226.61792, y: -64.56}
+  m_AnchoredPosition: {x: 506.76416, y: 346.32166}
   m_SizeDelta: {x: 453.23584, y: 129.11871}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1198626858
@@ -2859,7 +2846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae43d269b696c945af9d26c7c703d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMovingPlatform: 0
+  isMovingPlatform: 1
   isOneWay: 1
   bounce: 0
   speed: 5
@@ -3262,7 +3249,7 @@ PrefabInstance:
     - target: {fileID: 7112950458448886671, guid: 2ecea021b2c2456408592d315d5f3039, type: 3}
       propertyPath: timeManager
       value: 
-      objectReference: {fileID: 268565588}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3455,6 +3442,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1630992509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1630992510}
+  - component: {fileID: 1630992511}
+  m_Layer: 0
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1630992510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630992509}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1005428099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1630992511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630992509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c579c1459c44e44a6f0967e841f701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1101659438}
+  secondsPerBook: 1
 --- !u!1001 &1642694033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4466,7 +4499,7 @@ PrefabInstance:
     - target: {fileID: 1244176970088902353, guid: d31547666fe8eab4fa86ca2293d5c44e, type: 3}
       propertyPath: timeManager
       value: 
-      objectReference: {fileID: 268565588}
+      objectReference: {fileID: 0}
     - target: {fileID: 3613278725022743156, guid: d31547666fe8eab4fa86ca2293d5c44e, type: 3}
       propertyPath: m_Name
       value: DeathPit
