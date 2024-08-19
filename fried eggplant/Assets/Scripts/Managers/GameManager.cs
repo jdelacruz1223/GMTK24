@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +11,12 @@ public class GameManager : MonoBehaviour
     public string nextScene { get; private set; }
     public float currentTime { get; private set; }
 
+    public float totalBooks { get; private set; }
+    public float totalBookmarks { get; private set; }
+    public List<LevelModel> levelUserStats { get; private set; }
+    public UserStatsModel User { get; private set; }
+    public string username { get; private set; }
+
     private void Awake()
     {
         if (instance != null)
@@ -16,7 +24,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        
+
         instance = this;
     }
 
@@ -30,6 +38,13 @@ public class GameManager : MonoBehaviour
 
         nextScene = "";
         currentTime = 0;
+        levelUserStats = new List<LevelModel>();
+
+        // Intialize User
+        User.Name = "";
+        User.levelStats = levelUserStats;
+        User.totalTime = 0.0f;
+        User.totalBookmarks = 0;
     }
 
     public void setNextScene(string name) => nextScene = name;
@@ -41,8 +56,17 @@ public class GameManager : MonoBehaviour
     public void BackToMenu() => SceneHandler.GotoScene("MainMenuScene", hasTransition: true);
     public void RetryLevel() => SceneHandler.GotoScene(SceneManager.GetActiveScene().name, hasTransition: true);
 
-    public void EndLevel()
+    public void EndLevel(int level = 0)
     {
+        TimeManager.instance.endLevel();
+        levelUserStats.Append(new LevelModel { level = level, totalBookmarks = LevelManager.instance.totalBookmarks, elapsedTime = TimeManager.instance.getTime() });
 
+        User.levelStats = levelUserStats;
+        User.totalTime += TimeManager.instance.getTime();
+        User.totalBookmarks += LevelManager.instance.totalBookmarks;
+
+        LevelManager.instance.CompleteLevel();
     }
+
+    public void SetUsername(string name) => username = name;
 }
