@@ -1,6 +1,7 @@
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 using System;
+using System.Collections.Generic;
 
 [Table("leaderboard")]
 public class Leaderboard : BaseModel
@@ -11,6 +12,12 @@ public class Leaderboard : BaseModel
     [Column("player_name")]
     public string Name { get; set; }
 
-    [Column("score")]
-    public int Score { get; set; }
+    [Column("total_bookmarks")]
+    public int Bookmark { get; set; }
+
+    [Column("levelstats")]
+    public List<LevelModel> LevelStats { get; set; }
+
+    [Column("totaltime")]
+    public float TotalTime { get; set; }
 }
