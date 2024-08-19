@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 
 
@@ -12,6 +9,7 @@ public class PlayerAnimation : MonoBehaviour
     //     animator.SetBool("isJumping", false);
     //     animator.SetBool("isFalling", false);
     //     animator.SetBool("hasBook", false);
+
     public enum MoveState
     {
         idle,
@@ -22,8 +20,8 @@ public class PlayerAnimation : MonoBehaviour
         hasBook,
         hasTurned
     }
-    public Animator anim;
-    
+    [HideInInspector] public Animator anim;
+    [SerializeField] private ParticleSystem dust;
     
     void Start()
     {
@@ -46,9 +44,11 @@ public class PlayerAnimation : MonoBehaviour
             case MoveState.running:
                 anim.SetBool("isRunning",true);
                 anim.SetBool("isIdling",false);
+                if (dust != null && GetComponent<PlayerMovement>().IsGrounded) dust.Play();
             break;
             case MoveState.landed:
                 anim.SetTrigger("hasLanded");
+                if (dust != null) dust.Play();
             break;
             case MoveState.falling:
                 anim.SetBool("isFalling", true);

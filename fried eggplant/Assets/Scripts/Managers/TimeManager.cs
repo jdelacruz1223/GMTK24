@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class TimeManager : MonoBehaviour
 {
@@ -38,14 +34,17 @@ public class TimeManager : MonoBehaviour
     {
         totalTime = (!isPaused) ? totalTime + Time.deltaTime : totalTime;
         currentTime = totalTime - startTime;
-        GameManager.GetInstance().setCurrentTime(currentTime);
+
+        GameManager.GetInstance()?.setCurrentTime(currentTime);
     }
     public void Timer() {
         var t0 = (int) currentTime;
         var m = t0/60;
         var s = t0 - m*60;
         var ms = (int)((currentTime - t0)*100);
-        text.text = $"{m:00}:{s:00}:{ms:00}";
+        if (text != null) {
+          text.text = $"{m:00}:{s:00}:{ms:00}";
+        }
     }
     [ContextMenu("Pause Timer")]
     public void pauseTimer() {
