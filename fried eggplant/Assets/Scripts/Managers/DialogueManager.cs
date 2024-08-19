@@ -30,9 +30,9 @@ public class DialogueManager : MonoBehaviour
                 collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
                 currentBox = dialogueBoxes.Dequeue();
                 currentBox.SetActive(true);
-            } else if (dialogueBoxes.Count == 0 && !currentBox.activeSelf) {
-                collision.gameObject.GetComponent<PlayerMovement>().toggleControl(true);
             }
-        } 
+        } else if (collision.gameObject.CompareTag("Player") && dialogueBoxes.Count == 0 && !currentBox.activeSelf) {
+            collision.gameObject.GetComponent<PlayerMovement>().toggleControl(true);
+        }
     }
 }

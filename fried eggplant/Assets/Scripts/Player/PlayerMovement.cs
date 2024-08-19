@@ -219,11 +219,20 @@ public class PlayerMovement : Actor
     //Toggles player control on or off
     public void toggleControl() {
         canMove = !canMove;
+        if (!canMove) {
+            velocity.x = 0;
+            currentMoveState = animIdle;
+        }
+
     }
 
     //Sets player control to set boolean value
     public void toggleControl(bool t) {
         canMove = t;
+        if (!canMove) {
+            velocity.x = 0;
+            currentMoveState = animIdle;
+        }
     }
     
     #region Jumping Mechanics
