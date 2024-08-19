@@ -263,7 +263,7 @@ public class PlayerMovement : Actor
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
-            currentMoveState = animHasTurned;
+            if (IsGrounded) currentMoveState = animHasTurned;
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
