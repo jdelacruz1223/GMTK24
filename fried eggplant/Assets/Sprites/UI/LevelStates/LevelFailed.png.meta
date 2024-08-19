@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fbe425fc8fae87a488a30a5fd0cbd18e
+guid: 6f84367cf62b03846949270223cd80e6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,12 +97,96 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Level1.1_0
+      name: LevelFailed_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 720
+        width: 500
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85cac00e970b6f945826c5f2b1e479e4
+      internalID: 1959700851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelFailed_1
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 720
+        width: 500
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c085eea0a429e0f4fabd97465150ed19
+      internalID: -888004056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelFailed_2
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 720
+        width: 500
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c89cf120128acc44e9e22d02b375a719
+      internalID: -1619635232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelFailed_3
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 720
+        width: 500
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1cf115970257b6479c777cdb24b9acc
+      internalID: 2033375283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LevelFailed_4
       rect:
         serializedVersion: 2
         x: 0
         y: 540
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -111,19 +195,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5dd51b2e54f4d8147861e70fe1e51f31
-      internalID: 911444537
+      spriteID: 940b797641faa94459a7ca9061d326cd
+      internalID: -1346934450
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_1
+      name: LevelFailed_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 500
         y: 540
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -132,19 +216,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ea490205c6ead44caa34aa954a2caf4
-      internalID: 1593841080
+      spriteID: 6f42d5e206360aa42896e0a6d40d5451
+      internalID: 1730999161
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_2
+      name: LevelFailed_6
       rect:
         serializedVersion: 2
-        x: 640
+        x: 1000
         y: 540
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -153,19 +237,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a39d88b77744f1742bc1c283f59dc534
-      internalID: -1846551160
+      spriteID: 06612fa88a55d494da178182b9854c07
+      internalID: -2077819302
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_3
+      name: LevelFailed_7
       rect:
         serializedVersion: 2
-        x: 960
+        x: 1500
         y: 540
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -174,19 +258,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb1d0982eeb641a44b1581202b876e61
-      internalID: -1024482329
+      spriteID: 7ff1347c2431de2489ae70130e113e14
+      internalID: 2121236905
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_4
+      name: LevelFailed_8
       rect:
         serializedVersion: 2
         x: 0
         y: 360
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -195,19 +279,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0496bf5b76959d47856fca03b1d077f
-      internalID: 366032096
+      spriteID: 4b0fc2ef3ce70fc4daec86e2810f1538
+      internalID: -1381017210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_5
+      name: LevelFailed_9
       rect:
         serializedVersion: 2
-        x: 320
+        x: 500
         y: 360
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -216,19 +300,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f05b55436ac50a4a9b18f01a0b1b7eb
-      internalID: -1712147127
+      spriteID: bb4d191074aab474b8f5855885f6fdf7
+      internalID: -2056792721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_6
+      name: LevelFailed_10
       rect:
         serializedVersion: 2
-        x: 640
+        x: 1000
         y: 360
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -237,19 +321,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f63f1378c270c294ab5a56d4382284bd
-      internalID: -614253914
+      spriteID: e46899914bf604941be520a033e95ff4
+      internalID: 1730073436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_7
+      name: LevelFailed_11
       rect:
         serializedVersion: 2
-        x: 960
+        x: 1500
         y: 360
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -258,19 +342,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 117414009faf78143ae7321ca7b84c74
-      internalID: -1836320399
+      spriteID: b52862c8cb7e2014d9c2e90f1d227a7a
+      internalID: -1587611325
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_8
+      name: LevelFailed_12
       rect:
         serializedVersion: 2
         x: 0
         y: 180
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -279,19 +363,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b68f4ad2d0268584690c16902016f373
-      internalID: -1906062338
+      spriteID: cfb40829937e7704d9ff413edab9eba7
+      internalID: 560186065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_9
+      name: LevelFailed_13
       rect:
         serializedVersion: 2
-        x: 320
+        x: 500
         y: 180
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -300,19 +384,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fef90e830165869409b77a0f599cc36f
-      internalID: 1262820430
+      spriteID: 16aea2f150ec7de44bf93db0676e3f1a
+      internalID: 77865146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_10
+      name: LevelFailed_14
       rect:
         serializedVersion: 2
-        x: 640
+        x: 1000
         y: 180
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -321,19 +405,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88395e6f05ac01748b519a9091dc233f
-      internalID: 969586041
+      spriteID: c794b5bb043f5d94d96e4efc62afe473
+      internalID: -1884605013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_11
+      name: LevelFailed_15
       rect:
         serializedVersion: 2
-        x: 960
+        x: 1500
         y: 180
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -342,19 +426,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f01cce295042d247b8e12e580229ef2
-      internalID: -644903586
+      spriteID: 2372ae7e47ac9e344b917b56541e11e9
+      internalID: 23662703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Level1.1_12
+      name: LevelFailed_16
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 320
+        width: 500
         height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -363,71 +447,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46012c4f30672f341aca3297fb47e7d4
-      internalID: -164918467
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Level1.1_13
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 320
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 33f2880d11f58cd438502e9614ba87fc
-      internalID: 236471208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Level1.1_14
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 320
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d32ad0464e1eb7b4c9e5f274b503ffa9
-      internalID: 2080928602
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Level1.1_15
-      rect:
-        serializedVersion: 2
-        x: 960
-        y: 0
-        width: 320
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e3469bea8100dc140a6aa3139766b7a8
-      internalID: 211890103
+      spriteID: cdc93a6e8ef1dfd4389cfd498742d3e5
+      internalID: -954539789
       vertices: []
       indices: 
       edges: []
@@ -443,22 +464,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Level1.1_0: 911444537
-      Level1.1_1: 1593841080
-      Level1.1_10: 969586041
-      Level1.1_11: -644903586
-      Level1.1_12: -164918467
-      Level1.1_13: 236471208
-      Level1.1_14: 2080928602
-      Level1.1_15: 211890103
-      Level1.1_2: -1846551160
-      Level1.1_3: -1024482329
-      Level1.1_4: 366032096
-      Level1.1_5: -1712147127
-      Level1.1_6: -614253914
-      Level1.1_7: -1836320399
-      Level1.1_8: -1906062338
-      Level1.1_9: 1262820430
+      LevelFailed_0: 1959700851
+      LevelFailed_1: -888004056
+      LevelFailed_10: 1730073436
+      LevelFailed_11: -1587611325
+      LevelFailed_12: 560186065
+      LevelFailed_13: 77865146
+      LevelFailed_14: -1884605013
+      LevelFailed_15: 23662703
+      LevelFailed_16: -954539789
+      LevelFailed_2: -1619635232
+      LevelFailed_3: 2033375283
+      LevelFailed_4: -1346934450
+      LevelFailed_5: 1730999161
+      LevelFailed_6: -2077819302
+      LevelFailed_7: 2121236905
+      LevelFailed_8: -1381017210
+      LevelFailed_9: -2056792721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
