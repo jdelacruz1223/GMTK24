@@ -18,11 +18,12 @@ public class BookCollision : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-        if (rigidbody == null) {
+        if (rigidbody == null)
+        {
             transform.SetParent(null);
             rigidbody = gameObject.AddComponent<Rigidbody2D>();
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            
+
             Vector2 forceDirection = collision.contacts[0].normal * -1;
             float forceMagnitude = 10f;
             rigidbody.AddForce(forceDirection * forceMagnitude * 5, ForceMode2D.Impulse);
@@ -33,9 +34,9 @@ public class BookCollision : MonoBehaviour
     IEnumerator destroyBook(GameObject obj)
     {
         transform.SetParent(null);
-       
+
         bookCollector.RemoveBook(gameObject);
-        BookFollow.GetInstance().removePos(obj.transform.localPosition.y);
+        SkillsUIManager.GetInstance().UpdateVisualAbility();
 
         yield return new WaitForSeconds(3);
 
