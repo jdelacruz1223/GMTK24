@@ -34,9 +34,6 @@ public class PlayerMovement : MonoBehaviour
     private bool hasStarted;
     private bool isDead;
 
-    //particle systems
-    public ParticleSystem dust;
-
     //private bool isFlipping = false;
     private BookCollector bookCollector;
     private GameObject introSplash;
@@ -106,6 +103,9 @@ public class PlayerMovement : MonoBehaviour
             if(boost.y != 0){
                 StartCoroutine(lift());
             }
+        }
+        if (!canMove) {
+            currentMoveState = animIdle;
         }
     }
 
@@ -314,15 +314,6 @@ public class PlayerMovement : MonoBehaviour
         isBouncing = true;
         yield return new WaitForSeconds(bounceCooldown);
         isBouncing = false;
-    }
-
-    void CreateDust(){
-        dust.Play();
-            // if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Landed"))
-            //     {
-            //         CreateDust();
-            //     }
- 
     }
 
 

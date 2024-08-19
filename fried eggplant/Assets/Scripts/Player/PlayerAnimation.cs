@@ -12,6 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     //     animator.SetBool("isJumping", false);
     //     animator.SetBool("isFalling", false);
     //     animator.SetBool("hasBook", false);
+
     public enum MoveState
     {
         idle,
@@ -23,6 +24,7 @@ public class PlayerAnimation : MonoBehaviour
         hasTurned
     }
     public Animator anim;
+    public ParticleSystem dust;
     
     
     void Start()
@@ -49,6 +51,7 @@ public class PlayerAnimation : MonoBehaviour
             break;
             case MoveState.landed:
                 anim.SetTrigger("hasLanded");
+                dust.Play();
             break;
             case MoveState.falling:
                 anim.SetBool("isFalling", true);
