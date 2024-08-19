@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BookCollision : MonoBehaviour
 {
-    private bool hasRigidbody = false;
     private SpriteRenderer SpriteRenderer;
     private BoxCollider2D boxCollider;
     private BookCollector bookCollector;
@@ -18,25 +17,16 @@ public class BookCollision : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        if ((collision.gameObject.layer == 6 && collision.transform.tag != "platform") || collision.transform.tag == "obstacle")
-        {
-            if (!hasRigidbody)
-            {
-                Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
-                rb.bodyType = RigidbodyType2D.Dynamic;
-                hasRigidbody = true;
-
-                Vector2 forceDirection = collision.contacts[0].normal * -1;
-                float forceMagnitude = 10f;
-
-                rb.AddForce(forceDirection * forceMagnitude * 5, ForceMode2D.Impulse);
-
-                StartCoroutine(destroyBook(collision.gameObject));
-            }
-        }
-        if (collision.transform.tag == "platform" || collision.transform.tag == "Player" || collision.transform.tag == "Book") {
-            Physics2D.IgnoreCollision(collision.collider, gameObject.GetComponent<Collider2D>());
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        if (rigidbody == null) {
+            transform.SetParent(null);
+            rigidbody = gameObject.AddComponent<Rigidbody2D>();
+            rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            
+            Vector2 forceDirection = collision.contacts[0].normal * -1;
+            float forceMagnitude = 10f;
+            rigidbody.AddForce(forceDirection * forceMagnitude * 5, ForceMode2D.Impulse);
+            StartCoroutine(destroyBook(collision.gameObject));
         }
     }
 

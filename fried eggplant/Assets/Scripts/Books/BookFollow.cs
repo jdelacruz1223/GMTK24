@@ -9,10 +9,12 @@ public class BookFollow : MonoBehaviour
 
     [SerializeField] GameObject stackPos;
     public List<float> yPositions { get; private set; }
+    private new Rigidbody2D rigidbody;
 
     public void Start()
     {
         yPositions = new List<float>();
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Awake()
@@ -29,25 +31,8 @@ public class BookFollow : MonoBehaviour
     public void addPos(float pos) => yPositions.Add(pos);
     public void removePos(float pos) => yPositions.Remove(pos);
 
-    void Update()
+    void FixedUpdate()
     {
-        StartCoroutine(UpdateBookStack());
-    }
-
-    IEnumerator UpdateBookStack()
-    {
-        int index = 0;
-        foreach(Transform child in transform)
-        {
-            Vector3 worldPosition = stackPos.transform.position;
-            child.position = new Vector3(
-                worldPosition.x,
-                worldPosition.y + yPositions[index],
-                child.position.z
-            );
-            index++;
-        }
-
-        yield return new WaitForEndOfFrame();
+      rigidbody.position = stackPos.transform.position;
     }
 }

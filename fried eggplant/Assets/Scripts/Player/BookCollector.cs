@@ -34,7 +34,6 @@ public class BookCollector : MonoBehaviour
         collectedBooks.Add(newBook);
         DataManager.instance.addBook();
         BookFollow.GetInstance().addPos(newBook.transform.localPosition.y);
-
     }
     
     public void RemoveBook(GameObject book) {
