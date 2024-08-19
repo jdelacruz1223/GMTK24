@@ -5,22 +5,28 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     // Functions for Menu Buttons
-    public void MainMenu(){
+    public void MainMenu()
+    {
         GameManager.instance.BackToMenu();
     }
-    public void RetryLevel() {
+    public void RetryLevel()
+    {
         GameManager.instance.RetryLevel();
     }
-    public void NextLevel(string nextLevel) {
+    public void NextLevel(string nextLevel)
+    {
         GameManager.instance.GoToNextLevel(nextLevel);
     }
-    public void Leaderboard() {
+    public void Leaderboard()
+    {
         GameManager.instance.GotoLeaderboard();
     }
-    public void QuitGame() {
+    public void QuitGame()
+    {
         GameManager.instance.QuitGame();
     }
-    public void StartGame() {
+    public void StartGame()
+    {
         GameManager.instance.StartGame();
     }
 }

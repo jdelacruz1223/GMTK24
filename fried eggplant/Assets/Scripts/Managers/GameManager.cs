@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        
+
         instance = this;
     }
 
@@ -41,8 +41,11 @@ public class GameManager : MonoBehaviour
     public void BackToMenu() => SceneHandler.GotoScene("MainMenuScene", hasTransition: true);
     public void RetryLevel() => SceneHandler.GotoScene(SceneManager.GetActiveScene().name, hasTransition: true);
 
-    public void EndLevel()
+    public void EndLevel(bool hasCompleted = false)
     {
+        TimeManager.instance.endLevel();
 
+        if (hasCompleted)
+            LevelManager.instance.CompleteLevel();
     }
 }
