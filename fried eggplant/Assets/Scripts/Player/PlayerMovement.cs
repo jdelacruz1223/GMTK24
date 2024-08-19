@@ -152,7 +152,7 @@ public class PlayerMovement : Actor
 
         if (dashCounter > 0) {
             dashCounter -= Time.deltaTime;
-            velocity.y = 0;
+            velocity.y = dash.y/1.5f;
             velocity.x = dash.x * (isFacingRight ? 1 : -1);
         }
     }

@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4772523498930182298}
-  dust: {fileID: 0}
+  dust: {fileID: 437268304884921310}
 --- !u!95 &4772523498930182298
 Animator:
   serializedVersion: 5
@@ -360,6 +360,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d16e24d1ce7fc244ba2853a39921497d, type: 3}
+--- !u!198 &437268304884921310 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2210295161616811814, guid: d16e24d1ce7fc244ba2853a39921497d, type: 3}
+  m_PrefabInstance: {fileID: 1782852099082335480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3089147765440343033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3630795268466663169, guid: d16e24d1ce7fc244ba2853a39921497d, type: 3}
