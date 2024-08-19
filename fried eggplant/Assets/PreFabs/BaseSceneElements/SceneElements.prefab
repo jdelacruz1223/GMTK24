@@ -80,11 +80,8 @@ Transform:
   - {fileID: 3113717354693504011}
   - {fileID: 5488195758094721225}
   - {fileID: 657314835892976926}
-<<<<<<< HEAD
-=======
   - {fileID: 2229232947935287815}
   - {fileID: 4359231366029966313}
->>>>>>> Dichill
   - {fileID: 7775028599975781040}
   - {fileID: 1178878385035557163}
   m_Father: {fileID: 4858666268984832848}
@@ -280,11 +277,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-<<<<<<< HEAD
-  - {fileID: 6927965791129631296}
-=======
   - {fileID: 8840785546131206807}
->>>>>>> Dichill
   m_Father: {fileID: 7563955460096960819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5901271304448873927
