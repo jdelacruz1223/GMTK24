@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     private AudioSource audioSource;
     private float normalVolume;
+    [SerializeField] private float volumeDimModifier = 0.1f;
     public AudioClip menuMusic;
     public AudioClip introBGM;
     public AudioClip BGMLoop;
@@ -47,8 +49,8 @@ public class AudioManager : MonoBehaviour
             audioSource.loop = true;
             audioSource.Play();
         }
-        if(GameObject.Find("DimOverlay(Clone)")) {
-            audioSource.volume = 0.025f;
+        if(GameObject.Find("DimOverlay(Clone)") && audioSource.volume == normalVolume) {
+            audioSource.volume *= volumeDimModifier;
         } else {
             audioSource.volume = normalVolume;
         }
