@@ -18,14 +18,14 @@ public class GameManager : MonoBehaviour
         }
         
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     async void Start()
     {
         // Initialize Supabase
-        if (SupabaseClient.GetInstance() != null) {
-          await SupabaseClient.GetInstance().InitializeSupabase();
+        if (SupabaseClient.GetInstance() != null)
+        {
+            await SupabaseClient.GetInstance().InitializeSupabase();
         }
 
         nextScene = "";
@@ -43,6 +43,6 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel()
     {
-            
+
     }
 }
