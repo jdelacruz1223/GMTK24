@@ -18,7 +18,7 @@ public class BookCollision : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-        if (rigidbody == null) {
+        if (rigidbody == null && collision.gameObject.tag != "Book") {
             transform.SetParent(null);
             rigidbody = gameObject.AddComponent<Rigidbody2D>();
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
