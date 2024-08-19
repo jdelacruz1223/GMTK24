@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class SceneSequence : MonoBehaviour
 {
-    public GameObject endScreen;
+    [SerializeField] private GameObject endScreen;
     public AudioSource jingle;
     private GameObject cam;
     [SerializeField] private GameObject dimOverlay;
@@ -34,4 +34,5 @@ public class SceneSequence : MonoBehaviour
             }
         }
     }
+    
 }
