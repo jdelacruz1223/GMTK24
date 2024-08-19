@@ -18,6 +18,7 @@ public class BookCollision : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if ((collision.gameObject.layer == 6 && collision.transform.tag != "platform") || collision.transform.tag == "obstacle")
         {
             if (!hasRigidbody)
@@ -41,19 +42,26 @@ public class BookCollision : MonoBehaviour
 
     IEnumerator destroyBook()
     {
+        Transform parentTransform = transform.parent;
+
+        List<GameObject> otherChildren = new List<GameObject>();
+
+        foreach (Transform child in parentTransform)
+        {
+            if (child.gameObject != this)
+            {
+                otherChildren.Add(child.gameObject);
+
+                Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                hasRigidbody = true;
+            }
+        }
+
         transform.SetParent(null);
-        float alphaVal = SpriteRenderer.color.a;
-        Color tmp = SpriteRenderer.color;
+       
         bookCollector.RemoveBook(gameObject);
 
-        while (SpriteRenderer.color.a < 1)
-        {
-            alphaVal += 0.01f;
-            tmp.a = alphaVal;
-            SpriteRenderer.color = tmp;
-
-            yield return new WaitForSeconds(0.05f);
-        }
 
         yield return new WaitForSeconds(3);
 

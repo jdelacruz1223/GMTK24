@@ -23,7 +23,6 @@ using UnityEngine;
 /// </summary>
 public class SceneHandler
 {
-
     /// <summary>
     /// Handles all of the scenes whether additive or not.
     /// Can add scenes, and unload scenes.
@@ -45,4 +44,3 @@ public class SceneHandler
     public static void AddScene(string i) => SceneHelper.LoadScene(i, additive: true, setActive: true);
     public static void UnloadScene(string i) => SceneHelper.UnloadScene(i);
 }
-
