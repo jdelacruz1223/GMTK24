@@ -17,13 +17,18 @@ public class PlayerMovement : Actor
     private bool canMove;
     private float timeIdle;
     [SerializeField] private float cooldown = 1f;
-    [SerializeField] private float boostTime = 1f;
+
+    [Header("Bounce Config")]
     [SerializeField] private float bounceCooldown = 1f;
-    private Vector2 boost;
     [SerializeField] private float bounceForce = 100f;
-    [SerializeField] private float boostForce = 100f;
-    private bool isDashing = false;
     private bool isBouncing = false;
+    
+    [Header("Dash Config")]
+    [SerializeField] private float dashTime = 1f;
+    [SerializeField] private float dashForce = 100f;
+    private Vector2 dash;
+    private bool isDashing = false;
+
     private bool isCooldown = false;
     private bool hasBook;
     private bool hasStarted;
@@ -53,8 +58,9 @@ public class PlayerMovement : Actor
     // Components
     // public Rigidbody2D rb;
 
-    [SerializeField] private new CinemachineVirtualCamera camera;
+    private new CinemachineVirtualCamera camera;
     [SerializeField] private AnimationCurve cameraZoomCurve;
+    private float initialCameraSize;
 
     //Movement Variables
     [Header("Movement Config")]
@@ -85,6 +91,7 @@ public class PlayerMovement : Actor
         hasStarted = canMove;
         isDead = false;
         camera = FindFirstObjectByType<CinemachineVirtualCamera>();
+        initialCameraSize = camera.m_Lens.OrthographicSize;
     }
     
     override
@@ -93,17 +100,17 @@ public class PlayerMovement : Actor
         FixedUpdateMovement();
 
         if (DataManager.instance.instantBoostAmount.sqrMagnitude > Vector2.kEpsilon) {
-            boost = DataManager.instance.applyBoost() * boostForce;
-            if (boost.x != 0) {
-                StartCoroutine(dash());
+            dash = DataManager.instance.applyBoost() * dashForce;
+            if (dash.x != 0) {
+                StartCoroutine(DoDash());
             }
-            if (boost.y != 0) {
-                StartCoroutine(lift());
+            if (dash.y != 0) {
+                StartCoroutine(DoLift());
             }
         }
 
         if (playerAnimation.anim.GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
-        camera.m_Lens.OrthographicSize = 10 + cameraZoomCurve.Evaluate(Mathf.Abs(velocity.x) / maxSpeed);
+        camera.m_Lens.OrthographicSize = initialCameraSize + cameraZoomCurve.Evaluate(Mathf.Abs(velocity.x) / maxSpeed);
     }
 
     void FixedUpdateMovement() {
@@ -120,7 +127,6 @@ public class PlayerMovement : Actor
             killJump = false;
             coyoteTimeCounter = 0;
         }
-
         
         var speed = velocity.x;
         var horizontal = Input.GetAxisRaw("Horizontal");
@@ -295,23 +301,23 @@ public class PlayerMovement : Actor
     }
     #endregion
 
-    IEnumerator dash(){
+    IEnumerator DoDash(){
         var temp = rigidbody.gravityScale;
         rigidbody.gravityScale = 0;
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
-        rigidbody.AddForce(new Vector2(boost.x*(isFacingRight?1:-1),0));
+        rigidbody.AddForce(new Vector2(dash.x*(isFacingRight?1:-1),0));
         isDashing = true;
-        yield return new WaitForSeconds(boostTime);
+        yield return new WaitForSeconds(dashTime);
         rigidbody.velocity = new Vector2(0,0);
         rigidbody.gravityScale = temp;
         isDashing = false;
     }
 
-    IEnumerator lift(){
+    IEnumerator DoLift(){
         var temp = rigidbody.gravityScale;
         rigidbody.gravityScale = 0;
-        rigidbody.AddForce(new Vector2(0,boost.y/2));
-        yield return new WaitForSeconds(boostTime);
+        rigidbody.AddForce(new Vector2(0,dash.y/2));
+        yield return new WaitForSeconds(dashTime);
         rigidbody.velocity = new Vector2(0,0);
         rigidbody.gravityScale = temp;
     }
