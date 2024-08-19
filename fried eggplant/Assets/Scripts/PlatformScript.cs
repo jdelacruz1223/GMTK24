@@ -8,9 +8,12 @@ using UnityEngine;
 public class PlatformScript : MonoBehaviour
 {
     [SerializeField] private bool isMovingPlatform = false; 
+    [SerializeField] private bool isOneWay = false;
     [SerializeField] private bool bounce = false; // Goes back and forth if true
     [SerializeField] private float speed = 5f;
     private Vector2 direction;
+    private Collider2D player;
+    private Collider2D collision;
     private int wpIndex = 0;
     private int bounceControl = 1; 
     public Transform[] waypoints; // The platform will be set to the first waypoint's position
@@ -21,6 +24,9 @@ public class PlatformScript : MonoBehaviour
         if (waypoints != null) {
             transform.position = (waypoints[0] != null) ? waypoints[0].position : transform.position;
         }
+        collision = GetComponent<BoxCollider2D>();
+        GetComponent<PlatformEffector2D>().enabled = isOneWay;
+        collision.usedByEffector = isOneWay;
     }
 
     // Update is called once per frame
@@ -45,5 +51,23 @@ public class PlatformScript : MonoBehaviour
                 }
             }
         }
+        if (isOneWay && Input.GetAxisRaw("Vertical") < 0 && player != null) {
+            StartCoroutine(DisableCollision(player));
+        }
+    }
+    void OnCollisionEnter2D(Collision2D c) {
+        if (c.transform.tag == "Player") {
+            player = c.collider;
+        }
+    }
+    void OnCollisionExit2D (Collision2D c ) {
+        if (c.transform.tag == "Player") {
+            player = null;
+        }
+    }
+    private IEnumerator DisableCollision(Collider2D p) {
+        Physics2D.IgnoreCollision(collision, p);
+        yield return new WaitForSeconds(1f);
+        Physics2D.IgnoreCollision(collision, p, false);
     }
 }

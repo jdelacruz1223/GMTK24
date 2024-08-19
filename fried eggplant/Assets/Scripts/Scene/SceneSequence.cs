@@ -23,6 +23,7 @@ public class SceneSequence : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) {
             collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
             endScreen.SetActive(true);
+            TimeManager.instance.endLevel();
         }
     }
     public void GoToMainMenu() {
@@ -33,6 +34,6 @@ public class SceneSequence : MonoBehaviour
         SceneHandler.GotoScene(nextLevel, hasTransition: true);
     }
     public void RetryLevel() {
-        
+        SceneHandler.GotoScene(SceneManager.GetActiveScene().name);
     }
 }

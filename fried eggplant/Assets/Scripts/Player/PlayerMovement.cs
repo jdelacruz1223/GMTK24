@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation.MoveState animJumping = PlayerAnimation.MoveState.jumping;
     private PlayerAnimation.MoveState animHasBook = PlayerAnimation.MoveState.hasBook;
     private PlayerAnimation.MoveState animHasTurned = PlayerAnimation.MoveState.hasTurned;
-    private float speed;
+    [SerializeField] private float speed;
     private bool canMove;
     private float timeIdle;
     [SerializeField] private float cooldown = 1f;
@@ -33,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
     private bool hasBook;
     private bool hasStarted;
     private bool isDead;
+
+    //particle systems
+    public ParticleSystem dust;
+
     //private bool isFlipping = false;
     private BookCollector bookCollector;
     private GameObject introSplash;
@@ -107,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             if (IsGrounded()) {
@@ -310,5 +315,16 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(bounceCooldown);
         isBouncing = false;
     }
+
+    void CreateDust(){
+        dust.Play();
+            // if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Landed"))
+            //     {
+            //         CreateDust();
+            //     }
+ 
+    }
+
+
 }
 
