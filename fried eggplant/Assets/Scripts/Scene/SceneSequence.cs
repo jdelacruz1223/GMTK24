@@ -10,7 +10,6 @@ public class SceneSequence : MonoBehaviour
     public string nextLevel;
     public GameObject endScreen;
     public AudioSource jingle;
-    private Transform screenPos;
     private GameObject cam;
     // Start is called before the first frame update
     void Start()
