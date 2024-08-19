@@ -32,7 +32,7 @@ public class BookCollision : MonoBehaviour
 
                 rb.AddForce(forceDirection * forceMagnitude * 5, ForceMode2D.Impulse);
 
-                StartCoroutine(destroyBook());
+                StartCoroutine(destroyBook(collision.gameObject));
             }
         }
         if (collision.transform.tag == "platform" || collision.transform.tag == "Player" || collision.transform.tag == "Book") {
@@ -40,28 +40,12 @@ public class BookCollision : MonoBehaviour
         }
     }
 
-    IEnumerator destroyBook()
+    IEnumerator destroyBook(GameObject obj)
     {
-        Transform parentTransform = transform.parent;
-
-        List<GameObject> otherChildren = new List<GameObject>();
-
-        foreach (Transform child in parentTransform)
-        {
-            if (child.gameObject != this)
-            {
-                otherChildren.Add(child.gameObject);
-
-                Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
-                rb.bodyType = RigidbodyType2D.Dynamic;
-                hasRigidbody = true;
-            }
-        }
-
         transform.SetParent(null);
        
         bookCollector.RemoveBook(gameObject);
-
+        BookFollow.GetInstance().removePos(obj.transform.localPosition.y);
 
         yield return new WaitForSeconds(3);
 
