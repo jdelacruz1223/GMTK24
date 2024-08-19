@@ -241,7 +241,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
-            //currentMoveState = animHasTurned;
+            currentMoveState = animHasTurned;
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
@@ -269,8 +269,8 @@ public class PlayerMovement : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
-    public bool isPlayerDead() {
-        return isDead;
+    public bool isControllable() {
+        return canMove;
     }
     #endregion
 
