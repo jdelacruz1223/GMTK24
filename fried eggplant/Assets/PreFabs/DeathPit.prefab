@@ -93,3 +93,4 @@ MonoBehaviour:
   nextLevel: N/A
   endScreen: {fileID: 3376728195548775992, guid: 42326b795f839b9498b4928016038edf, type: 3}
   jingle: {fileID: 0}
+  dimOverlay: {fileID: 7906227895425289971, guid: 903384f2723e42a40873b8f1f61144c7, type: 3}
