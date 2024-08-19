@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Dash
   description: A burst of speed in the direction you are facing
-  cost: 5
+  cost: 3
   modifier: {fileID: 11400000, guid: 7a0b82150753b27489843d1779ce1da8, type: 2}

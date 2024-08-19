@@ -26,12 +26,12 @@ public class PlayerMovement : Actor
     [Header("Dash Config")]
     [SerializeField] private float dashTime = 1f;
     [SerializeField] private float dashForce = 100f;
-    private float dashCounter;
     private Vector2 dash;
-    private bool IsDashing { get => dashCounter > 0; }
+    private bool isDashing = false;
 
     private bool isCooldown = false;
     private bool hasBook;
+    private bool hasStarted;
     private bool isDead;
     [SerializeField] private BookCollector bookCollector;
     private GameObject introSplash;
@@ -42,6 +42,7 @@ public class PlayerMovement : Actor
     private bool hasLanded;
 
     // Jumping Mechanics
+    private bool isJumping;
     [SerializeField] private float jumpingPower = 16f;
     [SerializeField] private float jumpBufferTime = 0.5f;
     private float jumpBufferCounter;
@@ -57,12 +58,9 @@ public class PlayerMovement : Actor
     // Components
     // public Rigidbody2D rb;
 
-    [Header("Camera Config")]
-    [SerializeField] private AnimationCurve cameraZoomCurve;
-    [SerializeField] private Transform cameraTarget;
     private new CinemachineVirtualCamera camera;
+    [SerializeField] private AnimationCurve cameraZoomCurve;
     private float initialCameraSize;
-    private Vector3 initialCameraTargetOffset;
 
     //Movement Variables
     [Header("Movement Config")]
@@ -90,10 +88,10 @@ public class PlayerMovement : Actor
         currentMoveState = animIdle;
         introSplash = GameObject.FindGameObjectWithTag("Intro Splash");
         canMove = introSplash == null;
+        hasStarted = canMove;
         isDead = false;
         camera = FindFirstObjectByType<CinemachineVirtualCamera>();
         initialCameraSize = camera.m_Lens.OrthographicSize;
-        initialCameraTargetOffset = cameraTarget.localPosition;
     }
     
     override
@@ -101,18 +99,22 @@ public class PlayerMovement : Actor
     {
         FixedUpdateMovement();
 
-        if (playerAnimation.anim.GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
-        var currentSize = camera.m_Lens.OrthographicSize;
-        var targetSize = initialCameraSize + cameraZoomCurve.Evaluate(Mathf.Abs(velocity.x) / maxSpeed);
-        camera.m_Lens.OrthographicSize = Mathf.MoveTowards(currentSize, targetSize, 0.05f);
+        if (DataManager.instance.instantBoostAmount.sqrMagnitude > Vector2.kEpsilon) {
+            dash = DataManager.instance.applyBoost() * dashForce;
+            if (dash.x != 0) {
+                StartCoroutine(DoDash());
+            }
+            if (dash.y != 0) {
+                StartCoroutine(DoLift());
+            }
+        }
 
-        var offsetScale = Mathf.Min(1f, Mathf.Abs(velocity.x) / maxSpeed) * Mathf.Sign(velocity.x);
-        Debug.Log($"offsetScale: {offsetScale * initialCameraTargetOffset.x}");
-        var offset = new Vector3(offsetScale * initialCameraTargetOffset.x, initialCameraTargetOffset.y, initialCameraTargetOffset.z);
-        cameraTarget.localPosition = transform.position + offset;
+        if (playerAnimation.anim.GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+        camera.m_Lens.OrthographicSize = initialCameraSize + cameraZoomCurve.Evaluate(Mathf.Abs(velocity.x) / maxSpeed);
     }
 
     void FixedUpdateMovement() {
+        if (!canMove) return;
 
         // fixed update Jump handling, cannot get button presses in here!
         if (coyoteTimeCounter > 0 && jumpBufferCounter > 0) {
@@ -127,7 +129,7 @@ public class PlayerMovement : Actor
         }
         
         var speed = velocity.x;
-        var horizontal = Input.GetAxisRaw("Horizontal") * (canMove ? 1 : 0);
+        var horizontal = Input.GetAxisRaw("Horizontal");
 
         var accel = stopAccel;
         
@@ -143,24 +145,12 @@ public class PlayerMovement : Actor
         speed = Mathf.MoveTowards(speed, targetSpeed, accel);
 
         velocity.x = speed;
-
-        // Dash overwrite
-        if (DataManager.instance.instantBoostAmount.sqrMagnitude > float.Epsilon) {
-            dashCounter = dashTime;
-            dash = DataManager.instance.applyBoost() * dashForce;
-        }
-
-        if (dashCounter > 0) {
-            dashCounter -= Time.deltaTime;
-            velocity.y = 0;
-            velocity.x = dash.x * (isFacingRight ? 1 : -1);
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canMove && !IsDashing && !isBouncing) {
+        if (canMove && !isDashing && !isBouncing) {
             CoyoteMechanic();
             // Get Horizontal Axis Input to know which side we are facing
             horizontal = Input.GetAxisRaw("Horizontal");
@@ -270,7 +260,19 @@ public class PlayerMovement : Actor
             transform.localScale = localScale;
         }
     }
-
+    /*
+    private IEnumerator flipDelay(){
+        isFlipping = true;
+        currentMoveState = animHasTurned;
+        yield return new WaitForSeconds(5/12);
+        isFacingRight = !isFacingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
+        currentMoveState = animIdle;
+        isFlipping = false;
+    }
+    */
     #endregion
 
     #region Checks
@@ -284,6 +286,12 @@ public class PlayerMovement : Actor
 
 
     #region Cooldowns
+    private IEnumerator JumpCooldown()
+    {
+        isJumping = true;
+        yield return new WaitForSeconds(0.4f);
+        isJumping = false;
+    }
 
     IEnumerator collisionCooldown()
     {
@@ -292,6 +300,27 @@ public class PlayerMovement : Actor
         isCooldown = false;
     }
     #endregion
+
+    IEnumerator DoDash(){
+        var temp = rigidbody.gravityScale;
+        rigidbody.gravityScale = 0;
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
+        rigidbody.AddForce(new Vector2(dash.x*(isFacingRight?1:-1),0));
+        isDashing = true;
+        yield return new WaitForSeconds(dashTime);
+        rigidbody.velocity = new Vector2(0,0);
+        rigidbody.gravityScale = temp;
+        isDashing = false;
+    }
+
+    IEnumerator DoLift(){
+        var temp = rigidbody.gravityScale;
+        rigidbody.gravityScale = 0;
+        rigidbody.AddForce(new Vector2(0,dash.y/2));
+        yield return new WaitForSeconds(dashTime);
+        rigidbody.velocity = new Vector2(0,0);
+        rigidbody.gravityScale = temp;
+    }
 
     IEnumerator waitForBounceCooldown() {
         isBouncing = true;

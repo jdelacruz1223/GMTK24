@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 680708230741935781}
   - component: {fileID: -2800846484274752664}
   - component: {fileID: 4772523498930182298}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -210,16 +210,17 @@ MonoBehaviour:
   shellSize: 0.03125
   playerAnimation: {fileID: -2800846484274752664}
   cooldown: 1
+  boostTime: 0.2
   bounceCooldown: 1
   bounceForce: 300
-  dashTime: 0.1
-  dashForce: 20
+  boostForce: 2000
   bookCollector: {fileID: 680708230741935781}
   jumpingPower: 11
   jumpBufferTime: 0.1
   coyoteTime: 0.2
   groundCheckOffset: {x: 0.0625, y: -1}
   groundCheckSize: {x: 0.5, y: 0.0625}
+  camera: {fileID: 0}
   cameraZoomCurve:
     serializedVersion: 2
     m_Curve:
@@ -233,8 +234,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1.0079689
-      value: 1.5000324
+      time: 1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -244,7 +245,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  cameraTarget: {fileID: 0}
   maxSpeed: 25
   startSpeed: 10
   moveAccel: 0.5

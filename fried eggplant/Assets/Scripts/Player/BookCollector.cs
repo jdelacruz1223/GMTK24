@@ -22,6 +22,7 @@ public class BookCollector : MonoBehaviour
     {
         book.SetActive(false);
 
+
         GameObject newBook = Instantiate(bookPrefab, bookStackPosition.position, Quaternion.identity);
 
         newBook.transform.SetParent(bookStackPosition);
@@ -32,9 +33,9 @@ public class BookCollector : MonoBehaviour
 
         collectedBooks.Add(newBook);
         DataManager.instance.addBook();
-        SkillsUIManager.GetInstance().UpdateVisualAbility();
+        BookFollow.GetInstance().addPos(newBook.transform.localPosition.y);
     }
-
+    
     public void RemoveBook(GameObject book) {
         if (collectedBooks.Contains(book)) {
 

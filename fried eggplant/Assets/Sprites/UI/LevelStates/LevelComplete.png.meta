@@ -447,8 +447,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da027872592289941993548655439bf9
-      internalID: -629335220
+      spriteID: d4be16b8498d3824c8a44e94f6be1a3a
+      internalID: -1599326914
       vertices: []
       indices: 
       edges: []
@@ -472,7 +472,7 @@ TextureImporter:
       LevelComplete_13: -205537433
       LevelComplete_14: -613426492
       LevelComplete_15: 1513560170
-      LevelComplete_16: -629335220
+      LevelComplete_16: -1599326914
       LevelComplete_2: 853018807
       LevelComplete_3: 540442006
       LevelComplete_4: -150675799
