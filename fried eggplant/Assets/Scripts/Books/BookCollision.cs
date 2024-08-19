@@ -18,7 +18,7 @@ public class BookCollision : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "obstacle")
+        if ((collision.gameObject.layer == 6 && collision.transform.tag != "platform") || collision.transform.tag == "obstacle")
         {
             if (!hasRigidbody)
             {
@@ -33,6 +33,9 @@ public class BookCollision : MonoBehaviour
 
                 StartCoroutine(destroyBook());
             }
+        }
+        if (collision.transform.tag == "platform") {
+            Physics2D.IgnoreCollision(collision.collider, gameObject.GetComponent<Collider2D>());
         }
     }
 
