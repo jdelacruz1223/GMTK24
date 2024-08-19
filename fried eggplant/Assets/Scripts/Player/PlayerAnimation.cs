@@ -1,3 +1,4 @@
+using System.Reactive.Concurrency;
 using UnityEngine;
 
 
@@ -22,6 +23,8 @@ public class PlayerAnimation : MonoBehaviour
     }
     [HideInInspector] public Animator anim;
     [SerializeField] private ParticleSystem dust;
+    private float dustCooldown = 0.01f;
+    [SerializeField] private float currentCooldown = 0f;
     
     void Start()
     {
@@ -44,11 +47,23 @@ public class PlayerAnimation : MonoBehaviour
             case MoveState.running:
                 anim.SetBool("isRunning",true);
                 anim.SetBool("isIdling",false);
-                if (dust != null && GetComponent<PlayerMovement>().IsGrounded) dust.Play();
+                if (dust != null && GetComponent<PlayerMovement>().IsGrounded){
+                    if(currentCooldown >= dustCooldown){
+                        dust.Emit(1);
+                        dust.Play();
+                        currentCooldown = 0;   
+                    }
+                    else{
+                        currentCooldown += Time.deltaTime;
+                    }
+                }
             break;
             case MoveState.landed:
                 anim.SetTrigger("hasLanded");
-                if (dust != null) dust.Play();
+                if (dust != null){
+                    dust.Emit(10);
+                    dust.Play();
+                }
             break;
             case MoveState.falling:
                 anim.SetBool("isFalling", true);

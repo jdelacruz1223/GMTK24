@@ -31,15 +31,21 @@ public class SkillsManager : MonoBehaviour
     void Update()
     {
         if(Input.GetMouseButtonDown(0)){
-            applySkill(playerCurrentSkill);
+            if(playerCurrentSkill != null){
+                applySkill(playerCurrentSkill);
+            }
         }
         else if(Input.GetAxis("Mouse ScrollWheel") > 0){
-            GetPreviousSkill();
-            print("Switched to skill " + playerCurrentSkill.name);
+            if(playerCurrentSkill != null){ // bandaid, but if index 0 has no skills, neither will 1-n
+                GetPreviousSkill();
+                print("Switched to skill " + playerCurrentSkill.name);
+            }
         }
         else if(Input.GetAxis("Mouse ScrollWheel") < 0){
-            GetNextSkill();
-            print("Switched to skill " + playerCurrentSkill.name);
+            if(playerCurrentSkill != null){ // bandaid, but if index 0 has no skills, neither will 1-n
+                GetNextSkill();
+                print("Switched to skill " + playerCurrentSkill.name);
+            }
         }
     }
     void GetPreviousSkill(){
@@ -61,9 +67,12 @@ public class SkillsManager : MonoBehaviour
         if(DataManager.instance.booksAmount < skill.cost){
             return;
         }
+        if(!DataManager.instance.player.GetComponent<PlayerMovement>().isControllable()){
+            return;
+        }
         else{
             DataManager.instance.removeBooks(skill.cost);
-            SkillsUIManager.GetInstance().UpdateVisualAbility();
+            SkillsUIManager.GetInstance().updateVisualUsed();
         }
 
         if (skill.modifier.instantBoost != new Vector2(0,0)){

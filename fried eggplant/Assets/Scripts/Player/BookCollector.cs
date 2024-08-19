@@ -32,7 +32,6 @@ public class BookCollector : MonoBehaviour
 
         collectedBooks.Add(newBook);
         DataManager.instance.addBook();
-        SkillsUIManager.GetInstance().UpdateVisualAbility();
     }
 
     public void RemoveBook(GameObject book) {
