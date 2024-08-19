@@ -31,12 +31,12 @@ public class BookCollision : MonoBehaviour
 
                 rb.AddForce(forceDirection * forceMagnitude * 5, ForceMode2D.Impulse);
 
-                StartCoroutine(destroyBook(rb));
+                StartCoroutine(destroyBook());
             }
         }
     }
 
-    IEnumerator destroyBook(Rigidbody2D rb)
+    IEnumerator destroyBook()
     {
         transform.SetParent(null);
         float alphaVal = SpriteRenderer.color.a;

@@ -8,9 +8,13 @@ using UnityEngine;
 public class PlatformScript : MonoBehaviour
 {
     [SerializeField] private bool isMovingPlatform = false; 
+    [SerializeField] private bool isOneWay = false;
     [SerializeField] private bool bounce = false; // Goes back and forth if true
     [SerializeField] private float speed = 5f;
     private Vector2 direction;
+    private SpriteRenderer sprite;
+    private Transform player;
+    private Collider2D collision;
     private int wpIndex = 0;
     private int bounceControl = 1; 
     public Transform[] waypoints; // The platform will be set to the first waypoint's position
@@ -21,6 +25,9 @@ public class PlatformScript : MonoBehaviour
         if (waypoints != null) {
             transform.position = (waypoints[0] != null) ? waypoints[0].position : transform.position;
         }
+        sprite = GetComponent<SpriteRenderer>();
+        collision = GetComponent<BoxCollider2D>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -44,6 +51,9 @@ public class PlatformScript : MonoBehaviour
                     bounceControl = 1;
                 }
             }
+        }
+        if(isOneWay) {
+            
         }
     }
 }

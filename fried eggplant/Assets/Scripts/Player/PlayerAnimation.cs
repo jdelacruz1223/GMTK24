@@ -30,6 +30,8 @@ public class PlayerAnimation : MonoBehaviour
     public void AnimationUpdate(MoveState moveState, bool book)
     {
         if (book) anim.SetBool("hasBook", true);
+        if (!book) anim.SetBool("hasBook", false);
+
         switch (moveState)
         {
             case MoveState.idle:
@@ -43,18 +45,14 @@ public class PlayerAnimation : MonoBehaviour
                 anim.SetBool("isIdling",false);
             break;
             case MoveState.landed:
-                anim.SetBool("hasLanded", true);
-                anim.SetBool("isFalling", false);
-                
+                anim.SetTrigger("hasLanded");
             break;
             case MoveState.falling:
                 anim.SetBool("isFalling", true);
-                anim.SetBool("isJumping", false);
+                anim.SetBool("isJumping",false);
             break;
             case MoveState.jumping:
                 anim.SetBool("isJumping", true);
-                anim.SetBool("isIdling", false);
-                anim.SetBool("isRunning", false);
             break;
             case MoveState.hasTurned:
                 anim.SetBool("isRunning",true);
@@ -63,5 +61,7 @@ public class PlayerAnimation : MonoBehaviour
             default:
             break;
         }
+
+
     }
 }

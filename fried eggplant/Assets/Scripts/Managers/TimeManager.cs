@@ -26,7 +26,6 @@ public class TimeManager : MonoBehaviour
         GameManager.GetInstance()?.setCurrentTime(currentTime);
     }
     public void Timer() {
-        var timeVar = currentTime;
         var t0 = (int) currentTime;
         var m = t0/60;
         var s = t0 - m*60;
@@ -47,5 +46,8 @@ public class TimeManager : MonoBehaviour
     public void resetTimer(){
         startTime = Time.time;
         totalTime = startTime;
+    }
+    public float getTime() {
+        return currentTime;
     }
 }

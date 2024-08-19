@@ -5,7 +5,7 @@ public class BookCollector : MonoBehaviour
 {
     public GameObject bookPrefab;
     public Transform bookStackPosition;
-    private List<GameObject> collectedBooks = new List<GameObject>();
+    [SerializeField] private List<GameObject> collectedBooks = new List<GameObject>();
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,5 +39,12 @@ public class BookCollector : MonoBehaviour
     }
     public int getNumBooks(){
         return collectedBooks.Count;
+    }
+
+    public IEnumerator RemoveTopBook(){
+        GameObject book = collectedBooks[collectedBooks.Count-1];
+        RemoveBook(book);
+        Destroy(book);
+        yield return null;
     }
 }

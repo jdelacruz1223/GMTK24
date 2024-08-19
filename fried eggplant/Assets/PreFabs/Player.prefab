@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2807697339710320113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0.70749897, y: -0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,8 +108,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 122855161
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 2055086483, guid: 6f6e2ea63217ff64aacec68edf22e753, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -207,13 +207,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shellSize: 0.03125
-  playerAnimation: {fileID: -2800846484274752664}
-  startSpeed: 3
-  maxSpeed: 13
-  acceleration: 1.03
-  cooldown: 1
   bookCollector: {fileID: 680708230741935781}
-  jumpingPower: 10
+  playerAnimation: {fileID: -2800846484274752664}
+  cooldown: 1
+  boostTime: 0.2
+  bounceCooldown: 1
+  bounceForce: 300
+  boostForce: 2000
+  jumpingPower: 11
   jumpBufferTime: 0.1
   coyoteTime: 0.2
   groundLayer:
@@ -246,6 +247,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  rb: {fileID: 2572298416405821561}
+  C: 6
+  c: 0.3
+  a: 0.3
+  h: 1.4
+  d: 0.24
 --- !u!114 &680708230741935781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bookPrefab: {fileID: 6151016558333739303, guid: babdde49b22c337418ef654995d3c656, type: 3}
   bookStackPosition: {fileID: 7035654582375486965}
+  collectedBooks: []
 --- !u!114 &-2800846484274752664
 MonoBehaviour:
   m_ObjectHideFlags: 0
