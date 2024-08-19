@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class BookCollector : MonoBehaviour
 {
+    public static BookCollector GetInstance() { return instance; }
+    public static BookCollector instance;
     public GameObject bookPrefab;
     public Transform bookStackPosition;
     [SerializeField] public List<GameObject> collectedBooks = new List<GameObject>();
 
     public List<GameObject> getBooks() { return collectedBooks; }
 
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+
+        instance = this;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Book")) 
+        if (other.CompareTag("Book"))
         {
             CollectBook(other.gameObject);
         }
@@ -32,10 +45,13 @@ public class BookCollector : MonoBehaviour
 
         collectedBooks.Add(newBook);
         DataManager.instance.addBook();
+        BookFollow.GetInstance().addPos(newBook.transform.localPosition.y);
     }
 
-    public void RemoveBook(GameObject book) {
-        if (collectedBooks.Contains(book)) {
+    public void RemoveBook(GameObject book)
+    {
+        if (collectedBooks.Contains(book))
+        {
 
             collectedBooks.Remove(book);
 
@@ -46,12 +62,14 @@ public class BookCollector : MonoBehaviour
             BookFollow.GetInstance().removePos(book.transform.localPosition.y);
         }
     }
-    public int getNumBooks(){
+    public int getNumBooks()
+    {
         return collectedBooks.Count;
     }
 
-    public IEnumerator RemoveTopBook(){
-        GameObject book = collectedBooks[collectedBooks.Count-1];
+    public IEnumerator RemoveTopBook()
+    {
+        GameObject book = collectedBooks[collectedBooks.Count - 1];
         RemoveBook(book);
         Destroy(book);
         yield return null;
