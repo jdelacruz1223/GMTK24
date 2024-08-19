@@ -241,7 +241,7 @@ public class PlayerMovement : Actor
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
-            //currentMoveState = animHasTurned;
+            currentMoveState = animHasTurned;
             isFacingRight = !isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
@@ -266,6 +266,9 @@ public class PlayerMovement : Actor
     #region Checks
     public bool isPlayerDead() {
         return isDead;
+    }
+    public bool isControllable() {
+        return canMove;
     }
     #endregion
 
@@ -312,5 +315,7 @@ public class PlayerMovement : Actor
         yield return new WaitForSeconds(bounceCooldown);
         isBouncing = false;
     }
+
+
 }
 

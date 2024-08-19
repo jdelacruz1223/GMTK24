@@ -91,5 +91,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevel: N/A
-  endScreen: {fileID: 0}
-  timeManager: {fileID: 0}
+  endScreen: {fileID: 3376728195548775992, guid: 42326b795f839b9498b4928016038edf, type: 3}
+  jingle: {fileID: 0}

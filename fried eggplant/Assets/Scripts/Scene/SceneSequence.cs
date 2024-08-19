@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class SceneSequence : MonoBehaviour
 {
-    [SerializeField] private string nextLevel;
+    public string nextLevel;
     public GameObject endScreen;
-    public TimeManager timeManager;
+    public AudioSource jingle;
+    private GameObject cam;
     // Start is called before the first frame update
     void Start()
     {
-        
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     // Update is called once per frame
@@ -22,9 +24,12 @@ public class SceneSequence : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
-            collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
-            endScreen.SetActive(true);
-            timeManager.pauseTimer();
+            if (collision.gameObject.GetComponent<PlayerMovement>().isControllable()) {
+                collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
+                Instantiate(endScreen, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), Quaternion.identity, cam.transform);
+                TimeManager.instance.endLevel();
+                jingle.Play();
+            }
         }
     }
     public void GoToMainMenu() {
