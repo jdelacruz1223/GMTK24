@@ -63,9 +63,10 @@ public class SkillsManager : MonoBehaviour
         }
         else{
             DataManager.instance.removeBooks(skill.cost);
+            SkillsUIManager.GetInstance().UpdateVisualAbility();
         }
 
-        if(skill.modifier.instantBoost != new Vector2(0,0)){
+        if (skill.modifier.instantBoost != new Vector2(0,0)){
             DataManager.instance.addBoost(skill.modifier.instantBoost);
         }
         if(skill.modifier.addBounce == true){
