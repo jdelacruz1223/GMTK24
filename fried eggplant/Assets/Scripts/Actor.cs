@@ -8,11 +8,11 @@ public abstract class Actor : MonoBehaviour
 
     [HideInInspector] public Vector2 velocity;
     protected new Rigidbody2D rigidbody;
-    protected ContactFilter2D contactFilter;
+    // protected ContactFilter2D contactFilter;
     private bool isGrounded = false;
     public bool IsGrounded { get => isGrounded; }
     private readonly List<RaycastHit2D> hitList = new(16);
-    public float shellSize = 1/32;
+    public float shellSize = 1 / 32;
 
     void OnEnable()
     {
@@ -22,9 +22,12 @@ public abstract class Actor : MonoBehaviour
     void Start()
     {
         // Init contact filter
-        contactFilter.useTriggers = false;
-        contactFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
-        contactFilter.useLayerMask = true;
+        // contactFilter = new ContactFilter2D
+        // {
+        //     useTriggers = false,
+        //     layerMask = Physics2D.GetLayerCollisionMask(gameObject.layer),
+        //     useLayerMask = true,
+        // };
     }
 
     void FixedUpdate()
@@ -42,12 +45,16 @@ public abstract class Actor : MonoBehaviour
         if (move.magnitude > float.Epsilon)
         {
             // MoveX
-            if (Mathf.Abs(move.x) > float.Epsilon) {
+            if (Mathf.Abs(move.x) > float.Epsilon)
+            {
                 var moveX = new Vector2(move.x, 0);
                 var hit = CollisionCheck(moveX);
-                if (hit == null) {
+                if (hit == null)
+                {
                     rigidbody.position += moveX;
-                } else {
+                }
+                else
+                {
                     // Hit wall
                     Debug.Log("Hit wall");
                     rigidbody.position += moveX.normalized * (hit.Value.distance - shellSize);
@@ -56,16 +63,21 @@ public abstract class Actor : MonoBehaviour
             }
 
             // MoveY
-            if (Mathf.Abs(move.y) > float.Epsilon) {
+            if (Mathf.Abs(move.y) > float.Epsilon)
+            {
                 var moveY = new Vector2(0, move.y);
                 var hit = CollisionCheck(moveY);
-                if (hit == null) {
+                if (hit == null)
+                {
                     rigidbody.position += moveY;
-                } else {
+                }
+                else
+                {
                     // Hit floor/ceiling
                     rigidbody.position += moveY.normalized * (hit.Value.distance - shellSize);
                     velocity.y = 0;
-                    if (move.y < 0) {
+                    if (move.y < 0)
+                    {
                         isGrounded = true;
                     }
                 }
@@ -73,8 +85,14 @@ public abstract class Actor : MonoBehaviour
         }
     }
 
-    RaycastHit2D? CollisionCheck(Vector2 amount) {
-        int count = rigidbody.Cast(amount, contactFilter, hitList, amount.magnitude + shellSize);
+    RaycastHit2D? CollisionCheck(Vector2 amount)
+    {
+        var filter = new ContactFilter2D {
+            layerMask = Physics2D.GetLayerCollisionMask(gameObject.layer),
+            useLayerMask = true,
+            useTriggers = false,
+        };
+        int count = rigidbody.Cast(amount, filter, hitList, amount.magnitude + shellSize);
         if (count == 1) return hitList.First();
         if (count > 1) return hitList.OrderBy(h => h.distance).First();
         return null;

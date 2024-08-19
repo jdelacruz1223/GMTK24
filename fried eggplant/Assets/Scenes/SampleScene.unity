@@ -793,7 +793,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.0
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4734,17 +4734,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2572298416405821561, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: m_BodyType
-      value: 1
+    - target: {fileID: 680708230741935781, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: bookStackPosition
+      value: 
+      objectReference: {fileID: 1151423383}
+    - target: {fileID: 2807697339710320113, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 2572298416405821561, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2572298416405821561, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: m_UseFullKinematicContacts
-      value: 1
     - target: {fileID: 2973911715215442114, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: m_FlipX
       value: 0
@@ -4762,19 +4759,12 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3713750086931246365, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3713750086931246365, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: m_TagString
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 1691215954}
-    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 2074690777}
-      propertyPath: C
-      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: a
@@ -4793,6 +4783,14 @@ PrefabInstance:
       value: 9.6
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1691215954}
+    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: dashTime
       value: 0.5
       objectReference: {fileID: 0}
@@ -4801,16 +4799,8 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: maxSpeed
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: boostTime
       value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: startSpeed
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: boxSize.x
@@ -4821,25 +4811,12 @@ PrefabInstance:
       value: 0.0625
       objectReference: {fileID: 0}
     - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: groundCollider
-      propertyPath: acceleration
-      value: 1.003
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
       propertyPath: jumpingPower
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 8415856245176918753, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8415856245176918753, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: m_Size.x
-      value: 0.71875
-      objectReference: {fileID: 0}
-    - target: {fileID: 8415856245176918753, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-      propertyPath: m_Size.y
-      value: 1.40625
+    - target: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+      propertyPath: groundCollider
+      value: 1.003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

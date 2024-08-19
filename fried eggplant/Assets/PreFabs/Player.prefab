@@ -280,6 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4772523498930182298}
+  dust: {fileID: 0}
 --- !u!95 &4772523498930182298
 Animator:
   serializedVersion: 5

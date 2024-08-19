@@ -12,6 +12,7 @@ TagManager:
   - BigBookPoint
   - Intro Splash
   - Death Pit
+  - BookHoldingPoint
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - UI
   - Ground
   - Transition
-  - 
-  - 
+  - Player
+  - HeldBook
   - 
   - 
   - 
