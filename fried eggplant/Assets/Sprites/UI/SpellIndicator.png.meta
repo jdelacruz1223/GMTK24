@@ -100,10 +100,10 @@ TextureImporter:
       name: SpellIndicator_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 4
+        y: 39
+        width: 25
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,10 +121,10 @@ TextureImporter:
       name: SpellIndicator_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
+        x: 36
+        y: 39
+        width: 25
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,10 +142,10 @@ TextureImporter:
       name: SpellIndicator_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
+        x: 68
+        y: 39
+        width: 25
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: SpellIndicator_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
+        x: 100
+        y: 39
+        width: 25
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: SpellIndicator_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
+        x: 132
+        y: 39
+        width: 25
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: SpellIndicator_5
       rect:
         serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
+        x: 164
+        y: 39
+        width: 25
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,6 +218,153 @@ TextureImporter:
       bones: []
       spriteID: 03d987c0f3b98fa4c9a6ae73ee3333ca
       internalID: -1229988867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpellIndicator_6
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 39
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cb86654f6a357642b31a66de1b0f942
+      internalID: -128619328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpellIndicator_7
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 39
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e8a8fc238ff218448c3b529996a9c22
+      internalID: -241072262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpellIndicator_8
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 39
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b336533620023143854a454099d40e5
+      internalID: -1784780284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpellIndicator_9
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 39
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7267c870617ac7d479fedf85c9d4de15
+      internalID: 1074631578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpellIndicator_10
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 7
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98a7d30a7458bfc42846fb8f1148f697
+      internalID: 295655545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpellIndicator_11
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 7
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25c31b5c05044404f87764e5501bf81d
+      internalID: -1292970724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpellIndicator_12
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 7
+        width: 25
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b11b3e02c9186b45b936dc236f8e452
+      internalID: -1872181981
       vertices: []
       indices: 
       edges: []
@@ -235,10 +382,17 @@ TextureImporter:
     nameFileIdTable:
       SpellIndicator_0: 2107472561
       SpellIndicator_1: 1194081333
+      SpellIndicator_10: 295655545
+      SpellIndicator_11: -1292970724
+      SpellIndicator_12: -1872181981
       SpellIndicator_2: 2121258117
       SpellIndicator_3: 1873552944
       SpellIndicator_4: 1394065743
       SpellIndicator_5: -1229988867
+      SpellIndicator_6: -128619328
+      SpellIndicator_7: -241072262
+      SpellIndicator_8: -1784780284
+      SpellIndicator_9: 1074631578
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
