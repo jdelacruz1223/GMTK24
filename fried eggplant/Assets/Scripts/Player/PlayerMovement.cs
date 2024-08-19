@@ -107,7 +107,7 @@ public class PlayerMovement : Actor
         camera.m_Lens.OrthographicSize = Mathf.MoveTowards(currentSize, targetSize, 0.05f);
 
         var offsetScale = Mathf.Min(1f, Mathf.Abs(velocity.x) / maxSpeed) * Mathf.Sign(velocity.x);
-        Debug.Log($"offsetScale: {offsetScale * initialCameraTargetOffset.x}");
+//        Debug.Log($"offsetScale: {offsetScale * initialCameraTargetOffset.x}");
         var offset = new Vector3(offsetScale * initialCameraTargetOffset.x, initialCameraTargetOffset.y, initialCameraTargetOffset.z);
         cameraTarget.localPosition = transform.position + offset;
     }
