@@ -4050,7 +4050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1266755732521232593, guid: ee861e1598d653542ba4533cfbb43be3, type: 3}
       propertyPath: orthographic size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1611586695382505168, guid: ee861e1598d653542ba4533cfbb43be3, type: 3}
       propertyPath: m_XDamping
