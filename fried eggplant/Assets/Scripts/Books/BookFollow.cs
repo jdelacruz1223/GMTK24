@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BookFollow : MonoBehaviour
@@ -33,6 +34,35 @@ public class BookFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-      rigidbody.position = stackPos.transform.position;
+        rigidbody.position = stackPos.transform.position;
+    }
+
+    // update stack positions
+    void Update()
+    {
+
+    }
+
+
+    public void UpdateStack(int index, Vector3 lastPos) => StartCoroutine(UpdateBookStack(index, lastPos));
+
+    IEnumerator UpdateBookStack(int index, Vector3 lastPos)
+    {
+        if (index == 0)
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.GetComponent<Rigidbody2D>() == null)
+                {
+                    Rigidbody2D rb = child.AddComponent<Rigidbody2D>();
+                    rb.bodyType = RigidbodyType2D.Dynamic;
+
+                    BookCollector.GetInstance().RemoveBook(child.gameObject);
+                }
+            }
+        }
+
+        SkillsUIManager.GetInstance().UpdateVisualAbility();
+        yield return new WaitForEndOfFrame();
     }
 }

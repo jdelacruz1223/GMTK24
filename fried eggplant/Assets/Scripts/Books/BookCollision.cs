@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class BookCollision : MonoBehaviour
@@ -17,6 +18,9 @@ public class BookCollision : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        int index = transform.GetSiblingIndex();
+        Vector3 lastPos = transform.position;
+
         Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
         if (rigidbody == null)
         {
@@ -27,16 +31,15 @@ public class BookCollision : MonoBehaviour
             Vector2 forceDirection = collision.contacts[0].normal * -1;
             float forceMagnitude = 10f;
             rigidbody.AddForce(forceDirection * forceMagnitude * 5, ForceMode2D.Impulse);
-            StartCoroutine(destroyBook(collision.gameObject));
+            StartCoroutine(destroyBook(index, lastPos));
         }
     }
 
-    IEnumerator destroyBook(GameObject obj)
+    IEnumerator destroyBook(int index, Vector3 lastPos)
     {
-        transform.SetParent(null);
-
         bookCollector.RemoveBook(gameObject);
         SkillsUIManager.GetInstance().UpdateVisualAbility();
+        BookFollow.GetInstance().UpdateStack(index, lastPos);
 
         yield return new WaitForSeconds(3);
 
