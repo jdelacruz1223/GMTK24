@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour
 
     public static LevelManager instance;
 
+    public int totalBookmarks { get; private set; }
+
     void Awake()
     {
         if (instance != null && instance != this)
@@ -36,8 +38,8 @@ public class LevelManager : MonoBehaviour
 
     public void CompleteLevel()
     {
+        levelComplete.SetActive(true);
         elapsedTime = TimeManager.instance.getTime();
-        CompleteLevel();
 
         int stars = CalculateStars(elapsedTime);
         DisplayStars(stars);
@@ -65,6 +67,8 @@ public class LevelManager : MonoBehaviour
 
     private void DisplayStars(int stars)
     {
+        totalBookmarks += stars;
+
         for (int i = 0; i < stars; i++)
         {
             GameObject bookmark = Bookmarks[i];
