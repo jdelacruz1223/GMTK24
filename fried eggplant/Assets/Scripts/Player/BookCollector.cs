@@ -47,7 +47,6 @@ public class BookCollector : MonoBehaviour
             // it will fall down until it goes to the first stack pos
             DataManager.instance.removeBook();
             BookFollow.GetInstance().removePos(book.transform.localPosition.y);
-
         }
     }
     public int getNumBooks(){
