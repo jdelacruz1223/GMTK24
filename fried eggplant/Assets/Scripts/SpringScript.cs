@@ -16,7 +16,7 @@ public class SpringScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider) {
         if (collider.gameObject.CompareTag("Player")) {
             PlayerMovement player = collider.gameObject.GetComponent<PlayerMovement>();
-            player.rb.velocity = new Vector2(player.rb.velocity.x, launchPower);
+            player.velocity += new Vector2(player.velocity.x, launchPower);
             StartCoroutine(springAnimation());
         }
     }

@@ -52,7 +52,6 @@ public class PlayerMovement : Actor
     private bool killJump;
 
     // Ground Checks
-    [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Vector2 groundCheckOffset;
     [SerializeField] private Vector2 groundCheckSize;
 
@@ -63,14 +62,24 @@ public class PlayerMovement : Actor
     [SerializeField] private AnimationCurve cameraZoomCurve;
 
     //Movement Variables
-    [SerializeField] public float C;
-    [SerializeField] public float c;
-    [SerializeField] public float a;
-    [SerializeField] public float h;
-    [SerializeField] public float d;
-    private const float pi = Mathf.PI;
-    private float x;
+    [Header("Movement Config")]
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float startSpeed;
 
+    [Tooltip("How quickly the player goes from 0 to startSpeed")]
+    [SerializeField] private float moveAccel = 0.5f;
+
+    [Tooltip("Acceleration for going from startSpeed to maxSpeed")]
+    [SerializeField] private float momentumAccel = 0.1f;
+    
+    [Tooltip("How quickly the player turns around")]
+    [SerializeField] private float skidAccel = 0.8f;
+    
+    [Tooltip("How quickly the player stops with no buttons pressed")]
+    [SerializeField] private float stopAccel = 0.7f;
+    
+    [Tooltip("Scales the current accel when in the air")]
+    [SerializeField] private float airMultiplier = 0.65f;
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +89,7 @@ public class PlayerMovement : Actor
         canMove = introSplash == null;
         hasStarted = canMove;
         isDead = false;
+        camera = FindFirstObjectByType<CinemachineVirtualCamera>();
     }
     
     override
@@ -109,13 +119,17 @@ public class PlayerMovement : Actor
         var speed = velocity.x;
         var horizontal = Input.GetAxisRaw("Horizontal");
 
-        var accel = 0.3f;
+        var accel = stopAccel;
+        
         var targetSpeed = 0f;
 
         if (Mathf.Abs(horizontal) > float.Epsilon) {
-            if (Mathf.Abs(speed) > startSpeed) accel = 0.05f;
+            accel = moveAccel;
+            if (Mathf.Sign(velocity.x) == -Mathf.Sign(horizontal)) accel = skidAccel;
+            else if (Mathf.Abs(speed) > startSpeed) accel = momentumAccel;
             targetSpeed = maxSpeed * Mathf.Sign(horizontal);
         }
+        if (!IsGrounded) accel *= airMultiplier;
         speed = Mathf.MoveTowards(speed, targetSpeed, accel);
 
         velocity.x = speed;
@@ -125,6 +139,7 @@ public class PlayerMovement : Actor
     void Update()
     {
         if (canMove && !isDashing && !isBouncing) {
+            CoyoteMechanic();
             // Get Horizontal Axis Input to know which side we are facing
             horizontal = Input.GetAxisRaw("Horizontal");
             hasBook = bookCollector.getNumBooks() > 0;
@@ -154,18 +169,17 @@ public class PlayerMovement : Actor
         if (collision.gameObject.CompareTag("obstacle") && !isCooldown)
         {
             Debug.Log("Collided with wall");
-            x = 0;
             collisionCooldown();
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        if(DataManager.instance.canBounce){
-            rb.AddForce(collision.contacts[0].normal * bounceForce);
-            if(collision.relativeVelocity.y < 0){
-                rb.AddForce(Vector2.up * bounceForce);
+        if (DataManager.instance.canBounce) {
+            velocity += collision.contacts[0].normal * bounceForce;
+            if (collision.relativeVelocity.y < 0) {
+                velocity += Vector2.up * bounceForce;
             }
-            if(IsGrounded()){
+            if (IsGrounded) {
                 DataManager.instance.canBounce = false;
             }
         }
@@ -173,6 +187,7 @@ public class PlayerMovement : Actor
             transform.parent = collision.transform;
         }
     }
+
     void OnCollisionExit2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("platform")) {
             transform.parent = null;
@@ -183,6 +198,7 @@ public class PlayerMovement : Actor
     public void toggleControl() {
         canMove = !canMove;
     }
+
     //Sets player control to set boolean value
     public void toggleControl(bool t) {
         canMove = t;
@@ -230,7 +246,6 @@ public class PlayerMovement : Actor
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
-            x = 0;
         }
     }
     /*
@@ -262,6 +277,7 @@ public class PlayerMovement : Actor
         yield return new WaitForSeconds(0.4f);
         isJumping = false;
     }
+
     IEnumerator collisionCooldown()
     {
         isCooldown = true;

@@ -130,9 +130,9 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3713750086931246365}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -192,7 +192,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 1.4}
+  m_Size: {x: 0.71875, y: 1.40625}
   m_EdgeRadius: 0
 --- !u!114 &4620653007918910439
 MonoBehaviour:
@@ -206,20 +206,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b50e35b4d1ab24cbd5dd5a0c4a399a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0}
   shellSize: 0.03125
-  bookCollector: {fileID: 680708230741935781}
   playerAnimation: {fileID: -2800846484274752664}
   cooldown: 1
   boostTime: 0.2
   bounceCooldown: 1
   bounceForce: 300
   boostForce: 2000
+  bookCollector: {fileID: 680708230741935781}
   jumpingPower: 11
   jumpBufferTime: 0.1
   coyoteTime: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   groundCheckOffset: {x: 0.0625, y: -1}
   groundCheckSize: {x: 0.5, y: 0.0625}
   camera: {fileID: 0}
@@ -247,12 +245,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rb: {fileID: 2572298416405821561}
-  C: 6
-  c: 0.3
-  a: 0.3
-  h: 1.4
-  d: 0.24
+  maxSpeed: 25
+  startSpeed: 10
+  moveAccel: 0.5
+  momentumAccel: 0.1
+  skidAccel: 0.8
+  stopAccel: 0.7
+  airMultiplier: 0.65
 --- !u!114 &680708230741935781
 MonoBehaviour:
   m_ObjectHideFlags: 0

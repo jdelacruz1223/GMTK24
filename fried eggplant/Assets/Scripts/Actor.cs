@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Actor : MonoBehaviour
 {
 
-    protected Vector2 velocity;
+    [HideInInspector] public Vector2 velocity;
     protected new Rigidbody2D rigidbody;
     protected ContactFilter2D contactFilter;
     private bool isGrounded = false;
