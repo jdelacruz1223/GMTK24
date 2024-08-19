@@ -45,7 +45,7 @@ public class PlayerAnimation : MonoBehaviour
             case MoveState.running:
                 anim.SetBool("isRunning",true);
                 anim.SetBool("isIdling",false);
-                if (GetComponent<PlayerMovement>().IsGrounded()) dust.Play();
+                if (GetComponent<PlayerMovement>().IsGrounded) dust.Play();
             break;
             case MoveState.landed:
                 anim.SetTrigger("hasLanded");

@@ -1,11 +1,6 @@
-using System;
 using System.Collections;
 using Cinemachine;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
 
 public class PlayerMovement : Actor
 {
@@ -96,8 +91,19 @@ public class PlayerMovement : Actor
     protected void ActorFixedUpdate()
     {
         FixedUpdateMovement();
+
+        if (DataManager.instance.instantBoostAmount.sqrMagnitude > Vector2.kEpsilon) {
+            boost = DataManager.instance.applyBoost() * boostForce;
+            if (boost.x != 0) {
+                StartCoroutine(dash());
+            }
+            if (boost.y != 0) {
+                StartCoroutine(lift());
+            }
+        }
+
         if (playerAnimation.anim.GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
-        camera.m_Lens.OrthographicSize = 4 + cameraZoomCurve.Evaluate(Mathf.Abs(velocity.x) / maxSpeed);
+        camera.m_Lens.OrthographicSize = 10 + cameraZoomCurve.Evaluate(Mathf.Abs(velocity.x) / maxSpeed);
     }
 
     void FixedUpdateMovement() {

@@ -10,7 +10,7 @@ public abstract class Actor : MonoBehaviour
     protected new Rigidbody2D rigidbody;
     protected ContactFilter2D contactFilter;
     private bool isGrounded = false;
-    protected bool IsGrounded { get => isGrounded; }
+    public bool IsGrounded { get => isGrounded; }
     private readonly List<RaycastHit2D> hitList = new(16);
     public float shellSize = 1/32;
 
