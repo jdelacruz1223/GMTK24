@@ -14,7 +14,9 @@ public class MenuManager : MonoBehaviour
     {
         SceneHandler.GotoScene("Tutorial Scene", hasTransition: true);
     }
-
+    
+    public void GotoLeaderboard() => SceneHandler.GotoScene("Leaderboard");
+    
     public void BackToMenu()
     {
 

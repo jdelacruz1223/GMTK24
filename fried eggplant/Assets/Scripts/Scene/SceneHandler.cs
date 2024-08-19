@@ -44,4 +44,3 @@ public class SceneHandler
     public static void AddScene(string i) => SceneHelper.LoadScene(i, additive: true, setActive: true);
     public static void UnloadScene(string i) => SceneHelper.UnloadScene(i);
 }
-
