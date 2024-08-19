@@ -63,8 +63,11 @@ public class DataManager : MonoBehaviour
         booksAmount -= 1;
     }
     public void removeBooks(int amt){
+        BookCollector temp = player.GetComponent<BookCollector>();
         for (int i = 0; i < amt; i++){
-            StartCoroutine(player.GetComponent<BookCollector>().RemoveTopBook());
+            if(temp.getNumBooks() > 0){
+                StartCoroutine(temp.RemoveTopBook());
+            }
         }
     }
 }

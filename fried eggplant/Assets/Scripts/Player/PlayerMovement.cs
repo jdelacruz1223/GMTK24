@@ -107,7 +107,7 @@ public class PlayerMovement : Actor
         camera.m_Lens.OrthographicSize = Mathf.MoveTowards(currentSize, targetSize, 0.05f);
 
         var offsetScale = Mathf.Min(1f, Mathf.Abs(velocity.x) / maxSpeed) * Mathf.Sign(velocity.x);
-        Debug.Log($"offsetScale: {offsetScale * initialCameraTargetOffset.x}");
+//        Debug.Log($"offsetScale: {offsetScale * initialCameraTargetOffset.x}");
         var offset = new Vector3(offsetScale * initialCameraTargetOffset.x, initialCameraTargetOffset.y, initialCameraTargetOffset.z);
         cameraTarget.localPosition = transform.position + offset;
     }
@@ -152,7 +152,7 @@ public class PlayerMovement : Actor
 
         if (dashCounter > 0) {
             dashCounter -= Time.deltaTime;
-            velocity.y = 0;
+            velocity.y = dash.y/1.5f;
             velocity.x = dash.x * (isFacingRight ? 1 : -1);
         }
     }
