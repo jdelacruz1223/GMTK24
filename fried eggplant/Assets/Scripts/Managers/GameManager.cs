@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     public void BackToMenu() => SceneHandler.GotoScene("MainMenuScene", hasTransition: true);
     public void RetryLevel() => SceneHandler.GotoScene(SceneManager.GetActiveScene().name, hasTransition: true);
 
-    public void EndLevel(bool hasCompleted = false, int level = 0)
+    public void EndLevel(int level = 0)
     {
         TimeManager.instance.endLevel();
         levelUserStats.Append(new LevelModel { level = level, totalBookmarks = LevelManager.instance.totalBookmarks, elapsedTime = TimeManager.instance.getTime() });
@@ -65,8 +65,7 @@ public class GameManager : MonoBehaviour
         User.totalTime += TimeManager.instance.getTime();
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
 
-        if (hasCompleted)
-            LevelManager.instance.CompleteLevel();
+        LevelManager.instance.CompleteLevel();
     }
 
     public void SetUsername(string name) => username = name;
