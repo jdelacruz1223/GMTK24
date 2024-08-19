@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class SceneSequence : MonoBehaviour
 {
-    public string nextLevel;
     public GameObject endScreen;
     public AudioSource jingle;
     private GameObject cam;
@@ -16,32 +15,23 @@ public class SceneSequence : MonoBehaviour
     void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera");
+        if(endScreen.activeSelf) endScreen.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        endScreen.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, 0);
     }
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
             if (collision.gameObject.GetComponent<PlayerMovement>().isControllable()) {
                 collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
-                Instantiate(endScreen, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), Quaternion.identity, cam.transform);
+                endScreen.SetActive(true);
                 Instantiate(dimOverlay, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), Quaternion.identity, cam.transform);
                 TimeManager.instance.endLevel();
                 jingle.Play();
             }
         }
-    }
-    public void GoToMainMenu() {
-        SceneHandler.GotoScene("MainMenuScene", hasTransition: true);
-    }
-    [ContextMenu("Go To Next Level")]
-    public void GoToNextLevel() {
-        SceneHandler.GotoScene(nextLevel, hasTransition: true);
-    }
-    public void RetryLevel() {
-        SceneHandler.GotoScene(SceneManager.GetActiveScene().name);
     }
 }

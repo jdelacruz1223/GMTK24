@@ -42,7 +42,9 @@ public class TimeManager : MonoBehaviour
         var m = t0/60;
         var s = t0 - m*60;
         var ms = (int)((currentTime - t0)*100);
-        text.text = $"{m:00}:{s:00}:{ms:00}";
+        if (text != null) {
+          text.text = $"{m:00}:{s:00}:{ms:00}";
+        }
     }
     [ContextMenu("Pause Timer")]
     public void pauseTimer() {

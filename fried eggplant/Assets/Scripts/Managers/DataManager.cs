@@ -1,6 +1,3 @@
-using Assets.Scripts.Database;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -25,7 +22,7 @@ public class DataManager : MonoBehaviour
     }
     private void Start()
     {
-        player = GameObject.FindFirstObjectByType<PlayerMovement>().gameObject;
+        player = FindFirstObjectByType<PlayerMovement>().gameObject;
     }
 
     void Update()
