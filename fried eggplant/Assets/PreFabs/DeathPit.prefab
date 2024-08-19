@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8929eceb5bf120a44be7c04772f02684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endScreen: {fileID: 0}
+  endScreen: {fileID: 3376728195548775992, guid: 42326b795f839b9498b4928016038edf, type: 3}
   jingle: {fileID: 8134312428264070405}
   dimOverlay: {fileID: 7906227895425289971, guid: 903384f2723e42a40873b8f1f61144c7, type: 3}
 --- !u!82 &8134312428264070405
