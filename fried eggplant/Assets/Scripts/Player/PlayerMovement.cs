@@ -114,7 +114,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            CreateDust();
             if (IsGrounded()) {
                 speed = C * Mathf.Atan(c * x - a) + (pi / d) + h;
                 x += Time.deltaTime;
@@ -319,6 +318,11 @@ public class PlayerMovement : MonoBehaviour
 
     void CreateDust(){
         dust.Play();
+            // if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Landed"))
+            //     {
+            //         CreateDust();
+            //     }
+ 
     }
 
 
