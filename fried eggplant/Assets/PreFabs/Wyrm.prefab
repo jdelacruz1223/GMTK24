@@ -120,5 +120,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
-  speed: 0.3
+  speed: 0.4
   playerFollow: {fileID: 0}
