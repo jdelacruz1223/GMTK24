@@ -625,7 +625,7 @@ Transform:
   m_GameObject: {fileID: 8281746918291405959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 0.97870207, z: -9.875534}
+  m_LocalPosition: {x: 4, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -857,10 +857,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wyrm
       objectReference: {fileID: 0}
-    - target: {fileID: 2077782957699912042, guid: bb5dc3e9ad323ab4abc65a5a6e4f7e92, type: 3}
-      propertyPath: playerFollow
-      value: 
-      objectReference: {fileID: 1154247983374579219}
     - target: {fileID: 3422854909165978373, guid: bb5dc3e9ad323ab4abc65a5a6e4f7e92, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -999,11 +995,6 @@ PrefabInstance:
 --- !u!1 &844595998216953754 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3713750086931246365, guid: 42c947489e98ad24eba98e958c303276, type: 3}
-  m_PrefabInstance: {fileID: 4049157809192628871}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1154247983374579219 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2897444028573041812, guid: 42c947489e98ad24eba98e958c303276, type: 3}
   m_PrefabInstance: {fileID: 4049157809192628871}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2217897782236340086 stripped

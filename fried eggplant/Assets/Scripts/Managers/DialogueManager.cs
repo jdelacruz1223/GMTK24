@@ -48,6 +48,15 @@ public class DialogueManager : MonoBehaviour
         currentBox = dialogueBoxes.Dequeue();
         currentBox.SetActive(true);
     }
+    //Dequeues all active dialogue
+    public void DequeueDialogue() {
+        while(dialogueBoxes.Count != 0) {
+            dialogueBoxes.Dequeue();
+        }
+        if(currentBox != null && currentBox.activeSelf) {
+            currentBox.SetActive(false);
+        }
+    }
     public bool isTextBoxActive() {
         return currentBox != null && currentBox.activeSelf;
     }

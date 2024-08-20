@@ -161,6 +161,21 @@ public class PlayerMovement : Actor
             dashCounter -= Time.deltaTime;
             velocity.y = dash.y/1.5f;
             velocity.x = dash.x * (isFacingRight ? 1 : -1);
+            print(dash);
+            if(dash.y > 0){
+                playerAnimation.isLifting = true;
+            }
+            if(dash.y < 0){
+                playerAnimation.isSlamming = true;
+            }
+            if(dash.x > 0 || dash.x < 0){
+                playerAnimation.isDashing = true;
+            }
+        }
+        else{
+            playerAnimation.isLifting = false;
+            playerAnimation.isSlamming = false;
+            playerAnimation.isDashing = false;
         }
     }
 
