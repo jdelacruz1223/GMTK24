@@ -1397,7 +1397,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
+        key0: {r: 0.8509804, g: 0.7411765, b: 0.78431374, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4218,7 +4218,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 0.8509804, g: 0.7411765, b: 0.78431374, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4958,6 +4958,9 @@ Transform:
   m_Children:
   - {fileID: 7035654582375486965}
   - {fileID: 3089147765440343033}
+  - {fileID: 3296819538271135768}
+  - {fileID: 5633697472240246189}
+  - {fileID: 5829151719534110911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2973911715215442114
@@ -5134,7 +5137,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  cameraTarget: {fileID: 0}
+  cameraForwardLerpScale: 0.1
   maxSpeed: 25
   startSpeed: 10
   moveAccel: 0.5
