@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
     private AudioSource audioSource;
     private float normalVolume;
-    [SerializeField] private float volumeDimModifier = 0.1f;
+    [SerializeField] private float volumeDimModifier = 0.01f;
     public AudioClip menuMusic;
     public AudioClip introBGM;
     public AudioClip BGMLoop;
@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
         }
         if(GameObject.Find("DimOverlay(Clone)") && audioSource.volume == normalVolume) {
             audioSource.volume *= volumeDimModifier;
-        } else {
+        } else if (!GameObject.Find("DimOverlay(Clone)")) {
             audioSource.volume = normalVolume;
         }
     }

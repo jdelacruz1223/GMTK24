@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615f2bd2fc82fcf4ea883bcf7e7cff48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: How much wood would a woodchuck chuck if a woodchuck could chuck wood?
+  dialogue: How much wood would a woodchuck chuck if a /nwoodchuck could chuck wood?
   speaker: Forre
   dialogueText: {fileID: 362987806}
   speakerText: {fileID: 150574298}
