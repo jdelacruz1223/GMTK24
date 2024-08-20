@@ -19,7 +19,7 @@ public class LevelSkillStates : ScriptableObject
     }
 
 }
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(LevelSkillStates))]
 public class LevelSkillStatesEditor : Editor{
 
@@ -58,3 +58,4 @@ public class LevelSkillStatesEditor : Editor{
         }        
     }
 }
+#endif
