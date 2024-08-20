@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fbb1b9b15e8c540b5e2e975b6591f3, type: 3}
   m_Name: SlamSkill
   m_EditorClassIdentifier: 
-  name: Lift
+  name: Slam
   description: Send yourself downwards
   cost: 4
-  modifier: {fileID: 0}
+  modifier: {fileID: 11400000, guid: f7ac7fbb6cbadf046bb34b08ff4a1401, type: 2}
