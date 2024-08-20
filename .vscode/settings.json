@@ -3,6 +3,7 @@
     "Cinemachine",
     "Cooldown",
     "Cooldowns",
+    "Lerp",
     "Mathf",
     "Raycast",
     "Rigidbody"

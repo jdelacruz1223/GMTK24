@@ -59,10 +59,13 @@ public class PlayerMovement : Actor
 
     [Header("Camera Config")]
     [SerializeField] private AnimationCurve cameraZoomCurve;
-    [SerializeField] private Transform cameraTarget;
+    
+    [Tooltip("This value is used in a lerp for the camera to follow a point ahead of the player. Effectively, the smaller this value is, the slower the camera will follow that point, preventing the jarring snap when the player hits a wall.")]
+    [SerializeField] private float cameraForwardLerpScale = 0.1f;
     private new CinemachineVirtualCamera camera;
+    private CinemachineTransposer transposer;
     private float initialCameraSize;
-    private Vector3 initialCameraTargetOffset;
+    private float initialCameraXOffset;
 
     //Movement Variables
     [Header("Movement Config")]
@@ -92,8 +95,9 @@ public class PlayerMovement : Actor
         canMove = introSplash == null;
         isDead = false;
         camera = FindFirstObjectByType<CinemachineVirtualCamera>();
+        transposer = camera.GetCinemachineComponent<CinemachineTransposer>();
         initialCameraSize = camera.m_Lens.OrthographicSize;
-        initialCameraTargetOffset = cameraTarget.localPosition;
+        initialCameraXOffset = transposer.m_FollowOffset.x;
     }
     
     override
@@ -102,14 +106,17 @@ public class PlayerMovement : Actor
         FixedUpdateMovement();
 
         if (playerAnimation.anim.GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+
+        // Adjust the camera's zoom (ortho size)
         var currentSize = camera.m_Lens.OrthographicSize;
         var targetSize = initialCameraSize + cameraZoomCurve.Evaluate(Mathf.Abs(velocity.x) / maxSpeed);
         camera.m_Lens.OrthographicSize = Mathf.MoveTowards(currentSize, targetSize, 0.05f);
 
-        var offsetScale = Mathf.Min(1f, Mathf.Abs(velocity.x) / maxSpeed) * Mathf.Sign(velocity.x);
-//        Debug.Log($"offsetScale: {offsetScale * initialCameraTargetOffset.x}");
-        var offset = new Vector3(offsetScale * initialCameraTargetOffset.x, initialCameraTargetOffset.y, initialCameraTargetOffset.z);
-        cameraTarget.localPosition = transform.position + offset;
+        // Adjust the camera's follow target to be ahead of the player
+        var offsetScale = transposer.m_FollowOffset.x / initialCameraXOffset;
+        var offsetScaleTarget = Mathf.Min(1f, Mathf.Abs(velocity.x) / maxSpeed) * Mathf.Sign(velocity.x);
+        offsetScale = Mathf.Lerp(offsetScale, offsetScaleTarget, cameraForwardLerpScale);
+        transposer.m_FollowOffset.x = offsetScale * initialCameraXOffset;
     }
 
     void FixedUpdateMovement() {
