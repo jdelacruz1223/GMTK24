@@ -213,8 +213,8 @@ MonoBehaviour:
   cooldown: 1
   bounceCooldown: 1
   bounceForce: 300
-  dashTime: 0.1
-  dashForce: 20
+  dashTime: 0.28
+  dashForce: 25
   bookCollector: {fileID: 680708230741935781}
   jumpingPower: 11
   jumpBufferTime: 0.1
@@ -282,6 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 4772523498930182298}
   dust: {fileID: 437268304884921310}
+  currentCooldown: 0
 --- !u!95 &4772523498930182298
 Animator:
   serializedVersion: 5
