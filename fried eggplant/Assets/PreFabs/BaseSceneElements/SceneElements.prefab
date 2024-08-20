@@ -82,6 +82,7 @@ Transform:
   - {fileID: 657314835892976926}
   - {fileID: 4359231366029966313}
   - {fileID: 7775028599975781040}
+  - {fileID: 6366167585209397047}
   m_Father: {fileID: 4858666268984832848}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2341729296235291190
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02fbc0c82c86bbb4bb75d7a53b7cf85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillStates: {fileID: 11400000, guid: 0778d58b55077e44b949b3baa7497b66, type: 2}
+  skillStates: {fileID: 0}
   playerSkills: []
   playerCurrentSkill: {fileID: 0}
   skillIndex: 0
@@ -357,6 +358,55 @@ Transform:
   - {fileID: 7610259041264945336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5993901347284945267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6366167585209397047}
+  - component: {fileID: 6802228939656378752}
+  m_Layer: 0
+  m_Name: SkillsUIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6366167585209397047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993901347284945267}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7563955460096960819}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6802228939656378752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993901347284945267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02856f73549e39b4e822769e2ea74561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillsPanel: {fileID: 0}
+  skillsPrefab:
+  - {fileID: 2183038058290526988, guid: 060a71ad544775b40aeb27a393fb9803, type: 3}
+  placeholderComponents: []
+  skillComponents: []
 --- !u!1 &6700636298563065686
 GameObject:
   m_ObjectHideFlags: 0
