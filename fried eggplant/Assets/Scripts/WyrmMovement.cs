@@ -18,7 +18,7 @@ public class WyrmMovement : MonoBehaviour
         if (spawnPoints.Count == 0) {
             gameObject.SetActive(false);
         } else {
-            transform.position = spawnPoints[spawnPointIndex].transform.position;
+            transform.position = new Vector3(spawnPoints[spawnPointIndex].transform.position.x, spawnPoints[spawnPointIndex].transform.position.y + 1, 0);
             scale = transform.localScale;
         }
     }

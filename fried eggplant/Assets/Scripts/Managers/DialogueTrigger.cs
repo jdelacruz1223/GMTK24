@@ -5,11 +5,11 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public List<GameObject> dialogueBoxes = new List<GameObject>();
-    public GameObject wyrm;
+    private GameObject wyrm;
     // Start is called before the first frame update
     void Start()
     {
-        
+        wyrm = GameObject.FindGameObjectWithTag("Wyrm");
     }
 
     // Update is called once per frame
