@@ -13,6 +13,7 @@ TagManager:
   - Intro Splash
   - Death Pit
   - BookHoldingPoint
+  - Wyrm
   layers:
   - Default
   - TransparentFX

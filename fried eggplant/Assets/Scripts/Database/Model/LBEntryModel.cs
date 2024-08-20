@@ -8,6 +8,8 @@ public class Leaderboard : BaseModel
 {
     [PrimaryKey("id")]
     public int Id { get; set; }
+    [Column("player_id")]
+    public string Player_ID { get; set; }
 
     [Column("player_name")]
     public string Name { get; set; }
@@ -20,4 +22,7 @@ public class Leaderboard : BaseModel
 
     [Column("totaltime")]
     public float TotalTime { get; set; }
+
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; }
 }

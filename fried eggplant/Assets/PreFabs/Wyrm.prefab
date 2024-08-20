@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3422854909165978373}
   - component: {fileID: 5279487016557791381}
   - component: {fileID: 1655487245372326737}
+  - component: {fileID: 2077782957699912042}
   m_Layer: 0
   m_Name: Wyrm
-  m_TagString: Untagged
+  m_TagString: Wyrm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +107,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2077782957699912042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729254025159340308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ae51c6d4eb699a46932cd82c69a1ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints: []
+  speed: 0.4
+  playerFollow: {fileID: 0}

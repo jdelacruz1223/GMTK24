@@ -1,3 +1,4 @@
+using Assets.Scripts.Database;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,7 +16,9 @@ public class GameManager : MonoBehaviour
     public float totalBookmarks { get; private set; }
     public List<LevelModel> levelUserStats { get; private set; }
     public UserStatsModel User { get; private set; }
-    public string username { get; private set; }
+    public string user_id { get; private set; }
+    public bool hasId { get; set; }
+    public bool dbError { get; set; }
 
     private void Awake()
     {
@@ -31,21 +34,55 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
+        InitializeInitialData();
+        
         // Initialize Supabase
         if (SupabaseClient.GetInstance() != null)
         {
             await SupabaseClient.GetInstance().InitializeSupabase();
         }
 
+        // Initialize JsonManager, see if theres an existing user data
+        var jsonUserId = JsonManager.InitializeData();
+        if (jsonUserId != null)
+        {
+            hasId = true;
+            SetUserID(jsonUserId.id);
+            var data = await UserDBManager.instance.FetchData(jsonUserId.id);
+
+            if (data != null)
+            {
+                Debug.Log(data.Name);
+                Debug.LogWarning("[Supabase] fetched user. " + User.Name);
+            } else
+            {
+                dbError = true;
+                hasId = false;
+            }
+        } else
+        {
+            hasId = false;
+        }
+       
+    }
+
+    /// <summary>
+    /// Make sure variables that are null must be set here.
+    /// called first so that it wont conflict when retrieving data.
+    /// </summary>
+    void InitializeInitialData()
+    {
         nextScene = "";
         currentTime = 0;
         levelUserStats = new List<LevelModel>();
 
         // Intialize User
+        User = new UserStatsModel();
         User.Name = "";
         User.levelStats = levelUserStats;
         User.totalTime = 0.0f;
         User.totalBookmarks = 0;
+        dbError = false;
     }
 
     public void setNextScene(string name) => nextScene = name;
@@ -69,7 +106,20 @@ public class GameManager : MonoBehaviour
         LevelManager.instance.CompleteLevel();
     }
 
-    public void SetUsername(string name) => username = name;
+    public void SetUserID(string id)
+    {
+        if (user_id == null && !hasId)
+        {
+            Debug.Log("Created Data Json");
+            JsonManager.WriteID(id);
+            user_id = id;
+        } else
+        {
+            Debug.Log("User exists");
+            user_id = id;
+            hasId = true;
+        }
+    }
 
     void ifError()
     {
