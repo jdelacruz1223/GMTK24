@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public string user_id { get; private set; }
     public bool hasId { get; set; }
     public bool dbError { get; set; }
+    public List<int> finishedScenes { get; set; }
+
     private void Awake()
     {
         ifError();
@@ -45,6 +47,8 @@ public class GameManager : MonoBehaviour
         {
             hasId = true;
             SetUserID(jsonUserId.id);
+            finishedScenes = jsonUserId.scenes;
+
             var data = await DBManager.instance.FetchData(jsonUserId.id);
 
             if (data != null)
@@ -94,6 +98,7 @@ public class GameManager : MonoBehaviour
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
 
         await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, User.totalTime, User.totalBookmarks);
+        JsonManager.WriteScene(SceneManager.GetActiveScene().buildIndex);
         LevelManager.instance.CompleteLevel();
     }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DialogueBox : MonoBehaviour
@@ -29,6 +30,8 @@ public class DialogueBox : MonoBehaviour
     
     
     void Awake() {
+        if (JsonManager.IsSceneInList(SceneManager.GetActiveScene().buildIndex)) Destroy(this);
+        
         dialogueText.text = "";
         speakerText.text = forreSpeak ? "Forre" : "Wyrm";
         currentPortrait.sprite = forreSpeak ? forrePotrait : wyrmPortrait;

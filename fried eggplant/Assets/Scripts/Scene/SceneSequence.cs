@@ -39,5 +39,4 @@ public class SceneSequence : MonoBehaviour
             }
         }
     }
-
 }
