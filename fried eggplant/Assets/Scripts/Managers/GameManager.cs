@@ -17,8 +17,6 @@ public class GameManager : MonoBehaviour
     public string user_id { get; private set; }
     public bool hasId { get; set; }
     public bool dbError { get; set; }
-    public int currentSceneIndex { get; set; }
-
     private void Awake()
     {
         ifError();
@@ -92,11 +90,11 @@ public class GameManager : MonoBehaviour
     async public void EndLevel(int level = 0)
     {
         TimeManager.instance.endLevel();
-        LevelManager.instance.CompleteLevel();
         User.totalTime += TimeManager.instance.getTime();
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
 
-        await DBManager.instance.AddUserFromLeaderboard(user_id, currentSceneIndex, User.Name, TimeManager.instance.getTime(), LevelManager.instance.totalBookmarks);
+        await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, TimeManager.instance.getTime(), LevelManager.instance.totalBookmarks);
+        LevelManager.instance.CompleteLevel();
     }
 
     public void SetUserID(string id)
@@ -113,8 +111,6 @@ public class GameManager : MonoBehaviour
             hasId = true;
         }
     }
-
-    public void SetCurrentSceneIndex(int index) => currentSceneIndex = index;
 
     void ifError()
     {
