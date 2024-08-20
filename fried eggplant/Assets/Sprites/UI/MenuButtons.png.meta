@@ -100,12 +100,12 @@ TextureImporter:
       name: MenuButtons_0
       rect:
         serializedVersion: 2
-        x: 34
+        x: 21
         y: 211
-        width: 64
+        width: 85
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -121,12 +121,12 @@ TextureImporter:
       name: MenuButtons_1
       rect:
         serializedVersion: 2
-        x: 162
+        x: 149
         y: 211
-        width: 64
+        width: 85
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: MenuButtons_2
       rect:
         serializedVersion: 2
-        x: 21
+        x: 6
         y: 147
-        width: 85
+        width: 114
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +163,12 @@ TextureImporter:
       name: MenuButtons_3
       rect:
         serializedVersion: 2
-        x: 149
+        x: 134
         y: 147
-        width: 85
+        width: 114
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: MenuButtons_4
       rect:
         serializedVersion: 2
-        x: 6
+        x: 34
         y: 83
-        width: 114
+        width: 64
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: MenuButtons_5
       rect:
         serializedVersion: 2
-        x: 134
+        x: 162
         y: 83
-        width: 114
+        width: 64
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -228,10 +228,10 @@ TextureImporter:
         serializedVersion: 2
         x: 34
         y: 19
-        width: 64
+        width: 53
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -249,6 +249,27 @@ TextureImporter:
         serializedVersion: 2
         x: 162
         y: 19
+        width: 53
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 489524867cf25cc4b99e9b4a2e497857
+      internalID: -303960642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuButtons_8
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 275
         width: 64
         height: 22
       alignment: 0
@@ -258,8 +279,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 489524867cf25cc4b99e9b4a2e497857
-      internalID: -303960642
+      spriteID: 543556e88bbe54b4dbd034ee7b608ee1
+      internalID: 1319160015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuButtons_9
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 275
+        width: 64
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb4855c99d71c354daf183289b6c7045
+      internalID: -2009682374
       vertices: []
       indices: 
       edges: []
@@ -283,6 +325,8 @@ TextureImporter:
       MenuButtons_5: -509704488
       MenuButtons_6: 1980982739
       MenuButtons_7: -303960642
+      MenuButtons_8: 1319160015
+      MenuButtons_9: -2009682374
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
