@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     public void setNextScene(string name) => nextScene = name;
     public void setCurrentTime(float time) => currentTime = time;
     public void QuitGame() => Application.Quit();
-    public void StartGame() => SceneHandler.GotoScene("Tutorial 1.1", hasTransition: true);
+    public void StartGame() => SceneHandler.GotoScene("1.1", hasTransition: true);
     public void GotoLeaderboard() => SceneHandler.GotoScene("Leaderboard", hasTransition: true);
     public void GoToNextLevel(string nextLevel) => SceneHandler.GotoScene(nextLevel, hasTransition: true);
     public void BackToMenu() => SceneHandler.GotoScene("MainMenuScene", hasTransition: true);
