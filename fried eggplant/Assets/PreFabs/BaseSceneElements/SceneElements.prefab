@@ -615,6 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stackPos: {fileID: 2217897782236340086}
+  player: {fileID: 8660040548992956768}
 --- !u!50 &6511347661638017668
 Rigidbody2D:
   serializedVersion: 4
@@ -1052,3 +1053,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 544602320563870603, guid: 42c947489e98ad24eba98e958c303276, type: 3}
   m_PrefabInstance: {fileID: 4049157809192628871}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8660040548992956768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4620653007918910439, guid: 42c947489e98ad24eba98e958c303276, type: 3}
+  m_PrefabInstance: {fileID: 4049157809192628871}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844595998216953754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b50e35b4d1ab24cbd5dd5a0c4a399a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

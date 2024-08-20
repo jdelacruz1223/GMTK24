@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool hasId { get; set; }
     public bool dbError { get; set; }
     public List<int> finishedScenes { get; set; }
+    [SerializeField] private GameObject pauseMenu;
 
     private void Awake()
     {
@@ -54,14 +55,25 @@ public class GameManager : MonoBehaviour
             if (data != null)
             {
                 User = data;
-            } else
+            }
+            else
             {
                 dbError = true;
                 hasId = false;
             }
-        } else
+        }
+        else
         {
             hasId = false;
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
+            Time.timeScale = pauseMenu.activeSelf ? 0 : 1;
         }
     }
 
@@ -109,7 +121,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("Created Data Json");
             JsonManager.WriteID(id);
             user_id = id;
-        } else
+        }
+        else
         {
             Debug.Log("User exists");
             user_id = id;
@@ -119,20 +132,20 @@ public class GameManager : MonoBehaviour
 
     void ifError()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
       Debug.Log("Unity Editor");
-    #endif
+#endif
 
-    #if UNITY_IOS
+#if UNITY_IOS
       Debug.Log("iOS");
-    #endif
+#endif
 
-    #if UNITY_STANDALONE_OSX
+#if UNITY_STANDALONE_OSX
         Debug.Log("Standalone OSX");
-    #endif
+#endif
 
-    #if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN
       Debug.Log("Standalone Windows");
-    #endif
+#endif
     }
 }
