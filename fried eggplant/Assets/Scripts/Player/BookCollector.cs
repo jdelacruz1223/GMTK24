@@ -41,7 +41,7 @@ public class BookCollector : MonoBehaviour
 
         newBook.SetActive(true);
 
-        newBook.transform.localPosition += new Vector3(0, collectedBooks.Count * newBook.GetComponent<SpriteRenderer>().bounds.size.y, 0);
+        newBook.transform.localPosition += new Vector3(Random.Range(-2/16f, 2/16f), collectedBooks.Count * newBook.GetComponent<SpriteRenderer>().bounds.size.y, 0);
 
         collectedBooks.Add(newBook);
         DataManager.instance.addBook();
