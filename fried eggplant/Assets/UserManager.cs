@@ -22,7 +22,7 @@ public class UserManager : MonoBehaviour
     {
         if (usernameTxt.text.Length > 0)
         {
-            bool status = await UserDBManager.instance.insertPlayer(usernameTxt.text);
+            bool status = await DBManager.instance.insertPlayer(usernameTxt.text);
             if (status)
             {
                 userCreationPanel.SetActive(false);

@@ -53,6 +53,12 @@ public class TimeManager : MonoBehaviour
     }
     public void endLevel() {
         currentTime -= secondsPerBook * DataManager.instance.booksAmount;
+
+        var t0 = (int)currentTime;
+        var m = t0 / 60;
+        var s = t0 - m * 60;
+        var ms = (int)((currentTime - t0) * 100);
+        text.text = $"{m:00}:{s:00}:{ms:00}";
         pauseTimer();
     }
     [ContextMenu("Unpause Timer")]

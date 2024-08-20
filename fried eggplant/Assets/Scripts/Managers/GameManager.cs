@@ -1,6 +1,7 @@
 using Assets.Scripts.Database;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,15 +12,11 @@ public class GameManager : MonoBehaviour
 
     public string nextScene { get; private set; }
     public float currentTime { get; private set; }
-
     public float totalBooks { get; private set; }
-    public float totalBookmarks { get; private set; }
-    public List<LevelModel> levelUserStats { get; private set; }
     public UserStatsModel User { get; private set; }
     public string user_id { get; private set; }
     public bool hasId { get; set; }
     public bool dbError { get; set; }
-
     private void Awake()
     {
         ifError();
@@ -34,13 +31,13 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
-        InitializeInitialData();
-        
         // Initialize Supabase
         if (SupabaseClient.GetInstance() != null)
         {
             await SupabaseClient.GetInstance().InitializeSupabase();
         }
+
+        InitializeInitialData();
 
         // Initialize JsonManager, see if theres an existing user data
         var jsonUserId = JsonManager.InitializeData();
@@ -48,12 +45,11 @@ public class GameManager : MonoBehaviour
         {
             hasId = true;
             SetUserID(jsonUserId.id);
-            var data = await UserDBManager.instance.FetchData(jsonUserId.id);
+            var data = await DBManager.instance.FetchData(jsonUserId.id);
 
             if (data != null)
             {
-                Debug.Log(data.Name);
-                Debug.LogWarning("[Supabase] fetched user. " + User.Name);
+                User = data;
             } else
             {
                 dbError = true;
@@ -63,7 +59,6 @@ public class GameManager : MonoBehaviour
         {
             hasId = false;
         }
-       
     }
 
     /// <summary>
@@ -74,12 +69,10 @@ public class GameManager : MonoBehaviour
     {
         nextScene = "";
         currentTime = 0;
-        levelUserStats = new List<LevelModel>();
 
         // Intialize User
         User = new UserStatsModel();
         User.Name = "";
-        User.levelStats = levelUserStats;
         User.totalTime = 0.0f;
         User.totalBookmarks = 0;
         dbError = false;
@@ -94,15 +87,13 @@ public class GameManager : MonoBehaviour
     public void BackToMenu() => SceneHandler.GotoScene("MainMenuScene", hasTransition: true);
     public void RetryLevel() => SceneHandler.GotoScene(SceneManager.GetActiveScene().name, hasTransition: true);
 
-    public void EndLevel(int level = 0)
+    async public void EndLevel(int level = 0)
     {
         TimeManager.instance.endLevel();
-        levelUserStats.Append(new LevelModel { level = level, totalBookmarks = LevelManager.instance.totalBookmarks, elapsedTime = TimeManager.instance.getTime() });
-
-        User.levelStats = levelUserStats;
         User.totalTime += TimeManager.instance.getTime();
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
 
+        await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, TimeManager.instance.getTime(), LevelManager.instance.totalBookmarks);
         LevelManager.instance.CompleteLevel();
     }
 

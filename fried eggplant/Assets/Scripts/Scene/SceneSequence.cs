@@ -10,6 +10,7 @@ public class SceneSequence : MonoBehaviour
     [SerializeField] private GameObject endScreen;
     public AudioSource jingle;
     private GameObject cam;
+    [SerializeField] int sceneIndex = 0;
     [SerializeField] private GameObject dimOverlay;
     // Start is called before the first frame update
     void Start()
@@ -32,8 +33,12 @@ public class SceneSequence : MonoBehaviour
                 collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
                 endScreen.SetActive(true);
                 Instantiate(dimOverlay, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), Quaternion.identity, cam.transform);
+<<<<<<< HEAD
                 //GameManager.GetInstance().EndLevel();
                 DialogueManager.instance.DequeueDialogue();
+=======
+                GameManager.GetInstance().EndLevel(sceneIndex);
+>>>>>>> Dichill
                 Debug.Log("Jingle should play");
                 jingle.Play();
             }
