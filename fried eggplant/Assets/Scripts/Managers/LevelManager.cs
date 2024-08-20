@@ -22,7 +22,6 @@ public class LevelManager : MonoBehaviour
 
     [Header("Leaderboards")]
     public GameObject LbPlaceholder;
-    [SerializeField] float distBetweenText = 10f;
 
     private float elapsedTime;
 
@@ -114,11 +113,6 @@ public class LevelManager : MonoBehaviour
             pos.text = (index + 1).ToString();
             name.text = leaderboard.playerName;
             time.text = Util.floatToTime(leaderboard.elapsedTime);
-
-
-            RectTransform rectTransform = obj.GetComponent<RectTransform>();
-            rectTransform.anchoredPosition = new Vector2(0, -distBetweenText * index);
-            index++;
         }
     }
 }
