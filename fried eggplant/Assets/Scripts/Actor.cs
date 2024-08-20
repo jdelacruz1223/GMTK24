@@ -49,16 +49,15 @@ public abstract class Actor : MonoBehaviour
             {
                 var moveX = new Vector2(move.x, 0);
                 var hit = CollisionCheck(moveX);
-                if (hit == null)
+                if (hit)
                 {
-                    rigidbody.position += moveX;
+                    // Hit wall
+                    rigidbody.position += moveX.normalized * (hit.distance - shellSize);
+                    velocity.x = 0;
                 }
                 else
                 {
-                    // Hit wall
-                    Debug.Log("Hit wall");
-                    rigidbody.position += moveX.normalized * (hit.Value.distance - shellSize);
-                    velocity.x = 0;
+                    rigidbody.position += moveX;
                 }
             }
 
@@ -67,34 +66,43 @@ public abstract class Actor : MonoBehaviour
             {
                 var moveY = new Vector2(0, move.y);
                 var hit = CollisionCheck(moveY);
-                if (hit == null)
-                {
-                    rigidbody.position += moveY;
-                }
-                else
+                if (hit)
                 {
                     // Hit floor/ceiling
-                    rigidbody.position += moveY.normalized * (hit.Value.distance - shellSize);
+                    rigidbody.position += moveY.normalized * (hit.distance - shellSize);
                     velocity.y = 0;
                     if (move.y < 0)
                     {
                         isGrounded = true;
                     }
                 }
+                else
+                {
+                    rigidbody.position += moveY;
+                }
             }
         }
     }
 
-    RaycastHit2D? CollisionCheck(Vector2 amount)
+    RaycastHit2D CollisionCheck(Vector2 amount)
     {
         var filter = new ContactFilter2D {
             layerMask = Physics2D.GetLayerCollisionMask(gameObject.layer),
             useLayerMask = true,
             useTriggers = false,
         };
-        int count = rigidbody.Cast(amount, filter, hitList, amount.magnitude + shellSize);
-        if (count == 1) return hitList.First();
-        if (count > 1) return hitList.OrderBy(h => h.distance).First();
-        return null;
+        hitList.Clear();
+        rigidbody.Cast(amount, filter, hitList, amount.magnitude + shellSize);
+        if (hitList.Count == 0) return default;
+        return hitList
+            .Where(hit => {
+                if (!hit.collider.gameObject.TryGetComponent<PlatformEffector2D>(out var platform)) return true;
+                if (platform.useOneWay == false) return true;
+                // Don't count it if it's inside the player
+                if (hit.distance == 0) return false;
+                return Vector2.Dot(amount, platform.transform.up) < 0;
+            })
+            .OrderBy(h => h.distance)
+            .FirstOrDefault();
     }
 }

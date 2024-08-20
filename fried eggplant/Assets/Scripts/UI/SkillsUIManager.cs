@@ -34,6 +34,7 @@ public class SkillsUIManager : MonoBehaviour
 
     void Start()
     {
+        if (skillsPanel == null) return;
         foreach(Transform child in skillsPanel.transform){
             placeholderComponents.Add(child.gameObject);
         }

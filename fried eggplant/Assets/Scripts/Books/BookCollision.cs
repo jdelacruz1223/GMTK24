@@ -20,16 +20,15 @@ public class BookCollision : MonoBehaviour
         int index = transform.GetSiblingIndex();
         Vector3 lastPos = transform.position;
 
-        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-        if (rigidbody == null)
+        if (!TryGetComponent<Rigidbody2D>(out _))
         {
             transform.SetParent(null);
-            rigidbody = gameObject.AddComponent<Rigidbody2D>();
+            Rigidbody2D rigidbody = gameObject.AddComponent<Rigidbody2D>();
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
             Vector2 forceDirection = collision.contacts[0].normal * -1;
             float forceMagnitude = 10f;
-            rigidbody.AddForce(forceDirection * forceMagnitude * 5, ForceMode2D.Impulse);
+            rigidbody.AddForce(5 * forceMagnitude * forceDirection, ForceMode2D.Impulse);
             StartCoroutine(destroyBook(index, lastPos));
         }
     }
