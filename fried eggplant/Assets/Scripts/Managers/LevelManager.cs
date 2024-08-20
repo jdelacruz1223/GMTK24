@@ -110,6 +110,7 @@ public class LevelManager : MonoBehaviour
             pos.text = (index + 1).ToString();
             name.text = leaderboard.playerName;
             time.text = Util.floatToTime(leaderboard.elapsedTime);
+            index++;
         }
     }
 }

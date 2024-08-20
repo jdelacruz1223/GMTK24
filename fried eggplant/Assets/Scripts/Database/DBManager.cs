@@ -26,12 +26,93 @@ namespace Assets.Scripts.Database
             }
         }
 
+        /// <summary>
+        /// Fetch Leaderboard from Level Completed
+        /// </summary>
+        /// <param name="sceneIndex"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         public async Task<List<Leaderboard>> FetchLeaderboards(int sceneIndex, int max)
         {
             try
             {
                 var result = await SupabaseClient.GetInstance().Client
                     .From<Leaderboard>().Where(x => x.sceneIndex == sceneIndex).Order(x => x.elapsedTime, Supabase.Postgrest.Constants.Ordering.Ascending).Get();
+
+                if (result.ResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return result.Models;
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to fetch leaderboards: {ex.Message}");
+                return null;
+            }
+        }
+
+        public async Task<int> GetScenes(string id)
+        {
+            try
+            {
+                var result = await SupabaseClient.GetInstance().Client
+                    .From<Leaderboard>().Where(x => x.Player_ID == id).Get();
+
+                if (result.ResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return result.Models.Count;
+                }
+                else
+                    return 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to fetch leaderboards: {ex.Message}");
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Leaderboards Menu
+        /// </summary>
+        /// <param name="sceneIndex"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        public async Task<List<PlayerEntry>> FetchElapsedTimeLeaderboards()
+        {
+            try
+            {
+                var result = await SupabaseClient.GetInstance().Client
+                    .From<PlayerEntry>().Order(x => x.TotalTime, Supabase.Postgrest.Constants.Ordering.Ascending).Get();
+
+                if (result.ResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return result.Models;
+                }
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to fetch leaderboards: {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Fetch Most Books Collected
+        /// </summary>
+        /// <param name="sceneIndex"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
+        public async Task<List<PlayerEntry>> FetchMostBookCollectedLeaderboards()
+        {
+            try
+            {
+                var result = await SupabaseClient.GetInstance().Client
+                    .From<PlayerEntry>().Order(x => x.Bookmark, Supabase.Postgrest.Constants.Ordering.Descending).Get();
 
                 if (result.ResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -110,6 +191,10 @@ namespace Assets.Scripts.Database
                 if (result.ResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var usr = result.Model;
+
+                    Debug.Log(usr.Name);
+                    Debug.Log(usr.TotalTime);
+                    Debug.Log(usr.Bookmark);
 
                     return new UserStatsModel
                     {

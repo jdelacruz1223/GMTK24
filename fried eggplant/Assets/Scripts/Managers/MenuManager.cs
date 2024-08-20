@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public GameObject leaderboardCanva;
     // Functions for Menu Buttons
     public void MainMenu()
     {
@@ -23,8 +24,11 @@ public class MenuManager : MonoBehaviour
     }
     public void Leaderboard()
     {
-        GameManager.instance.GotoLeaderboard();
+        leaderboardCanva.SetActive(true);
     }
+
+    public void LeaveLeaderboard() => leaderboardCanva.SetActive(false);
+
     public void QuitGame()
     {
         GameManager.instance.QuitGame();

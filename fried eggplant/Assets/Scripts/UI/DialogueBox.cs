@@ -30,7 +30,6 @@ public class DialogueBox : MonoBehaviour
     
     
     void Awake() {
-        if (JsonManager.IsSceneInList(SceneManager.GetActiveScene().buildIndex)) Destroy(this);
         
         dialogueText.text = "";
         speakerText.text = forreSpeak ? "Forre" : "Wyrm";

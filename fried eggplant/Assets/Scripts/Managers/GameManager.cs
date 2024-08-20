@@ -55,6 +55,9 @@ public class GameManager : MonoBehaviour
             if (data != null)
             {
                 User = data;
+                User.totalTime = data.totalTime;
+                User.totalBookmarks = data.totalBookmarks;
+                User.Name = data.Name;
             }
             else
             {
@@ -110,6 +113,8 @@ public class GameManager : MonoBehaviour
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
 
         await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, User.totalTime, User.totalBookmarks);
+        await DBManager.instance.UpdatePlayer(user_id, User);
+
         JsonManager.WriteScene(SceneManager.GetActiveScene().buildIndex);
         LevelManager.instance.CompleteLevel();
     }
