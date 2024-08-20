@@ -52,15 +52,14 @@ public class BookCollector : MonoBehaviour
     {
         if (collectedBooks.Contains(book))
         {
-
             collectedBooks.Remove(book);
 
             // get position of book and see its index from the parent.
             // if its the very first underside of the book where its equal to the stackPos, then above of all book
             // it will fall down until it goes to the first stack pos
-            DataManager.instance.removeBook();
             BookFollow.GetInstance().removePos(book.transform.localPosition.y);
         }
+        DataManager.instance.removeBook();
     }
     public int getNumBooks()
     {
