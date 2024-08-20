@@ -29,6 +29,7 @@ public class DialogueBox : MonoBehaviour
     void Awake() {
         dialogueText.text = "";
         speakerText.text = forreSpeak ? "Forre" : "Wyrm";
+        currentPortrait.GetComponent<SpriteRenderer>().sprite = forreSpeak ? forrePotrait : wyrmPortrait;
         foreach (string d in dialogue) {dialogueQueue.Enqueue(d);}
         StartCoroutine(displayText());
     }
