@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -31,4 +33,10 @@ public class MenuManager : MonoBehaviour
     {
         GameManager.instance.StartGame();
     }
+
+    public void ShowCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+    
 }
