@@ -23,12 +23,39 @@ public class PlayerAnimation : MonoBehaviour
     }
     [HideInInspector] public Animator anim;
     [SerializeField] private ParticleSystem dust;
+    [SerializeField] private ParticleSystem dash;
+    [SerializeField] private ParticleSystem lift;
+    [SerializeField] private ParticleSystem slam;
+    public bool isDashing;
+    public bool isLifting;
+    public bool isSlamming;
     private float dustCooldown = 0.01f;
     [SerializeField] private float currentCooldown = 0f;
     
     void Start()
     {
         anim = GetComponent<Animator>();
+    }
+
+    void Update(){
+        if(isDashing){
+            dash.Emit(1);
+        }
+        else{
+            dash.Stop();
+        }
+        if(isLifting){
+            lift.Emit(1);
+        }
+        else{
+            lift.Stop();
+        }
+        if(isSlamming){
+            slam.Play();
+        }
+        else{
+            slam.Stop();
+        }
     }
 
     public void AnimationUpdate(MoveState moveState, bool book)
