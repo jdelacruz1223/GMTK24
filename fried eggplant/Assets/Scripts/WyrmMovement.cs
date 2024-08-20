@@ -10,6 +10,7 @@ public class WyrmMovement : MonoBehaviour
     [SerializeField] private float speed;
     private bool isFollowing = false;
     [SerializeField] private GameObject playerFollow;
+    private Vector3 scale;
     private Animator anim;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,7 @@ public class WyrmMovement : MonoBehaviour
             gameObject.SetActive(false);
         } else {
             transform.position = spawnPoints[spawnPointIndex].transform.position;
+            scale = transform.localScale;
         }
     }
 
@@ -25,6 +27,9 @@ public class WyrmMovement : MonoBehaviour
     void FixedUpdate() {
         if(isFollowing) {
             transform.position = Vector2.MoveTowards(transform.position, playerFollow.transform.position, speed);
+            transform.localScale = playerFollow.transform.parent.localScale;
+        } else {
+            transform.localScale = scale;
         }
     }
     void Update()
