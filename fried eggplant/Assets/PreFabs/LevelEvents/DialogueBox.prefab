@@ -96,7 +96,7 @@ MonoBehaviour:
   forreSpeak: 0
   dialogueText: {fileID: 675487838710271795}
   speakerText: {fileID: 2213063493155853270}
-  currentPortrait: {fileID: 3046753221022778014}
+  currentPortrait: {fileID: 563700162633330848}
   forrePotrait: {fileID: 1466702449, guid: f6a2585723e6f3a4f860657d93394c17, type: 3}
   wyrmPortrait: {fileID: 1466702449, guid: f6a2585723e6f3a4f860657d93394c17, type: 3}
   textSpeed: 3
