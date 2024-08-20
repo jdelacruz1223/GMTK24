@@ -8,7 +8,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     [Header("References")]
-    public GameObject levelComplete;
+    public GameObject timerText;
     [SerializeField] GameObject[] Bookmarks;
 
 
@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
     public void CompleteLevel()
     {
         PopulateLeaderboards();
-        levelComplete.SetActive(true);
+        timerText.SetActive(true);
         elapsedTime = TimeManager.instance.getTime();
 
         int stars = CalculateStars(elapsedTime);
