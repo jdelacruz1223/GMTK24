@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     public string user_id { get; private set; }
     public bool hasId { get; set; }
     public bool dbError { get; set; }
+
+    [SerializeField] private GameObject pauseMenu;
+
     private void Awake()
     {
         ifError();
@@ -58,6 +61,13 @@ public class GameManager : MonoBehaviour
         } else
         {
             hasId = false;
+        }
+    }
+
+    void Update(){
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
+            Time.timeScale = pauseMenu.activeSelf ? 0 : 1;
         }
     }
 
