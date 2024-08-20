@@ -5,15 +5,20 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Queue<GameObject> dialogueBoxes = new Queue<GameObject>();
-    public List<GameObject> dialogueBoxesList = new List<GameObject>();
+    public static DialogueManager GetInstance() { return instance; }
+    public static DialogueManager instance;
+    private Queue<GameObject> dialogueBoxes = new Queue<GameObject>();
     private GameObject currentBox;
-    void Start()
+
+    private void Awake()
     {
-        foreach (GameObject box in dialogueBoxesList)
+        if (instance != null)
         {
-            dialogueBoxes.Enqueue(box);
+            Destroy(this);
+            return;
         }
+
+        instance = this;
     }
 
     // Update is called once per frame
@@ -24,10 +29,23 @@ public class DialogueManager : MonoBehaviour
             currentBox.SetActive(true);
         }
     }
-    void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player") && dialogueBoxes.Count > 0 && (currentBox == null || !currentBox.activeSelf)) {
-            currentBox = dialogueBoxes.Dequeue();
-            currentBox.SetActive(true);
+    //Queues up dialogue and aborts current dialogue sequence if one already exists
+    public void QueueDialog(List<GameObject> list) {
+        if (list == null || list.Count == 0){
+            return;
         }
+        while(dialogueBoxes.Count != 0) {
+            dialogueBoxes.Dequeue();
+        }
+        if(currentBox != null && currentBox.activeSelf) {
+            currentBox.SetActive(false);
+        }
+        foreach (GameObject box in list)
+        {
+            Debug.Log("queuing up dialogue");
+            dialogueBoxes.Enqueue(box);
+        }
+        currentBox = dialogueBoxes.Dequeue();
+        currentBox.SetActive(true);
     }
 }
