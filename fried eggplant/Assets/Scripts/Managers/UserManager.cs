@@ -72,6 +72,8 @@ public class UserManager : MonoBehaviour
         int index = 0;
         foreach (var leaderboard in elapsedResults)
         {
+            if (leaderboard.TotalTime == 0) continue;
+
             var obj = Instantiate(placeholderMostTime, placeholderMostTime.transform.parent);
             obj.SetActive(true);
 
@@ -90,6 +92,8 @@ public class UserManager : MonoBehaviour
         index = 0;
         foreach (var leaderboard in bookCollected)
         {
+            if (leaderboard.TotalTime == 0) continue;
+
             var obj = Instantiate(mostBookCollected, mostBookCollected.transform.parent);
             obj.SetActive(true);
 

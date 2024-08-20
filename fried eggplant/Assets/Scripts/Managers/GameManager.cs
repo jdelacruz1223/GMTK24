@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public string user_id { get; private set; }
     public bool hasId { get; set; }
     public bool dbError { get; set; }
-    public List<int> finishedScenes { get; set; }
+    //public List<int> finishedScenes { get; set; }
     [SerializeField] private GameObject pauseMenu;
 
     private void Awake()
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         {
             hasId = true;
             SetUserID(jsonUserId.id);
-            finishedScenes = jsonUserId.scenes;
+            //finishedScenes = jsonUserId.scenes;
 
             var data = await DBManager.instance.FetchData(jsonUserId.id);
 
