@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52d1ff7f056760046b3e27791cdf3666, type: 3}
   m_Name: AllSkills
   m_EditorClassIdentifier: 
-  allSkills: []
-  isSkillAvailable: 
-  loaded: 0
+  allSkills:
+  - {fileID: 11400000, guid: cb18c3c7898ba094ea35302f59404f1a, type: 2}
+  - {fileID: 11400000, guid: df5875624d499ab469fd3273109b45cc, type: 2}
+  - {fileID: 11400000, guid: 66a01c4c338a5dd46ab73b06a6a23729, type: 2}
+  isSkillAvailable: 010101
+  loaded: 1
