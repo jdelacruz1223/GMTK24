@@ -33,6 +33,7 @@ public class SceneSequence : MonoBehaviour
                 endScreen.SetActive(true);
                 Instantiate(dimOverlay, new Vector3(cam.transform.position.x, cam.transform.position.y, 0), Quaternion.identity, cam.transform);
                 //GameManager.GetInstance().EndLevel();
+                DialogueManager.instance.DequeueDialogue();
                 Debug.Log("Jingle should play");
                 jingle.Play();
             }
