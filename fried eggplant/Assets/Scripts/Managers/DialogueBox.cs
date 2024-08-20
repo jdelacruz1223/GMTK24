@@ -13,8 +13,9 @@ public class DialogueBox : MonoBehaviour
     public TMP_Text speakerText;
     [SerializeField] private float textSpeed = 1f;
     [SerializeField] private float hangTime = 1f;
-    private AudioSource speech;
-    public string[] noSoundChar;
+    [SerializeField] private AudioSource speech;
+    public List<string> noSoundChar = new List<string>();
+    //private float basePitch;
     
     
     void Awake() {
@@ -22,7 +23,7 @@ public class DialogueBox : MonoBehaviour
     }
     void Start() {
         speakerText.text = speaker;
-        speech = GetComponent<AudioSource>();
+        //basePitch = speech.pitch;
     }
     void Update() {
 
@@ -51,8 +52,9 @@ public class DialogueBox : MonoBehaviour
                 default:
                 if (c.Length > 1) c = dialogue.Substring(i,1);
                 if (!noSoundChar.Contains(c) && speech.clip != null) {
-                    speech.pitch *= Random.value + 1f;
+                    //speech.pitch *= Random.value + basePitch;
                     speech.Play();
+                    //speech.pitch = basePitch;
                 } 
                 dialogueText.text += c;
                 i++;

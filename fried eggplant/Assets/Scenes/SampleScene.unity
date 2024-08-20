@@ -495,16 +495,6 @@ RectTransform:
   m_AnchoredPosition: {x: 114.28296, y: 23.628784}
   m_SizeDelta: {x: 1126.5659, y: 206.7424}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &236812241 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3742001970323032432, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
-  m_PrefabInstance: {fileID: 6692002926121791056}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &236812242 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
-  m_PrefabInstance: {fileID: 6692002926121791056}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &268565587
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,10 +589,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 860980092}
   - {fileID: 1623875081}
   - {fileID: 960456231}
   - {fileID: 1691187645}
-  - {fileID: 236812242}
   - {fileID: 101090934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1864,6 +1854,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799516023}
   m_CullTransparentMesh: 1
+--- !u!1 &860980091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 616378911822911764, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+  m_PrefabInstance: {fileID: 1867275696267534733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &860980092 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+  m_PrefabInstance: {fileID: 1867275696267534733}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &894703712
 GameObject:
   m_ObjectHideFlags: 0
@@ -3362,6 +3362,7 @@ GameObject:
   - component: {fileID: 1623875084}
   - component: {fileID: 1623875083}
   - component: {fileID: 1623875082}
+  - component: {fileID: 1623875085}
   m_Layer: 5
   m_Name: DialogueBox2
   m_TagString: Untagged
@@ -3403,15 +3404,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615f2bd2fc82fcf4ea883bcf7e7cff48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: While a woodchuck doesn't actually chuck wood, they do in fact chuck
-    quite a bit of dirt when digging out a burrow. On a good day they can chuck around
-    35 cubic feet of dirt (or about 700 pounds)
+  dialogue: While a woodchuck doesn't actually chuck wood,/. they do in fact chuck
+    quite a bit of dirt when digging out a burrow./| On a good day they can chuck
+    around 35 cubic feet of dirt (or about 700 pounds)
   speaker: Forre
   dialogueText: {fileID: 182991896}
   speakerText: {fileID: 894703714}
   textSpeed: 2
   hangTime: 2
-  noSoundChar: []
+  speech: {fileID: 1623875085}
+  noSoundChar:
+  - '?'
 --- !u!114 &1623875083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3450,6 +3453,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623875080}
   m_CullTransparentMesh: 1
+--- !u!82 &1623875085
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623875080}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1a0a57d02ed29ac4da9a8e7c4070138d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1626148262
 GameObject:
   m_ObjectHideFlags: 0
@@ -3671,7 +3770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueBoxesList:
-  - {fileID: 236812241}
+  - {fileID: 860980091}
   - {fileID: 1623875080}
 --- !u!1001 &1642694033
 PrefabInstance:
@@ -5103,7 +5202,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d31547666fe8eab4fa86ca2293d5c44e, type: 3}
---- !u!1001 &6692002926121791056
+--- !u!1001 &1867275696267534733
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -5111,93 +5210,93 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 268565592}
     m_Modifications:
-    - target: {fileID: 1703020485032429228, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
-      propertyPath: dialogue
-      value: How much wood would a woodchuck chuck if a /nwoodchuck could chuck wood?
-      objectReference: {fileID: 0}
-    - target: {fileID: 3742001970323032432, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 616378911822911764, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_Name
       value: DialogueBox
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 1547.7
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_SizeDelta.y
       value: 392.2023
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -304
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7437433771142324100, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+    - target: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2723629033803030048, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+      propertyPath: dialogue
+      value: How much wood can a woodchuck chuck if a /nwoodchuck could chuck wood?
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
