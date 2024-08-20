@@ -71,13 +71,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            pauseMenu.SetActive(!pauseMenu.activeSelf);
-            Time.timeScale = pauseMenu.activeSelf ? 0 : 1;
-        }
-    }
-
     /// <summary>
     /// Make sure variables that are null must be set here.
     /// called first so that it wont conflict when retrieving data.
