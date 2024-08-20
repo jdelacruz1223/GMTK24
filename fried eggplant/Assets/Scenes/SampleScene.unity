@@ -2211,16 +2211,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
   m_PrefabInstance: {fileID: 1867275696267534733}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &894703712
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 616378911822911764, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
-  m_PrefabInstance: {fileID: 1867275696267534733}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &860980092 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1201044638897348461, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
-  m_PrefabInstance: {fileID: 1867275696267534733}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &902001441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 85314338251060761, guid: 1d781564d102ab74d8335013794f2384, type: 3}
@@ -7244,8 +7234,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-=======
 --- !u!224 &8973069367267183844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7265,7 +7253,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.49993896, y: -10.4}
   m_SizeDelta: {x: 44, y: 8}
   m_Pivot: {x: 0.5, y: 1}
->>>>>>> Dichill
 --- !u!222 &9040789994302088132
 CanvasRenderer:
   m_ObjectHideFlags: 0
