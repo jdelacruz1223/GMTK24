@@ -92,13 +92,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615f2bd2fc82fcf4ea883bcf7e7cff48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: SampleText
-  speaker: Who?
+  dialogue: []
+  forreSpeak: 0
   dialogueText: {fileID: 675487838710271795}
   speakerText: {fileID: 2213063493155853270}
-  textSpeed: 2
+  currentPortrait: {fileID: 3046753221022778014}
+  forrePotrait: {fileID: 1466702449, guid: f6a2585723e6f3a4f860657d93394c17, type: 3}
+  wyrmPortrait: {fileID: 1466702449, guid: f6a2585723e6f3a4f860657d93394c17, type: 3}
+  textSpeed: 3
   hangTime: 2
   speech: {fileID: 7084904248599831364}
+  forreSpeech: {fileID: 8300000, guid: 8dfddf757b7e2114dbb9aa5644cefcd8, type: 3}
+  wyrmSpeech: {fileID: 8300000, guid: 1a0a57d02ed29ac4da9a8e7c4070138d, type: 3}
   noSoundChar:
   - ' '
   - '?'

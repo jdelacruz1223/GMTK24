@@ -1146,7 +1146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &584976037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4098,15 +4098,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615f2bd2fc82fcf4ea883bcf7e7cff48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: While a woodchuck doesn't actually chuck wood,/. they do in fact chuck
-    quite a bit of dirt when digging out a burrow./| On a good day they can chuck
-    around 35 cubic feet of dirt (or about 700 pounds)
-  speaker: Forre
+  dialogue:
+  - 
+  forreSpeak: 0
   dialogueText: {fileID: 182991896}
   speakerText: {fileID: 894703714}
+  currentPortrait: {fileID: 0}
+  forrePotrait: {fileID: 0}
+  wyrmPortrait: {fileID: 0}
   textSpeed: 2
   hangTime: 2
   speech: {fileID: 1623875085}
+  forreSpeech: {fileID: 0}
+  wyrmSpeech: {fileID: 0}
   noSoundChar:
   - '?'
 --- !u!114 &1623875083
@@ -5618,7 +5622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1406481378298837819, guid: ee861e1598d653542ba4533cfbb43be3, type: 3}
       propertyPath: spawnPoints.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1406481378298837819, guid: ee861e1598d653542ba4533cfbb43be3, type: 3}
       propertyPath: spawnPoints.Array.data[0]
@@ -6102,6 +6106,30 @@ PrefabInstance:
     - target: {fileID: 2723629033803030048, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
       propertyPath: dialogue
       value: How much wood can a woodchuck chuck if a /nwoodchuck could chuck wood?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2723629033803030048, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+      propertyPath: forreSpeak
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2723629033803030048, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+      propertyPath: wyrmSpeech
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a0a57d02ed29ac4da9a8e7c4070138d, type: 3}
+    - target: {fileID: 2723629033803030048, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+      propertyPath: forreSpeech
+      value: 
+      objectReference: {fileID: 8300000, guid: 8dfddf757b7e2114dbb9aa5644cefcd8, type: 3}
+    - target: {fileID: 2723629033803030048, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+      propertyPath: dialogue.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2723629033803030048, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+      propertyPath: dialogue.Array.data[0]
+      value: How much wood can a woodchuck chuck if a /nwoodchuck could chuck wood?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2723629033803030048, guid: c7a81ca7cd8974847b27d29489c6ff5c, type: 3}
+      propertyPath: dialogue.Array.data[1]
+      value: 700 pounds, Forre./| 700 pounds.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
