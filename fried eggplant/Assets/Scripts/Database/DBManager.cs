@@ -26,30 +26,12 @@ namespace Assets.Scripts.Database
             }
         }
 
-        /// <summary>
-        /// Fetches all of the Leaderboard based on the given range
-        /// </summary>
-        /// <returns>Returns a list of all the players with respect to the Leaderboard Model</returns>
-        //public async Task<List<Leaderboard>> GetLeaderboards(int max)
-        //{
-        //    try
-        //    {
-        //        var result = await SupabaseClient.GetInstance().Client.From<Leaderboard>().Select(x => new object[] {x.LevelStats}).Limit(max).Get();
-        //        return result.Models;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.LogError($"Failed to retrieve top 10 leaderboard: {ex.Message}");
-        //        return null;
-        //    }
-        //}
-
         public async Task<List<Leaderboard>> FetchLeaderboards(int sceneIndex, int max)
         {
             try
             {
                 var result = await SupabaseClient.GetInstance().Client
-                    .From<Leaderboard>().Where(x => x.sceneIndex == sceneIndex).Order(x => x.elapsedTime, Supabase.Postgrest.Constants.Ordering.Ascending).Limit(max).Get();
+                    .From<Leaderboard>().Where(x => x.sceneIndex == sceneIndex).Order(x => x.elapsedTime, Supabase.Postgrest.Constants.Ordering.Ascending).Get();
 
                 if (result.ResponseMessage.StatusCode == System.Net.HttpStatusCode.OK)
                 {

@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         User.totalTime += TimeManager.instance.getTime();
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
 
-        await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, TimeManager.instance.getTime(), LevelManager.instance.totalBookmarks);
+        await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, User.totalTime, User.totalBookmarks);
         LevelManager.instance.CompleteLevel();
     }
 
