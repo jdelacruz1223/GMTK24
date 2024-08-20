@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueBox : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class DialogueBox : MonoBehaviour
     public bool forreSpeak; //if true, forre is the speaker, else wyrm is the speaker
     public TMP_Text dialogueText;
     public TMP_Text speakerText;
-    public GameObject currentPortrait;
+    public Image currentPortrait;
     public Sprite forrePotrait;
     public Sprite wyrmPortrait;
     [SerializeField] private float textSpeed = 1f;
@@ -23,13 +24,14 @@ public class DialogueBox : MonoBehaviour
     [SerializeField] private AudioClip wyrmSpeech;
     public List<string> noSoundChar = new List<string>();
 
+
     //private float basePitch;
     
     
     void Awake() {
         dialogueText.text = "";
         speakerText.text = forreSpeak ? "Forre" : "Wyrm";
-        currentPortrait.GetComponent<SpriteRenderer>().sprite = forreSpeak ? forrePotrait : wyrmPortrait;
+        currentPortrait.sprite = forreSpeak ? forrePotrait : wyrmPortrait;
         foreach (string d in dialogue) {dialogueQueue.Enqueue(d);}
         StartCoroutine(displayText());
     }
@@ -89,12 +91,12 @@ public class DialogueBox : MonoBehaviour
         if (forreSpeak) {
             forreSpeak = false;
             speakerText.text = "Wyrm";
-            currentPortrait.GetComponent<SpriteRenderer>().sprite = wyrmPortrait;
+            currentPortrait.sprite = wyrmPortrait;
             speech.clip = wyrmSpeech;
         } else {
             forreSpeak = true;
             speakerText.text = "Forre";
-            currentPortrait.GetComponent<SpriteRenderer>().sprite = forrePotrait;
+            currentPortrait.sprite = forrePotrait;
             speech.clip = forreSpeech;
         }
         
