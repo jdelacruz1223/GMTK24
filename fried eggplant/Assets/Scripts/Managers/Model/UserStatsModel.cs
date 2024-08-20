@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class UserStatsModel
@@ -8,4 +10,5 @@ public class UserStatsModel
     public List<LevelModel> levelStats { get; set; }
     public float totalTime { get; set; }
     public int totalBookmarks { get; set; }
+
 }

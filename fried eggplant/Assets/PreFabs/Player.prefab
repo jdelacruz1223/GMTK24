@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 544602320563870603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2897444028573041812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4535343924091114809}
+  m_Layer: 8
+  m_Name: WyrmPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4535343924091114809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897444028573041812}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.01, y: 0.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 544602320563870603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3713750086931246365
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,6 +100,7 @@ Transform:
   m_Children:
   - {fileID: 7035654582375486965}
   - {fileID: 3089147765440343033}
+  - {fileID: 4535343924091114809}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2973911715215442114
@@ -213,8 +245,8 @@ MonoBehaviour:
   cooldown: 1
   bounceCooldown: 1
   bounceForce: 300
-  dashTime: 0.1
-  dashForce: 20
+  dashTime: 0.28
+  dashForce: 25
   bookCollector: {fileID: 680708230741935781}
   jumpingPower: 11
   jumpBufferTime: 0.1
@@ -282,6 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 4772523498930182298}
   dust: {fileID: 437268304884921310}
+  currentCooldown: 0
 --- !u!95 &4772523498930182298
 Animator:
   serializedVersion: 5

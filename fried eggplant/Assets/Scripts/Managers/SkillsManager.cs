@@ -92,9 +92,6 @@ public class SkillsManager : MonoBehaviour
             if(skillStates.isSkillAvailable[i]){
                 availableSkills.Add(skillStates.allSkills[i]);
             }
-            else{
-                print("!!");
-            }
         }
         return availableSkills;
     }
