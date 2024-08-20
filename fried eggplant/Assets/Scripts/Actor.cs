@@ -32,7 +32,6 @@ public abstract class Actor : MonoBehaviour
 
     void FixedUpdate()
     {
-        velocity += rigidbody.gravityScale * Time.deltaTime * Physics2D.gravity;
         ActorFixedUpdate();
         Move(velocity * Time.deltaTime);
     }
