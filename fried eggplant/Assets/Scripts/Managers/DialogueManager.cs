@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class DialogueManager : MonoBehaviour
         }
 
         instance = this;
+    }
+
+    private void Start()
+    {
+        if (JsonManager.IsSceneInList(SceneManager.GetActiveScene().buildIndex)) DequeueDialogue();
     }
 
     // Update is called once per frame
