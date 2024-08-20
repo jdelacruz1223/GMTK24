@@ -7,7 +7,7 @@ public abstract class Actor : MonoBehaviour
 {
 
     [HideInInspector] public Vector2 velocity;
-    protected new Rigidbody2D rigidbody;
+    [HideInInspector] public new Rigidbody2D rigidbody { get; private set; }
     // protected ContactFilter2D contactFilter;
     private bool isGrounded = false;
     public bool IsGrounded { get => isGrounded; }

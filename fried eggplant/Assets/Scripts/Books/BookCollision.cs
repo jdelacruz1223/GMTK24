@@ -17,29 +17,31 @@ public class BookCollision : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        int index = transform.GetSiblingIndex();
-        Vector3 lastPos = transform.position;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("HeldBook")) {
+            return;
+        }
 
         if (!TryGetComponent<Rigidbody2D>(out _))
         {
-            transform.SetParent(null);
-            Rigidbody2D rigidbody = gameObject.AddComponent<Rigidbody2D>();
-            rigidbody.bodyType = RigidbodyType2D.Dynamic;
-
-            Vector2 forceDirection = collision.contacts[0].normal * -1;
-            float forceMagnitude = 10f;
-            rigidbody.AddForce(5 * forceMagnitude * forceDirection, ForceMode2D.Impulse);
-            StartCoroutine(destroyBook(index, lastPos));
+            StartCoroutine(ThrowOffBook());
         }
     }
 
-    IEnumerator destroyBook(int index, Vector3 lastPos)
+    public void MakeDynamic() {
+        transform.SetParent(null);
+        Rigidbody2D rigidbody = gameObject.AddComponent<Rigidbody2D>();
+        rigidbody.bodyType = RigidbodyType2D.Dynamic;
+
+        Vector2 forceDirection = Random.insideUnitCircle;
+        float forceMagnitude = 10f;
+        rigidbody.AddForce(5 * forceMagnitude * forceDirection, ForceMode2D.Impulse);
+            
+    }
+
+    IEnumerator ThrowOffBook()
     {
-        bookCollector.RemoveBook(gameObject);
-        BookFollow.GetInstance().UpdateStack(index, lastPos);
-
+        bookCollector.RemoveBook(gameObject, makeDynamic: true);
         yield return new WaitForSeconds(3);
-
         Destroy(gameObject);
     }
 }

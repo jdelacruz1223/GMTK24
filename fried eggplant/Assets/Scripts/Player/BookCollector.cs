@@ -35,31 +35,30 @@ public class BookCollector : MonoBehaviour
     {
         book.SetActive(false);
 
-        GameObject newBook = Instantiate(bookPrefab, bookStackPosition.position, Quaternion.identity);
-
-        newBook.transform.SetParent(bookStackPosition);
+        GameObject newBook = Instantiate(bookPrefab, bookStackPosition.position, Quaternion.identity, bookStackPosition);
 
         newBook.SetActive(true);
 
-        newBook.transform.localPosition += new Vector3(Random.Range(-2/16f, 2/16f), collectedBooks.Count * newBook.GetComponent<SpriteRenderer>().bounds.size.y, 0);
+        newBook.transform.localPosition += new Vector3(Random.Range(-1, 2) * 1/16f, collectedBooks.Count * newBook.GetComponent<SpriteRenderer>().bounds.size.y, 0);
 
         collectedBooks.Add(newBook);
         DataManager.instance.addBook();
-        BookFollow.GetInstance().addPos(newBook.transform.localPosition.y);
     }
 
-    public void RemoveBook(GameObject book)
+    public void RemoveBook(GameObject book, bool makeDynamic)
     {
         if (collectedBooks.Contains(book))
         {
-            collectedBooks.Remove(book);
-
-            // get position of book and see its index from the parent.
-            // if its the very first underside of the book where its equal to the stackPos, then above of all book
-            // it will fall down until it goes to the first stack pos
-            BookFollow.GetInstance().removePos(book.transform.localPosition.y);
+            // Remove this book and every book above it
+            var index = collectedBooks.IndexOf(book);
+            while (collectedBooks.Count > index) {
+                // Keep removing the last book
+                var b = collectedBooks[^1];
+                if (makeDynamic) b.GetComponent<BookCollision>().MakeDynamic();
+                collectedBooks.RemoveAt(collectedBooks.Count - 1);
+                DataManager.instance.removeBook();
+            }
         }
-        DataManager.instance.removeBook();
     }
     public int getNumBooks()
     {
@@ -68,8 +67,8 @@ public class BookCollector : MonoBehaviour
 
     public IEnumerator RemoveTopBook()
     {
-        GameObject book = collectedBooks[collectedBooks.Count - 1];
-        RemoveBook(book);
+        GameObject book = collectedBooks[^1];
+        RemoveBook(book, makeDynamic: false);
         Destroy(book);
         yield return null;
     }
