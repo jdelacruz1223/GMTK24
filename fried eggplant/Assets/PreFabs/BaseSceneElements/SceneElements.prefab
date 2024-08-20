@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints: {fileID: 0}
   smallBookPrefab: {fileID: 4516289614703689290, guid: 3d74f9ab1da7e3148aae746865ab5755, type: 3}
-  mediumBookPrefab: {fileID: 4516289614703689290, guid: 3d74f9ab1da7e3148aae746865ab5755, type: 3}
+  mediumBookPrefab: {fileID: 4516289614703689290, guid: d160f9b2cceff2847b1f8904b97f9abc, type: 3}
   bigBookPrefab: {fileID: 4516289614703689290, guid: 3d74f9ab1da7e3148aae746865ab5755, type: 3}
 --- !u!1 &965774370283090376
 GameObject:
