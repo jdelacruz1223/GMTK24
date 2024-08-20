@@ -19,6 +19,7 @@ public class DialogueBox : MonoBehaviour
     
     
     void Awake() {
+        dialogueText.text = "";
         StartCoroutine(displayText());
     }
     void Start() {
