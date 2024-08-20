@@ -24,15 +24,10 @@ public class DialogueManager : MonoBehaviour
             currentBox.SetActive(true);
         }
     }
-    void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player") && dialogueBoxes.Count > 0) {
-            if (collision.gameObject.GetComponent<PlayerMovement>().isControllable()) {
-                collision.gameObject.GetComponent<PlayerMovement>().toggleControl(false);
-                currentBox = dialogueBoxes.Dequeue();
-                currentBox.SetActive(true);
-            }
-        } else if (collision.gameObject.CompareTag("Player") && dialogueBoxes.Count == 0 && !currentBox.activeSelf) {
-            collision.gameObject.GetComponent<PlayerMovement>().toggleControl(true);
+    void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Player") && dialogueBoxes.Count > 0 && (currentBox == null || !currentBox.activeSelf)) {
+            currentBox = dialogueBoxes.Dequeue();
+            currentBox.SetActive(true);
         }
     }
 }

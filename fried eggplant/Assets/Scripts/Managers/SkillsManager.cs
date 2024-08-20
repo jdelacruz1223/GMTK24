@@ -6,7 +6,7 @@ public class SkillsManager : MonoBehaviour
 {  
     public static SkillsManager instance;
     public LevelSkillStates skillStates;
-    public Skill[] playerSkills; //all skills player can use
+    public List<Skill> playerSkills; //all skills player can use
     public Skill playerCurrentSkill; //which skill is selected
     public int skillIndex = 0;
     
@@ -24,7 +24,7 @@ public class SkillsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       playerSkills = getAvailableSkills().ToArray();
+       playerSkills = getAvailableSkills();
        playerCurrentSkill = playerSkills[skillIndex];
     }
     // Update is called once per frame
@@ -51,13 +51,13 @@ public class SkillsManager : MonoBehaviour
     void GetPreviousSkill(){
         skillIndex -= 1;
         if(skillIndex < 0){
-            skillIndex = playerSkills.Length-1;
+            skillIndex = playerSkills.Count-1;
         }
         playerCurrentSkill = playerSkills[skillIndex];
     }
     void GetNextSkill(){
         skillIndex += 1;
-        if(skillIndex >= playerSkills.Length){
+        if(skillIndex >= playerSkills.Count){
             skillIndex = 0;
         }
         playerCurrentSkill = playerSkills[skillIndex];
