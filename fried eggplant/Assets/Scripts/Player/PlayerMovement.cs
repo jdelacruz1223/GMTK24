@@ -103,9 +103,15 @@ public class PlayerMovement : Actor
     override
     protected void ActorFixedUpdate()
     {
-        FixedUpdateMovement();
-
         if (playerAnimation.anim.GetCurrentAnimatorStateInfo(0).IsName("End")) canMove = true;
+        if (!canMove) {
+            velocity = Vector2.zero;
+            currentMoveState = PlayerAnimation.MoveState.falling;
+            return;
+        }
+
+        velocity += rigidbody.gravityScale * Time.deltaTime * Physics2D.gravity;
+        FixedUpdateMovement();
 
         // Adjust the camera's zoom (ortho size)
         var currentSize = camera.m_Lens.OrthographicSize;

@@ -41,8 +41,8 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-     public void CompleteLevel()
-     {
+    public void CompleteLevel()
+    {
         PopulateLeaderboards();
         timerText.SetActive(true);
         elapsedTime = TimeManager.instance.getTime();
@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour
         {
             return 0;
         }
-        
+
     }
 
     private void DisplayStars(int stars)
@@ -94,9 +94,6 @@ public class LevelManager : MonoBehaviour
     async public void PopulateLeaderboards()
     {
         var results = await DBManager.instance.FetchLeaderboards(0, 10);
-        
-
-        Debug.Log(results);
 
         int index = 0;
         foreach (var leaderboard in results)
@@ -113,6 +110,7 @@ public class LevelManager : MonoBehaviour
             pos.text = (index + 1).ToString();
             name.text = leaderboard.playerName;
             time.text = Util.floatToTime(leaderboard.elapsedTime);
+            index++;
         }
     }
 }

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public string user_id { get; private set; }
     public bool hasId { get; set; }
     public bool dbError { get; set; }
-
+    public List<int> finishedScenes { get; set; }
     [SerializeField] private GameObject pauseMenu;
 
     private void Awake()
@@ -45,24 +45,33 @@ public class GameManager : MonoBehaviour
         {
             hasId = true;
             SetUserID(jsonUserId.id);
+            finishedScenes = jsonUserId.scenes;
+
             var data = await DBManager.instance.FetchData(jsonUserId.id);
 
             if (data != null)
             {
                 User = data;
-            } else
+                User.totalTime = data.totalTime;
+                User.totalBookmarks = data.totalBookmarks;
+                User.Name = data.Name;
+            }
+            else
             {
                 dbError = true;
                 hasId = false;
             }
-        } else
+        }
+        else
         {
             hasId = false;
         }
     }
 
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.Escape)){
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             pauseMenu.SetActive(!pauseMenu.activeSelf);
             Time.timeScale = pauseMenu.activeSelf ? 0 : 1;
         }
@@ -100,7 +109,10 @@ public class GameManager : MonoBehaviour
         User.totalTime += TimeManager.instance.getTime();
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
 
-        await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, TimeManager.instance.getTime(), LevelManager.instance.totalBookmarks);
+        await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, User.totalTime, User.totalBookmarks);
+        await DBManager.instance.UpdatePlayer(user_id, User);
+
+        JsonManager.WriteScene(SceneManager.GetActiveScene().buildIndex);
         LevelManager.instance.CompleteLevel();
     }
 
@@ -111,7 +123,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("Created Data Json");
             JsonManager.WriteID(id);
             user_id = id;
-        } else
+        }
+        else
         {
             Debug.Log("User exists");
             user_id = id;
@@ -121,20 +134,20 @@ public class GameManager : MonoBehaviour
 
     void ifError()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
       Debug.Log("Unity Editor");
-    #endif
+#endif
 
-    #if UNITY_IOS
+#if UNITY_IOS
       Debug.Log("iOS");
-    #endif
+#endif
 
-    #if UNITY_STANDALONE_OSX
+#if UNITY_STANDALONE_OSX
         Debug.Log("Standalone OSX");
-    #endif
+#endif
 
-    #if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN
       Debug.Log("Standalone Windows");
-    #endif
+#endif
     }
 }
