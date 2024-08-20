@@ -2890,6 +2890,11 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!1 &1245220074 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 932647904521931400, guid: f845b596d1207f74abd17e403799787b, type: 3}
+  m_PrefabInstance: {fileID: 3337664167033383708}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1297321193 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9033862488976633418, guid: 6777f9dd90c35dc449905321a0237228, type: 3}
@@ -5033,7 +5038,7 @@ PrefabInstance:
     - target: {fileID: 8476583696449177787, guid: ee861e1598d653542ba4533cfbb43be3, type: 3}
       propertyPath: levelComplete
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1245220074}
     - target: {fileID: 8476583696449177787, guid: ee861e1598d653542ba4533cfbb43be3, type: 3}
       propertyPath: Bookmarks.Array.data[0]
       value: 
