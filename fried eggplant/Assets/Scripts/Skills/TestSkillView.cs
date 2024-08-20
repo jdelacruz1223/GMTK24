@@ -20,14 +20,14 @@ public class TestSkillView : MonoBehaviour
     }
     string updateList(){
         string list = "";
-        for(int i = 0; i < SkillsManager.instance.playerSkills.Length; i++){
+        for(int i = 0; i < SkillsManager.instance.playerSkills.Count; i++){
             if(SkillsManager.instance.playerSkills[i] == SkillsManager.instance.playerCurrentSkill){
                 list += "#" + SkillsManager.instance.playerSkills[i].name + "#";
             }
             else{
                 list += SkillsManager.instance.playerSkills[i].name;
             }
-            if(i != SkillsManager.instance.playerSkills.Length-1){
+            if(i != SkillsManager.instance.playerSkills.Count-1){
                 list += '\n';
             }
         }
