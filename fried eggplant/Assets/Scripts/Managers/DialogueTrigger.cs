@@ -20,6 +20,7 @@ public class DialogueTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player") && dialogueBoxes.Count > 0 && (dialogueBoxes == null || dialogueBoxes.Count > 0)) {
             DialogueManager.instance.QueueDialog(dialogueBoxes);
+            wyrm.GetComponent<WyrmMovement>().startFollowing();
             while(dialogueBoxes.Count > 0) {
                 dialogueBoxes.Remove(dialogueBoxes[0]);
             }
