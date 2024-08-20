@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,9 @@ public class DialogueBox : MonoBehaviour
     public TMP_Text speakerText;
     [SerializeField] private float textSpeed = 1f;
     [SerializeField] private float hangTime = 1f;
+    [SerializeField] private AudioSource speech;
+    public List<string> noSoundChar = new List<string>();
+    //private float basePitch;
     
     
     void Awake() {
@@ -19,6 +23,7 @@ public class DialogueBox : MonoBehaviour
     }
     void Start() {
         speakerText.text = speaker;
+        //basePitch = speech.pitch;
     }
     void Update() {
 
@@ -46,18 +51,17 @@ public class DialogueBox : MonoBehaviour
                 break;
                 default:
                 if (c.Length > 1) c = dialogue.Substring(i,1);
+                if (!noSoundChar.Contains(c) && speech.clip != null) {
+                    //speech.pitch *= Random.value + basePitch;
+                    speech.Play();
+                    //speech.pitch = basePitch;
+                } 
                 dialogueText.text += c;
                 i++;
                 break;
             }
             yield return new WaitForSeconds(1 / (textSpeed * 10));
         }
-        /*
-        foreach(char c in dialogue) {
-            dialogueText.text += c;
-            yield return new WaitForSeconds(1 / (textSpeed * 10));
-        }
-        */
         yield return new WaitForSeconds(hangTime);
         gameObject.SetActive(false);
     }
