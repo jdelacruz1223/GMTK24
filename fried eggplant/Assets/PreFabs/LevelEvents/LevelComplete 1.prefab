@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c29d8ea5d98189439d8dd9c5d0cfa5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leaderboardCanva: {fileID: 6717001631642449538}
 --- !u!1 &1527743682220339413
 GameObject:
   m_ObjectHideFlags: 0

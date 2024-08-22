@@ -15,14 +15,13 @@ public class TimeManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Awake() {
-        if (instance != null && instance != this)
+        if (instance != null)
         {
             Destroy(this);
+            return;
         }
-        else
-        {
-            instance = this;
-        }
+        
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
     void Start()
