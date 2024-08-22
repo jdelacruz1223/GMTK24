@@ -3014,6 +3014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c579c1459c44e44a6f0967e841f701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  text: {fileID: 374184967}
   secondsPerBook: 1
 --- !u!4 &856575470
 Transform:

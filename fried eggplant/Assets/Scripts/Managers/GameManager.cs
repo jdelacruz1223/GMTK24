@@ -105,14 +105,16 @@ public class GameManager : MonoBehaviour
 
     async public void EndLevel(int level = 0)
     {
+        Debug.LogWarning("End Level");
         TimeManager.instance.endLevel();
         User.totalTime += TimeManager.instance.getTime();
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
 
+        Debug.LogWarning("Adding user to Leaderboards & Updating User Stats");
         await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, User.totalTime, User.totalBookmarks);
         await DBManager.instance.UpdatePlayer(user_id, User);
 
-        JsonManager.WriteScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.LogWarning("Level Manager Complete Level Initalized");
         LevelManager.instance.CompleteLevel();
     }
 
