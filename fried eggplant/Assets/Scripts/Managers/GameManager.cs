@@ -107,8 +107,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.LogWarning("End Level");
         TimeManager.instance.endLevel();
-        User.totalTime += TimeManager.instance.getTime();
+        if (TimeManager.instance.getTime() < User.totalTime)
+            User.totalTime = TimeManager.instance.getTime();
+        
         User.totalBookmarks += LevelManager.instance.totalBookmarks;
+
+        Debug.Log(User.totalBookmarks);
 
         Debug.LogWarning("Adding user to Leaderboards & Updating User Stats");
         await DBManager.instance.AddUserFromLeaderboard(user_id, SceneManager.GetActiveScene().buildIndex, User.Name, User.totalTime, User.totalBookmarks);

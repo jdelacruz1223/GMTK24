@@ -95,6 +95,8 @@ public class LevelManager : MonoBehaviour
 
     async public void PopulateLeaderboards()
     {
+        Debug.LogWarning(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+
         var results = await DBManager.instance.FetchLeaderboards(0, 10);
 
         int index = 0;

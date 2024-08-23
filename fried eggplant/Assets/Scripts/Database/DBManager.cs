@@ -143,13 +143,14 @@ namespace Assets.Scripts.Database
                     if (result.Models.Count > 0)
                     {
                         var existingUser = result.Models.First();
-                        existingUser.playerName = playerName;
                         existingUser.elapsedTime = elapsedTime;
                         existingUser.bookCollected = bookCollected;
 
                         var updateResult = await SupabaseClient.GetInstance().Client
                             .From<Leaderboard>().Where(x => x.Player_ID == id)
                             .Update(existingUser);
+
+                        Debug.Log(bookCollected);
 
                         return updateResult.ResponseMessage.StatusCode == System.Net.HttpStatusCode.OK;
                     }
