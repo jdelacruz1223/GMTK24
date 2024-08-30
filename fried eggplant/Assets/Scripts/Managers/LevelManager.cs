@@ -43,10 +43,12 @@ public class LevelManager : MonoBehaviour
 
     public void CompleteLevel()
     {
+        Debug.LogWarning("Populate Leaderboards");
         PopulateLeaderboards();
         timerText.SetActive(true);
         elapsedTime = TimeManager.instance.getTime();
 
+        Debug.LogWarning("Populate Display Stars");
         int stars = CalculateStars(elapsedTime);
         DisplayStars(stars);
     }
@@ -93,6 +95,8 @@ public class LevelManager : MonoBehaviour
 
     async public void PopulateLeaderboards()
     {
+        Debug.LogWarning(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+
         var results = await DBManager.instance.FetchLeaderboards(0, 10);
 
         int index = 0;
